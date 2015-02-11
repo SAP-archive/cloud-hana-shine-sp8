@@ -1,0 +1,103 @@
+role {{PACKAGE_NAME}}.roles::User 
+
+{
+	package {{PACKAGE_NAME}}: REPO.READ, REPO.EDIT_NATIVE_OBJECTS, REPO.ACTIVATE_NATIVE_OBJECTS, REPO.MAINTAIN_NATIVE_PACKAGES;
+
+	application privilege: {{PACKAGE_NAME}}::Admin; 
+	
+	//catalog schema "_SYS_BIC": EXECUTE;
+	catalog schema "{{SCHEMA_NAME}}" : SELECT, EXECUTE, CREATE ANY, INSERT, UPDATE, DELETE;
+    
+    // analytic privileges
+    analytic privilege: {{PACKAGE_NAME}}.models:AP_PURCHASE_ORDER.analyticprivilege;
+    analytic privilege: {{PACKAGE_NAME}}.models:AP_PURCHASE_ORDER_PROD_CAT.analyticprivilege;	
+	analytic privilege: {{PACKAGE_NAME}}.models:AP_SALES_ORDER.analyticprivilege;
+	analytic privilege: {{PACKAGE_NAME}}.spatial.models:SPATIAL.analyticprivilege;
+	
+	// data tables
+	sql object "{{PACKAGE_NAME}}.data::EPM.MD.BusinessPartner" : SELECT, UPDATE, INSERT, DELETE;
+	sql object "{{PACKAGE_NAME}}.data::EPM.MD.Addresses" : SELECT, UPDATE, INSERT, DELETE;
+    sql object "{{PACKAGE_NAME}}.data::EPM.Conversions.T006" : SELECT, UPDATE, INSERT, DELETE;
+    sql object "{{PACKAGE_NAME}}.data::EPM.Conversions.T006A" : SELECT, UPDATE, INSERT, DELETE;
+    sql object "{{PACKAGE_NAME}}.data::EPM.Conversions.TCURC" : SELECT, UPDATE, INSERT, DELETE;
+    sql object "{{PACKAGE_NAME}}.data::EPM.Conversions.TCURF" : SELECT, UPDATE, INSERT, DELETE;
+    sql object "{{PACKAGE_NAME}}.data::EPM.Conversions.TCURN" : SELECT, UPDATE, INSERT, DELETE;
+    sql object "{{PACKAGE_NAME}}.data::EPM.Conversions.TCURR" : SELECT, UPDATE, INSERT, DELETE;
+    sql object "{{PACKAGE_NAME}}.data::EPM.Conversions.TCURT" : SELECT, UPDATE, INSERT, DELETE;
+    sql object "{{PACKAGE_NAME}}.data::EPM.Conversions.TCURV" : SELECT, UPDATE, INSERT, DELETE;
+    sql object "{{PACKAGE_NAME}}.data::EPM.Conversions.TCURW" : SELECT, UPDATE, INSERT, DELETE;
+    sql object "{{PACKAGE_NAME}}.data::EPM.Conversions.TCURX" : SELECT, UPDATE, INSERT, DELETE;
+    sql object "{{PACKAGE_NAME}}.data::EPM.MapKeys" : SELECT, UPDATE, INSERT, DELETE;
+    sql object "{{PACKAGE_NAME}}.data::EPM.MD.Addresses" : SELECT, UPDATE, INSERT, DELETE;
+    sql object "{{PACKAGE_NAME}}.data::EPM.MD.BusinessPartner" : SELECT, UPDATE, INSERT, DELETE;
+    sql object "{{PACKAGE_NAME}}.data::EPM.MD.Employees" : SELECT, UPDATE, INSERT, DELETE;
+    sql object "{{PACKAGE_NAME}}.data::EPM.MD.productLog" : SELECT, UPDATE, INSERT, DELETE;
+    sql object "{{PACKAGE_NAME}}.data::EPM.MD.Products" : SELECT, UPDATE, INSERT, DELETE;
+    sql object "{{PACKAGE_NAME}}.data::EPM.PO.Header" : SELECT, UPDATE, INSERT, DELETE;
+    sql object "{{PACKAGE_NAME}}.data::EPM.PO.Item" : SELECT, UPDATE, INSERT, DELETE;
+    sql object "{{PACKAGE_NAME}}.data::EPM.SO.Filter" : SELECT, UPDATE, INSERT, DELETE;
+    sql object "{{PACKAGE_NAME}}.data::EPM.SO.Header" : SELECT, UPDATE, INSERT, DELETE;
+    sql object "{{PACKAGE_NAME}}.data::EPM.SO.Item" : SELECT, UPDATE, INSERT, DELETE;
+    sql object "{{PACKAGE_NAME}}.data::EPM.User.Details" : SELECT, UPDATE, INSERT, DELETE;
+    sql object "{{PACKAGE_NAME}}.data::EPM.Util.Attachments" : SELECT, UPDATE, INSERT, DELETE;
+    sql object "{{PACKAGE_NAME}}.data::EPM.Util.Constants" : SELECT, UPDATE, INSERT, DELETE;
+    sql object "{{PACKAGE_NAME}}.data::EPM.Util.Messages" : SELECT, UPDATE, INSERT, DELETE;
+    sql object "{{PACKAGE_NAME}}.data::EPM.Util.Notes" : SELECT, UPDATE, INSERT, DELETE;
+    sql object "{{PACKAGE_NAME}}.data::EPM.Util.SSCOOKIE" : SELECT, UPDATE, INSERT, DELETE;
+    sql object "{{PACKAGE_NAME}}.data::EPM.Util.Texts" : SELECT, UPDATE, INSERT, DELETE;
+    sql object "{{PACKAGE_NAME}}.data::EPM.Util.TimeDimension" : SELECT, UPDATE, INSERT, DELETE;
+    sql object "{{PACKAGE_NAME}}.data::JobsDemo.Details" : SELECT, UPDATE, INSERT, DELETE;
+	
+	sql object "{{PACKAGE_NAME}}.data::purchaseOrderHeaderExternal" : SELECT;
+	
+	// sequences
+	sql object "{{PACKAGE_NAME}}.data::addressSeqId" : ALTER, SELECT, DROP;
+	sql object "{{PACKAGE_NAME}}.data::employeeSeqId" : ALTER, SELECT, DROP;
+    sql object "{{PACKAGE_NAME}}.data::partnerSeqId" : ALTER, SELECT, DROP;
+    sql object "{{PACKAGE_NAME}}.data::purchaseOrderSeqId" : ALTER, SELECT, DROP;
+    sql object "{{PACKAGE_NAME}}.data::salesOrderId" : ALTER, SELECT, DROP;
+    sql object "{{PACKAGE_NAME}}.data::sessionId" : ALTER, SELECT, DROP;
+    sql object "{{PACKAGE_NAME}}.data::textSeqId" : ALTER, SELECT, DROP;
+    sql object "{{PACKAGE_NAME}}.data::userSeqId" : ALTER, SELECT, DROP;
+
+    // procedures
+    sql object "{{PACKAGE_NAME}}.Procedures::get_application_variable" : EXECUTE;
+    sql object "{{PACKAGE_NAME}}.Procedures::get_application_variables" : EXECUTE;
+    sql object "{{PACKAGE_NAME}}.Procedures::get_bp_addresses_by_role" : EXECUTE;
+    sql object "{{PACKAGE_NAME}}.Procedures::get_products_by_filter" : EXECUTE;
+    sql object "{{PACKAGE_NAME}}.Procedures::get_product_sales_price" : EXECUTE;
+    sql object "{{PACKAGE_NAME}}.Procedures::get_session_variable" : EXECUTE;
+    sql object "{{PACKAGE_NAME}}.Procedures::jobsCreateEntry" : EXECUTE;
+    sql object "{{PACKAGE_NAME}}.Procedures::get_session_variables" : EXECUTE;
+    sql object "{{PACKAGE_NAME}}.Procedures::poCreate" : EXECUTE;
+    sql object "{{PACKAGE_NAME}}.Procedures::set_session_variable" : EXECUTE;
+    sql object "{{PACKAGE_NAME}}.Procedures::set_application_variables" : EXECUTE;
+    sql object "{{PACKAGE_NAME}}.Procedures::soCreate" : EXECUTE;
+    sql object "{{PACKAGE_NAME}}.Procedures::soDelete" : EXECUTE;
+    sql object "{{PACKAGE_NAME}}.Procedures::usersCreateMethod" : EXECUTE;
+    
+    // models
+    sql object "{{PACKAGE_NAME}}.spatial.models::BP_ADDRESS_DETAILS" :SELECT;
+    sql object "{{PACKAGE_NAME}}.spatial.models::REGION_SALES_BP" : SELECT;
+    sql object "{{PACKAGE_NAME}}.models::AT_SALES_ORDER_WORKLIST" :SELECT ;
+    sql object "{{PACKAGE_NAME}}.models::AN_PURCHASE_COMMON_CURRENCY" :SELECT ;
+    sql object "{{PACKAGE_NAME}}.models::AN_PURCHASE_OVERVIEW" :SELECT ;
+    sql object "{{PACKAGE_NAME}}.models::AN_SALES_ORDER_DYNAMIC_TIME_PERIOD" :SELECT ;
+    sql object "{{PACKAGE_NAME}}.models::AN_SALES_ORDER_LITE" :SELECT ;
+    sql object "{{PACKAGE_NAME}}.models::AN_SALES_ORDER_RANKING" :SELECT ;
+    sql object "{{PACKAGE_NAME}}.models::AN_SALES_OVERVIEW_WO_CURR_CONV" :SELECT ;
+    sql object "{{PACKAGE_NAME}}.models::AT_BUYER" :SELECT ;
+    sql object "{{PACKAGE_NAME}}.models::AT_PO_HEADER" :SELECT ;
+    sql object "{{PACKAGE_NAME}}.models::AT_PO_ITEM" :SELECT ;
+    sql object "{{PACKAGE_NAME}}.models::AT_PROD" :SELECT ;
+    sql object "{{PACKAGE_NAME}}.models::AT_PURCHASE_ORDER_WORKLIST" :SELECT ;
+    sql object "{{PACKAGE_NAME}}.models::AT_SUPPLIER" :SELECT ;
+    sql object "{{PACKAGE_NAME}}.models::AT_TIME_DIM" :SELECT ;
+    sql object "{{PACKAGE_NAME}}.models::CV_CUSTOMER_DISCOUNT_BY_RANKING_AND_REGION" :SELECT ;
+    sql object "{{PACKAGE_NAME}}.models::CV_SALESORDER_DYNAMIC_JOIN" :SELECT ;
+    sql object "{{PACKAGE_NAME}}.models::CV_SALESORDER_RANKING" :SELECT ;
+    sql object "{{PACKAGE_NAME}}.models::CV_SALESORDER_RANKING_SQL" :SELECT ;
+    sql object "{{PACKAGE_NAME}}.models::CV_SALES_ORDER_RANKING_AND_DISCOUNT_SQL" :SELECT ;
+    sql object "{{PACKAGE_NAME}}.models::CV_SALES_YEAR_COMPARISON" :SELECT ;
+
+}

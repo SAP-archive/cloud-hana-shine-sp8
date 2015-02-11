@@ -1,0 +1,23 @@
+
+import = [
+            {
+			    cdstable = "{{PACKAGE_NAME}}.data::EPM.MD.Addresses";
+                file = "{{PACKAGE_NAME}}.data.loads:addresses.csv";
+                header = false;
+            },
+            {
+                cdstable = "{{PACKAGE_NAME}}.data::EPM.MD.BusinessPartner";
+                file = "{{PACKAGE_NAME}}.data.loads:businessPartner.csv";
+                header = false;
+            },
+            {
+                cdstable = "{{PACKAGE_NAME}}.data::EPM.MD.Employees";
+                file = "{{PACKAGE_NAME}}.data.loads:employees.csv";
+                header = false;
+            },
+            {
+                cdstable = "{{PACKAGE_NAME}}.data::EPM.MD.Products";
+                file = "{{PACKAGE_NAME}}.data.loads:products.csv";
+                header = false;
+            }                                    
+         ]; 

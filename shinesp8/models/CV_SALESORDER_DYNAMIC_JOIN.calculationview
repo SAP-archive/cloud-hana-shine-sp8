@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Calculation:scenario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" schemaVersion="2.3" id="CV_SALESORDER_DYNAMIC_JOIN" applyPrivilegeType="ANALYTIC_PRIVILEGE" checkAnalyticPrivileges="true" defaultClient="crossClient" defaultLanguage="$$language$$" visibility="reportingEnabled" calculationScenarioType="TREE_BASED" dataCategory="CUBE" enforceSqlExecution="false" executionSemantic="UNDEFINED" outputViewType="Aggregation">
+  <origin/>
+  <descriptions defaultDescription="CV_SALESORDER_DYNAMIC_JOIN"/>
+  <defaultSchema schemaName="_SYS_BIC"/>
+  <localVariables/>
+  <variableMappings/>
+  <dataSources>
+    <DataSource id="AN_SALES_ORDER_LITE" type="ANALYTIC_VIEW">
+      <viewAttributes allViewAttributes="true"/>
+      <resourceUri>/{{PACKAGE_NAME}}.models/analyticviews/AN_SALES_ORDER_LITE</resourceUri>
+    </DataSource>
+    <DataSource id="Aggregation_2$$$$AN_SALES_ORDER_LITE$$" type="ANALYTIC_VIEW">
+      <viewAttributes allViewAttributes="true"/>
+      <resourceUri>/{{PACKAGE_NAME}}.models/analyticviews/AN_SALES_ORDER_LITE</resourceUri>
+    </DataSource>
+  </dataSources>
+  <calculationViews>
+    <calculationView xsi:type="Calculation:AggregationView" id="Aggregation_1">
+      <viewAttributes>
+        <viewAttribute id="COUNTRY"/>
+        <viewAttribute id="TOTAL_SALES"/>
+        <viewAttribute id="REGION"/>
+      </viewAttributes>
+      <calculatedViewAttributes/>
+      <input node="#AN_SALES_ORDER_LITE">
+        <mapping xsi:type="Calculation:AttributeMapping" target="COUNTRY" source="COUNTRY"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="TOTAL_SALES" source="NETAMOUNT"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="REGION" source="REGION"/>
+      </input>
+    </calculationView>
+    <calculationView xsi:type="Calculation:AggregationView" id="Aggregation_2">
+      <viewAttributes>
+        <viewAttribute id="PRODUCTID"/>
+        <viewAttribute id="SALES"/>
+        <viewAttribute id="COUNTRY"/>
+        <viewAttribute id="REGION"/>
+        <viewAttribute id="PRODUCT_NAME"/>
+      </viewAttributes>
+      <calculatedViewAttributes/>
+      <input node="#Aggregation_2$$$$AN_SALES_ORDER_LITE$$">
+        <mapping xsi:type="Calculation:AttributeMapping" target="PRODUCTID" source="PRODUCTID"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="SALES" source="NETAMOUNT"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="COUNTRY" source="COUNTRY"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="REGION" source="REGION"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="PRODUCT_NAME" source="PRODUCT_NAME"/>
+      </input>
+    </calculationView>
+    <calculationView xsi:type="Calculation:JoinView" id="Join_1" cardinality="C1_1" joinType="leftOuter">
+      <viewAttributes>
+        <viewAttribute id="PRODUCTID"/>
+        <viewAttribute id="COUNTRY"/>
+        <viewAttribute id="REGION"/>
+        <viewAttribute id="SALES"/>
+        <viewAttribute id="TOTAL_SALES"/>
+        <viewAttribute id="REGION_1"/>
+        <viewAttribute id="PRODUCT_NAME"/>
+      </viewAttributes>
+      <calculatedViewAttributes/>
+      <input node="#Aggregation_2">
+        <mapping xsi:type="Calculation:AttributeMapping" target="PRODUCTID" source="PRODUCTID"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="COUNTRY" source="COUNTRY"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="REGION" source="REGION"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="SALES" source="SALES"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="REGION_1" source="REGION"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="PRODUCT_NAME" source="PRODUCT_NAME"/>
+      </input>
+      <input node="#Aggregation_1">
+        <mapping xsi:type="Calculation:AttributeMapping" target="TOTAL_SALES" source="TOTAL_SALES"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="COUNTRY" source="COUNTRY"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="REGION" source="REGION"/>
+      </input>
+      <joinAttribute name="COUNTRY"/>
+      <joinAttribute name="REGION"/>
+    </calculationView>
+  </calculationViews>
+  <logicalModel id="Join_1">
+    <attributes>
+      <attribute id="REGION" order="1" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="REGION"/>
+        <keyMapping columnObjectName="Join_1" columnName="REGION"/>
+      </attribute>
+      <attribute id="COUNTRY" order="2" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="COUNTRY"/>
+        <keyMapping columnObjectName="Join_1" columnName="COUNTRY"/>
+      </attribute>
+      <attribute id="PRODUCTID" order="3" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="PRODUCTID"/>
+        <keyMapping columnObjectName="Join_1" columnName="PRODUCTID"/>
+      </attribute>
+      <attribute id="PRODUCT_NAME" order="4" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="PRODUCT_NAME"/>
+        <keyMapping columnObjectName="Join_1" columnName="PRODUCT_NAME"/>
+      </attribute>
+    </attributes>
+    <calculatedAttributes/>
+    <privateDataFoundation>
+      <tableProxies/>
+      <joins/>
+      <layout>
+        <shapes/>
+      </layout>
+    </privateDataFoundation>
+    <baseMeasures>
+      <measure id="TOTAL_SALES" order="5" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription=""/>
+        <measureMapping columnObjectName="Join_1" columnName="TOTAL_SALES"/>
+      </measure>
+      <measure id="SALES" order="6" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="NETAMOUNT"/>
+        <measureMapping columnObjectName="Join_1" columnName="SALES"/>
+      </measure>
+    </baseMeasures>
+    <calculatedMeasures>
+      <measure id="SHARE_SALES" hidden="false" order="7" aggregationType="sum" measureType="simple" datatype="DECIMAL" length="12" scale="5">
+        <descriptions defaultDescription="SHARE_SALES"/>
+        <formula>double(&quot;SALES&quot;)/double(&quot;TOTAL_SALES&quot;)</formula>
+      </measure>
+    </calculatedMeasures>
+    <restrictedMeasures/>
+    <localDimensions/>
+  </logicalModel>
+  <layout>
+    <shapes>
+      <shape modelObjectName="Output" modelObjectNameSpace="MeasureGroup">
+        <upperLeftCorner x="100" y="90"/>
+        <rectangleSize/>
+      </shape>
+      <shape modelObjectName="Aggregation_1" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="260" y="340"/>
+        <rectangleSize/>
+      </shape>
+      <shape modelObjectName="Aggregation_2" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="20" y="350"/>
+        <rectangleSize/>
+      </shape>
+      <shape modelObjectName="Join_1" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="100" y="210"/>
+        <rectangleSize/>
+      </shape>
+    </shapes>
+  </layout>
+</Calculation:scenario>

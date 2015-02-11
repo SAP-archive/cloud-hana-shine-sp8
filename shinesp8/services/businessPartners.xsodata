@@ -1,0 +1,4 @@
+service namespace "{{PACKAGE_NAME}}.services" {
+	"{{PACKAGE_NAME}}.data::EPM.MD.BusinessPartner"
+	as "BusinessPartners"; 
+}

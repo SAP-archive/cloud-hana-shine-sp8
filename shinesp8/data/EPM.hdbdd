@@ -1,0 +1,490 @@
+namespace {{PACKAGE_NAME}}.data;
+
+@Schema: '_SYS_BIC'
+context EPM {
+
+type BusinessKey : String(10);
+type SString  : String(40);
+type MString  : String(60);
+type LString  : String(255);
+type VLString : String(1024);
+type SDate : LocalDate;
+type PhoneT : String(30);
+type CurrencyT : String(5);
+type ABAPLanguage : String(1);
+type ISOLanguageT : String(2);
+type AmountT : Decimal(15,2);
+type QuantityT : Decimal(13,3);
+type UnitT: String(3);
+type StatusT: String(1);
+type ABAPDate: String(8);
+
+Type ValidityT {
+        STARTDATE : SDate;
+        ENDDATE : SDate;
+      };
+   
+   Type HistT {
+        CREATEDBY : Association to MD.Employees;
+        CREATEDAT : SDate;
+        CHANGEDBY : Association to MD.Employees;
+        CHANGEDAT : SDate; 
+      };
+     
+  
+ context MD {
+ Type NameT {
+        FIRST : SString;
+        MIDDLE : SString;
+        LAST : SString;
+        INITIALS : BusinessKey;
+      };
+ type SexT : String(1);
+ 
+@Catalog.tableType : #COLUMN 
+    Entity Addresses {
+        key  ADDRESSID: BusinessKey;
+        CITY: SString;
+        POSTALCODE: BusinessKey;
+        STREET: MString;
+        BUILDING: BusinessKey;
+        COUNTRY: String(3);
+        REGION: String(4);
+        ADDRESSTYPE: String(2);
+        VALIDITY: ValidityT;   
+        LATITUDE: Double;
+        LONGITUDE: Double; 
+    };
+    
+@Catalog.tableType : #COLUMN 
+    Entity BusinessPartner {
+        key  PARTNERID: BusinessKey;
+        PARTNERROLE: String(3); //Business Partner Role
+        EMAILADDRESS: LString;
+        PHONENUMBER: PhoneT;
+        FAXNUMBER: PhoneT null;
+        WEBADDRESS: VLString;
+        ADDRESSID: Association to Addresses null;
+        COMPANYNAME: String(80);
+        LEGALFORM: BusinessKey;
+        HISTORY: HistT;
+        CURRENCY: CurrencyT;
+    };
+  
+@Catalog.tableType : #COLUMN 
+    Entity Employees {
+        key  EMPLOYEEID: BusinessKey;
+        NAME: NameT null;
+        SEX: SexT;
+        LANGUAGE: ABAPLanguage;
+        PHONENUMBER: PhoneT null;
+        EMAILADDRESS: LString;
+        LOGINNAME: String(12);
+        ADDRESSID: Association to Addresses null;
+        VALIDITY: ValidityT; 
+        CURRENCY: CurrencyT;                
+        SALARYAMOUNT: AmountT;
+        ACCOUNTNUMBER: BusinessKey;
+        BANKID: BusinessKey;
+        BANKNAME: LString;
+        EMPLOYEEPICURL: LString;
+    };
+
+@Catalog.tableType : #COLUMN 
+    Entity Products {
+        key  PRODUCTID: BusinessKey; 
+		TYPECODE: String(2);
+		CATEGORY: SString;
+        HISTORY: HistT;
+        NAMEID: BusinessKey;
+        DESCID: BusinessKey;
+        SUPPLIERID: Association to MD.BusinessPartner;
+        TAXTARIFFCODE: Integer;
+        QUANTITYUNIT: UnitT;
+        WEIGHTMEASURE: QuantityT;
+        WEIGHTUNIT: UnitT; 
+        CURRENCY: CurrencyT;
+        PRICE: AmountT;
+        PRODUCTPICURL: LString null;
+        WIDTH: QuantityT;
+        DEPTH: QuantityT;
+        HEIGHT: QuantityT;
+        DIMENSIONUNIT: UnitT;	     
+    };
+
+ @Catalog.tableType: #COLUMN
+    Entity productLog{
+     key PRODUCTID: String(10);
+     key DATETIME: UTCDateTime;
+     key USERNAME: String(20);
+	 LOGTEXT: String(500);
+    }; 
+                    
+ }; 
+   
+ context SO {
+@Catalog.tableType : #COLUMN 
+    Entity Header {
+        key  SALESORDERID: BusinessKey;
+        HISTORY: HistT;
+        NOTEID: BusinessKey null;
+        PARTNERID: Association to MD.BusinessPartner;
+        CURRENCY: CurrencyT;
+        GROSSAMOUNT: AmountT;
+        NETAMOUNT: AmountT;
+        TAXAMOUNT: AmountT;
+        LIFECYCLESTATUS: StatusT;
+        BILLINGSTATUS: StatusT;
+        DELIVERYSTATUS: StatusT;
+    };
+
+@Catalog.tableType : #COLUMN 
+    Entity Item {
+        key  SALESORDERID: Association [1] to SO.Header {SALESORDERID};
+        key  SALESORDERITEM: BusinessKey;
+        PRODUCTID: Association to MD.Products;
+        NOTEID: BusinessKey null;
+        CURRENCY: CurrencyT;
+        GROSSAMOUNT: AmountT;
+        NETAMOUNT: AmountT;
+        TAXAMOUNT: AmountT;
+        ITEMATPSTATUS: String(1);
+        OPITEMPOS: BusinessKey null;
+		QUANTITY: QuantityT;
+		QUANTITYUNIT: UnitT;
+		DELIVERYDATE: SDate;
+    };
+ 
+@Catalog.tableType : #COLUMN 
+    Entity Filter {
+        key  MODEL: String(30);
+        key  COLNAME: String(8);
+        COLVALUE: String(8);
+    };
+            
+   };
+ context PO {
+@Catalog.tableType : #COLUMN 
+    Entity Header {
+        key  PURCHASEORDERID: BusinessKey;
+        HISTORY: HistT;
+        NOTEID: BusinessKey null;
+        PARTNERID: Association to MD.BusinessPartner;
+        CURRENCY: CurrencyT;
+        GROSSAMOUNT: AmountT;
+        NETAMOUNT: AmountT;
+        TAXAMOUNT: AmountT;
+        LIFECYCLESTATUS: StatusT;
+        APPROVALSTATUS: StatusT;
+        CONFIRMSTATUS: StatusT;
+        ORDERINGSTATUS: StatusT;
+        INVOICINGSTATUS: StatusT;
+    };
+
+
+@Catalog.tableType : #COLUMN 
+    Entity Item {
+        key  PURCHASEORDERID: Association [1] to PO.Header {PURCHASEORDERID};
+        key  PURCHASEORDERITEM: BusinessKey;
+        PRODUCTID: Association to MD.Products;
+        NOTEID: BusinessKey null;
+        CURRENCY: CurrencyT;
+        GROSSAMOUNT: AmountT;
+        NETAMOUNT: AmountT;
+        TAXAMOUNT: AmountT;
+		QUANTITY: QuantityT;
+		QUANTITYUNIT: UnitT;
+		DELIVERYDATE: SDate;
+    };
+        
+   };
+ context Util {
+@Catalog.tableType : #COLUMN 
+    Entity Constants {
+        key  DOMAIN: String(30);
+        key  FIXEDVALUE: String(30);
+        key  LANGUAGE: ABAPLanguage;
+        DESCRIPTION: MString;     
+    };
+
+@Catalog.tableType : #COLUMN 
+    Entity Texts {
+        key  TEXTID: BusinessKey;
+        LANGUAGE: ABAPLanguage;
+        ISOLANGUAGE: ISOLanguageT;
+        TEXT: VLString null;     
+    };
+        
+@Catalog.tableType : #COLUMN 
+    Entity Messages {
+        key  MESSAGECLASS: String(20);
+        key  MESSAGENUMBER: String(3);
+        key  LANGUAGE: ISOLanguageT;
+        DESCRIPTION: LString null;
+        TEXT: LargeString null;      
+    };
+
+@Catalog.tableType : #COLUMN 
+    Entity SSCOOKIE {
+        key  SESSIONID: String(32);
+        key  NAME: String(30);
+        key  APPLICATION: String(128);
+        EXPIRY: UTCTimestamp;
+        DATA: LargeString;      
+    };
+    
+@Catalog.tableType : #COLUMN 
+    Entity Notes {
+        key  NOTEID: BusinessKey;
+        LINKID: BusinessKey;
+        AUTHOR: String(30);
+        TEXT: LString;
+        CREATEDAT: UTCTimestamp;
+        THUMBNAIL: LString;      
+    };   
+    
+@Catalog.tableType : #COLUMN 
+    Entity Attachments {
+        key  NOTEID: BusinessKey;
+        LINKID: BusinessKey;        
+        TYPE: String(30);
+        TITLE: LString;
+        CREATEDAT: UTCTimestamp;
+        DESCRIPTION: LString;
+        SIZE: String(40);      
+    };       
+    
+@Catalog.tableType : #COLUMN 
+	Entity TimeDimension {
+	key  DATETIMESTAMP: UTCTimestamp;
+	DATE_SQL: LocalDate;
+	DATETIME_SAP: String(14);
+	DATE_SAP: String(8);
+	YEAR: String(4);
+	QUARTER: String(2);
+	MONTH: String(2);
+	WEEK: String(2);
+	WEEK_YEAR: String(4);
+	DAY_OF_WEEK: String(2);
+	DAY: String(2);
+	HOUR: String(2);
+	MINUTE: String(2);
+	SECOND: String(2);
+	CALQUARTER: String(5);
+	CALMONTH: String(6);
+	CALWEEK: String(6);
+	YEAR_INT: Integer;
+	QUARTER_INT: Integer;
+	MONTH_INT: Integer;
+	WEEK_INT: Integer;
+	WEEK_YEAR_INT: Integer;
+	DAY_OF_WEEK_INT: Integer;
+	DAY_INT: Integer;
+	HOUR_INT: Integer;
+	MINUTE_INT: Integer;
+	SECOND_INT: Integer;
+	};
+
+    
+         
+   }; 
+ context Conversions {
+ type MandtT: String(3);
+ 
+ 
+@Catalog.tableType : #COLUMN 
+    Entity T006 {
+        key  MANDT: MandtT;
+        key  MSEHI: String(3);
+	    KZEX3: String(1);
+	    KZEX6: String(1);
+	    ANDEC: Integer;
+	    KZKEH: String(1);
+	    KZWOB: String(1);
+	    KZ1EH: String(1);
+	    KZ2EH: String(1);
+	    DIMID: String(6);
+	    ZAEHL: Integer;
+	    NENNR: Integer;
+	    EXP10: Integer;
+	    ADDKO: Decimal(9,6);
+	    EXPON: Integer;
+	    DECAN: Integer;
+	    ISOCODE: String(3);
+	    PRIMARY: String(1);
+	    TEMP_VALUE: BinaryFloat;
+	    TEMP_UNIT: String(3);
+	    FAMUNIT: String(3);
+	    PRESS_VAL: BinaryFloat;
+	    PRESS_UNIT: String(3);  
+    };
+    
+@Catalog.tableType : #COLUMN 
+    Entity T006A {
+        key  MANDT: MandtT;
+        key  SPRAS: ABAPLanguage;
+        key  MSEHI: String(3);
+	    KZEX3: String(3);
+	    KZEX6: String(6);
+	    MSEHT: BusinessKey null;
+	    MSEHL: String(30) null;
+    };
+
+@Catalog.tableType : #COLUMN 
+    Entity TCURC {
+        key  MANDT: MandtT;
+		key  WAERS: CurrencyT;
+		ISOCD: String(3);
+		ALTWR: String(3);
+    	GDATU: ABAPDate;
+		XPRIMARY: String(1);
+    };
+  
+@Catalog.tableType : #COLUMN 
+    Entity TCURF {
+        key  MANDT: MandtT;
+		key  KURST: String(4);
+		key  FCURR: CurrencyT;
+		key  TCURR: CurrencyT;
+		key  GDATU: ABAPDate;
+		FFACT: Decimal(9,0);
+		TFACT: Decimal(9,0);
+		ABWCT: String(4);
+		ABWGA: String(8);
+    };
+       
+@Catalog.tableType : #COLUMN 
+    Entity TCURN {
+        key  MANDT: MandtT;
+		key  FCURR: CurrencyT;
+		key  TCURR: CurrencyT;
+		key  GDATU: ABAPDate;
+		NOTATION: String(1);
+    };
+
+@Catalog.tableType : #COLUMN 
+    Entity TCURR {
+        key  MANDT: MandtT;
+		key  KURST: String(4);        
+		key  FCURR: CurrencyT;
+		key  TCURR: CurrencyT;
+		key  GDATU: ABAPDate;
+		UKURS: Decimal(9,5);
+		FFACT: Decimal(9,0);
+		TFACT: Decimal(9,0);
+    };
+   
+@Catalog.tableType : #COLUMN    
+    Entity TCURT {
+        key  MANDT: MandtT;
+        key  SPRAS: ABAPLanguage;
+		key  WAERS: CurrencyT;
+		LTEXT: String(40);
+		KTEXT: String(15) null;
+    };
+    
+@Catalog.tableType : #COLUMN 
+    Entity TCURV {
+        key  MANDT: MandtT;
+		key  KURST: String(4);        
+		XINVR: String(1);
+		BWAER: CurrencyT;
+		XBWRL: String(1);
+		GKUZU: String(4);
+		BKUZU: String(4);
+		XFIXD: String(1);
+		XEURO: String(1);
+    };
+     
+@Catalog.tableType : #COLUMN    
+    Entity TCURW {
+        key  MANDT: MandtT;
+        key  SPRAS: ABAPLanguage;
+		key  KURST: String(4);
+		CURVW: String(40);
+    };
+     
+@Catalog.tableType : #COLUMN    
+    Entity TCURX {
+        key  CURRKEY: CurrencyT;
+		CURRDEC: Integer;
+    };
+                                        
+   };  
+ 
+ Context User {
+   @Catalog.tableType: #COLUMN
+     Entity Details {
+     	key PERS_NO: String(10);
+     	FIRSTNAME: SString;
+     	LASTNAME: SString;
+     	E_MAIL: LString;
+     };	
+  };
+   @Catalog.tableType : #COLUMN 
+    Entity MapKeys {
+        key  KEYID: String(10);
+        APP_ID: String(50);
+        APP_CODE: String(50);
+        EXT1: String(50);
+        EXT2: String(50);
+    };
+
+  Context Procedures{
+    
+    type tt_bp_addresses {
+      PARTNERID: String(10);
+      PARTNERROLE: String(3);
+      EMAILADDRESS: String(255);
+      COMPANYNAME: String(80);
+      ADDRESSID: String(10);
+      CITY: String(40);
+      POSTALCODE: String(10);
+      STREET: String(60); 
+	};
+
+    type tt_product_sale_price {
+      PRODUCTID: String(10);
+      CATEGORY: String(40);
+      PRICE: Decimal(15,2);
+      SALEPRICE: Decimal(15,2);
+    };
+    
+    type tt_customer_discount_calculation{
+      COMPANY_NAME: String(50);
+      REGION: String(50);
+      SALES: Decimal(15,2);
+      ORDERS: Integer;
+      SALES_RANK: Integer;
+      ORDER_RANK: Integer;
+    };
+    
+     type tt_tax_calculation {
+      PARTNERID: String(10);
+      COMPANYNAME: String(80);
+      PRODUCTID: String(10);      	
+      };
+    
+    type tt_variable{
+        SESSIONID: String(32);
+        NAME: String(30);
+        APPLICATION: String(128);
+        EXPIRY: UTCTimestamp;
+        DATA: LargeString; 
+    };
+    
+ 	Type tt_errors {
+        HTTP_STATUS_CODE : Integer;
+        ERROR_MESSAGE : String(100);
+        DETAIL : String(100);
+      };
+          
+    type tt_scookie{
+        SESSIONID: String(32);
+        NAME: String(30);
+        APPLICATION: String(128);
+        EXPIRY: UTCTimestamp;    
+    };
+  };
+      
+};

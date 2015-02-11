@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Calculation:scenario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:AccessControl="http://www.sap.com/ndb/SQLCoreModelAccessControl.ecore" xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" xmlns:Variable="http://www.sap.com/ndb/BiModelVariable.ecore" schemaVersion="2.2" id="CV_SALESORDER_RANKING" applyPrivilegeType="ANALYTIC_PRIVILEGE" checkAnalyticPrivileges="true" defaultClient="crossClient" defaultLanguage="$$language$$" visibility="internal" calculationScenarioType="TREE_BASED" dataCategory="DEFAULT" enforceSqlExecution="false" executionSemantic="UNDEFINED" outputViewType="Aggregation">
+  <origin/>
+  <descriptions defaultDescription="CV_SALESORDER_RANKING"/>
+  <defaultSchema schemaName="_SYS_BIC"/>
+  <localVariables>
+    <variable id="IP_FR_DTE" parameter="true">
+      <descriptions defaultDescription="IP_FR_DTE"/>
+      <variableProperties datatype="NVARCHAR" mandatory="true">
+        <valueDomain type="empty"/>
+        <selection multiLine="false" type="SingleValue"/>
+        <derivationRule>
+          <resultColumn schemaName="_SYS_BIC" columnObjectName="{{PACKAGE_NAME}}.data::EPM.SO.Filter" columnName="COLVALUE"/>
+          <columnFilter columnName="COLNAME">
+            <valueFilter xsi:type="AccessControl:SingleValueFilter" including="true" value="FROM"/>
+          </columnFilter>
+          <columnFilter columnName="MODEL">
+            <valueFilter xsi:type="AccessControl:SingleValueFilter" including="true" value="AN_SALESORDER_RANKING"/>
+          </columnFilter>
+        </derivationRule>
+      </variableProperties>
+    </variable>
+    <variable id="IP_TO_DTE" parameter="true">
+      <descriptions defaultDescription="IP_TO_DTE"/>
+      <variableProperties datatype="NVARCHAR" mandatory="true">
+        <valueDomain type="empty"/>
+        <selection multiLine="false" type="SingleValue"/>
+        <derivationRule>
+          <resultColumn schemaName="_SYS_BIC" columnObjectName="{{PACKAGE_NAME}}.data::EPM.SO.Filter" columnName="COLVALUE"/>
+          <columnFilter columnName="MODEL">
+            <valueFilter xsi:type="AccessControl:SingleValueFilter" including="true" value="AN_SALESORDER_RANKING"/>
+          </columnFilter>
+          <columnFilter columnName="COLNAME">
+            <valueFilter xsi:type="AccessControl:SingleValueFilter" including="true" value="TO"/>
+          </columnFilter>
+        </derivationRule>
+      </variableProperties>
+    </variable>
+  </localVariables>
+  <variableMappings>
+    <mapping xsi:type="Variable:VariableMapping" dataSource="#CV_SALESORDER_RANKING_SQL">
+      <targetVariable name="IP_TO_DTE" resourceUri="/{{PACKAGE_NAME}}.models/calculationviews/CV_SALESORDER_RANKING_SQL"/>
+      <localVariable>#IP_TO_DTE</localVariable>
+    </mapping>
+    <mapping xsi:type="Variable:VariableMapping" dataSource="#CV_SALESORDER_RANKING_SQL">
+      <targetVariable name="IP_FR_DTE" resourceUri="/{{PACKAGE_NAME}}.models/calculationviews/CV_SALESORDER_RANKING_SQL"/>
+      <localVariable>#IP_FR_DTE</localVariable>
+    </mapping>
+  </variableMappings>
+  <dataSources>
+    <DataSource id="CV_SALESORDER_RANKING_SQL" type="CALCULATION_VIEW">
+      <viewAttributes allViewAttributes="true"/>
+      <resourceUri>/{{PACKAGE_NAME}}.models/calculationviews/CV_SALESORDER_RANKING_SQL</resourceUri>
+    </DataSource>
+  </dataSources>
+  <calculationViews>
+    <calculationView xsi:type="Calculation:ProjectionView" id="Projection_1">
+      <viewAttributes>
+        <viewAttribute id="COMPANY_NAME"/>
+        <viewAttribute id="SALES"/>
+        <viewAttribute id="ORDERS"/>
+        <viewAttribute id="SALES_RANK"/>
+        <viewAttribute id="ORDER_RANK"/>
+      </viewAttributes>
+      <calculatedViewAttributes/>
+      <input node="#CV_SALESORDER_RANKING_SQL">
+        <mapping xsi:type="Calculation:AttributeMapping" target="COMPANY_NAME" source="COMPANY_NAME"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="SALES" source="SALES"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ORDERS" source="ORDERS"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="SALES_RANK" source="SALES_RANK"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ORDER_RANK" source="ORDER_RANK"/>
+      </input>
+    </calculationView>
+  </calculationViews>
+  <logicalModel id="Projection_1">
+    <attributes>
+      <attribute id="COMPANY_NAME" order="1" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="COMPANYNAME"/>
+        <keyMapping columnObjectName="Projection_1" columnName="COMPANY_NAME"/>
+      </attribute>
+      <attribute id="SALES" order="2" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="SALES"/>
+        <keyMapping columnObjectName="Projection_1" columnName="SALES"/>
+      </attribute>
+      <attribute id="ORDERS" order="3" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="ORDERS"/>
+        <keyMapping columnObjectName="Projection_1" columnName="ORDERS"/>
+      </attribute>
+      <attribute id="SALES_RANK" order="4" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="SALES_RANK"/>
+        <keyMapping columnObjectName="Projection_1" columnName="SALES_RANK"/>
+      </attribute>
+      <attribute id="ORDER_RANK" order="5" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="ORDER_RANK"/>
+        <keyMapping columnObjectName="Projection_1" columnName="ORDER_RANK"/>
+      </attribute>
+    </attributes>
+    <calculatedAttributes/>
+    <privateDataFoundation>
+      <tableProxies/>
+      <joins/>
+      <layout>
+        <shapes/>
+      </layout>
+    </privateDataFoundation>
+    <baseMeasures/>
+    <calculatedMeasures/>
+    <restrictedMeasures/>
+    <localDimensions/>
+  </logicalModel>
+  <layout>
+    <shapes>
+      <shape modelObjectName="Output" modelObjectNameSpace="MeasureGroup">
+        <upperLeftCorner x="40" y="85"/>
+        <rectangleSize height="0" width="0"/>
+      </shape>
+      <shape modelObjectName="Projection_1" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="40" y="200"/>
+        <rectangleSize height="0" width="0"/>
+      </shape>
+    </shapes>
+  </layout>
+</Calculation:scenario>

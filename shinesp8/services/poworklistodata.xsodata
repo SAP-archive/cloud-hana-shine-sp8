@@ -1,0 +1,4 @@
+service namespace "{{PACKAGE_NAME}}"  { 
+   "{{PACKAGE_NAME}}.models/AT_PURCHASE_ORDER_WORKLIST.attributeview" as "PO_WORKLIST" 
+   keys ("PURCHASEORDERID","PURCHASEORDERITEM");
+}

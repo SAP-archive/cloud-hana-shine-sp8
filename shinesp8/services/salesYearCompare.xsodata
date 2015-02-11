@@ -1,0 +1,7 @@
+service namespace "{{PACKAGE_NAME}}"  { 
+   "{{PACKAGE_NAME}}.models::CV_SALES_YEAR_COMPARISON" 
+    as "salesYear"  
+	keys generate local "ID"
+    aggregates always
+    parameters via entity "InputParams";
+}

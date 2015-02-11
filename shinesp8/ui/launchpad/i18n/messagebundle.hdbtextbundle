@@ -1,0 +1,76 @@
+DO_NOT_SHOW=Do not show this again
+TITLE=SHINE (SAP HANA Interactive Education)
+OK_BUTTON=OK
+INTRODUCTION=Introduction
+WHATS_NEW=What's New
+TILE_HELP_PROMPT=Clicking on each tile will bring up the help for that module.
+CHECK_PRE=Check Prerequisites
+DG=Data Generator
+POWLIST=Purchase Order Worklist
+SALES_DASH=Sales Dashboard
+SOWLIST=Sales Worklist
+USER=User CRUD
+SPATIAL=Spatial Demo
+SALES_DASH_MOB=Sales Dashboard Mobile
+BUSINESS_SCENARIO=Business Scenario
+MAJOR_TABLES=Major database Tables/Views
+UI_FOLDER=UI Folder path
+PERMISSIONS=Permissions required
+CONTINUE=Continue
+
+SHINE_INTRO=SAP HANA Interactive Education, or SHINE, is a demo application that makes it easy to learn how to build native SAP HANA applications. The demo application, delivered with SAP HANA in a special delivery unit(DU), comes complete with sample data and design-time developer objects for the application's database tables, data views, stored procedures, OData, and user interface. \n\nThis version however is a specially adapted version which runs on the trial landscape provided free of cost on https://hanatrial.ondemand.com The difference is that this version is adapted to run on the Shared HANA landscape which has more restrictions than the on-premise landscape.
+SHINE_WHATS_NEW=<ul><li>Multiple line item create of Sales Orders</li><li>Delete Sales Order</li><li>Separate Application link for SO Work list</li><li>Time Based Data Generator for PO and SO ( involved xsjs code)</li><li>Spatial demo</li></ul>
+
+TILE_DESC_DG=<div>The demo application defines a set of tables, along with a basic set of initial data that comes in a set of CSV files. For example, the sales orders table begins with 1,000 records. </br><ul><li>This application provides the tools for generating additional sales and purchase order records, as well as reloading the master data tables.</li><li>The records can also be distributed over a period of time using the Time based Data Generator</li><li>The complete application data can also be reset using this module.</li><li><font color="red">You can use the application with the initial data, but you must run the data generation tool  to create synonyms for Currency Conversions.</font></li></ul></div>
+TILE_DESC_PO=<div>This UI illustrates a comprehensive Purchase Order Worklist which can act as a complete interface for a Purchase Department Head.</br><ul><li>There is a list of Purchase Orders and upon selection of a particular order, the general data and Purchase Order items related to the purchase order are listed in separate tabs.</li><li>He can perform Actions like Delete, Accept or Reject on these Purchase Orders and export the data to excel</li><li>He can perform search for the Purchase Orders based on different attribute like Company Name,Product ID,etc</li></ul></div>
+TILE_DESC_SO=<div>This UI illustrates a Sales Order Worklist where you can create and delete Sales Orders.</br><ul><li>The Details tab provides a type of PO Worklist where all the Sales Orders are listed.</li><li>By selecting a Sales Order, you can view its details.</li><li>This tab also provides a feature for creating Sales Orders using XSJS.</li></ul></div>
+TILE_DESC_SD=<div>This UI illustrates a comprehensive dashboard concept for a Sales Manager that contains several charts based on the OData models constructed in the demo content.</br><ul><li>The Overview tab contains all the sales specific charts based on Region/Country/Discount per region.</li><li>The Product Reports tab contains charts that provide sales information categorized by product.</li><li>The Details tab provides a type of PO Worklist where all the Sales Orders are listed.</li><li>By selecting a Sales Order, you can view its details.</li><li>This tab also provides a feature for creating Sales Orders using XSJS.</li></ul></div>
+TILE_DESC_US=<div>The userCRUD ( Create Read Update Delete) folder contains a simple model and UI demonstrating creation and update of data.</br><ul><li>Here in this screen, a new User record can be created as well as existing records can be updated in the table itself or deleted.</li><li>New records can be created using two methods, first by <b>simple HTTP POST request using OData</b> and second by using the <b>$batch request provided by OData</b> which allows us to create multiple records in a single HTTP request.</li><li>You can perform an update by modifying the First Name, Last Name, and/or Email fields that already exist in the table.</li><li>This UI also showcases how to integrate the custom exits for OData methods.</li></ul></div>
+TILE_DESC_SPATIAL=<div>This UI illustrates a small demo on how spatial features and analyisis can be integrated with HANA XS applications. In this UI we use the latitude and longitude data from Address table to perform analysis over Sales and Customer data.</div>
+TILE_DESC_SALES_MOBILE=<div>This Mobile UI illustrates a comprehensive dashboard concept that contains several charts based on the OData model constructed in the demo content. You can see  sales specific charts based on Region/Country/Discount per region and  charts that provide sales information categorized by product.</div>
+
+TILE_BUSI_SCEN_SD=As the Sales head of a company which deals in buying and selling IT equipments all over the world via e-commerce, I would like to have some Sales Analytics (Graphical representation) by which i can figure out the sales per region after orders have been executed. This  would help me in optimizing my sales strategy and enable me to make better sales decisions.
+TILE_BUSI_SCEN_SP=As the Sales head of a company which deals in buying and selling IT equipments all over the world via e-commerce, I would like to visualize my Customers on a map. I would also like to select a region on the map and view its Sales data.
+
+TILE_DB_VIEWS_DG=<div>All Master Data Tables , Purchase and Sales tables.</div>
+TILE_DB_VIEWS_PO=<ul><li>EPM.Purchase.Header</li><li>EPM.Purchase.Item</li><li>AN_PURCHASE_Overview.analyticview</li><ul>
+TILE_DB_VIEWS_SO=<ul><li>EPM.Sales.Header</li><li>EPM.Sales.Item</li><li>AT_SALES_ORDER_WORKLIST.attributeview</li><ul>
+TILE_DB_VIEWS_SD=<ul><li>EPM.Sales.Header</li><li>EPM.Sales.Item</li><li>AN_SALES_ORDER_RANKING.analyticview</li><li>CV_SALES_YEAR_COMPARISON.calculationview</li><li>CV_SALES_ORDER_RANKING*.calculationview</li><ul>
+TILE_DB_VIEWS_US=<div>EPM.User.Details</div>
+TILE_DB_VIEWS_SPATIAL=<ul><li>EPM.MasterData.Addresses</li><li>EPM.MasterData.BusinessPartner</li><li>EPM.Sales.Header</li></ul>
+TILE_DB_VIEWS_SALES_MOB=<ul><li>EPM.Sales.Header</li><li>EPM.Sales.Item</li><li>AN_SALES_ORDER_RANKING.analyticview</li><li>CV_SALES_YEAR_COMPARISON.calculationview</li><li>CV_SALES_ORDER_RANKING*.calculationview</li></ul>
+
+TILE_UI_FOLDER_DG=shine/admin/ui/
+TILE_UI_FOLDER_PO=shine/ui/poworklist/
+TILE_UI_FOLDER_SO=shine/ui/salesDashboard/
+TILE_UI_FOLDER_SD=shine/ui/salesDashboard/
+TILE_UI_FOLDER_US=shine/ui/userCRUD/
+TILE_UI_FOLDER_SPATIAL=shine/spatial/ui/
+TILE_UI_FOLDER_SALES_MOB=shine/ui/salesDashMobile/
+
+TILE_PERMS_DG=User should have User.hdbrole to access this Application
+TILE_PERMS_PO=User should have User.hdbrole,Time Data has to be generated, Create Synonyms should have been executed in Data Generator.
+TILE_PERMS_SO=User should have User.hdbrole,Time Data has to be generated, Create Synonyms should have been executed in Data Generator.
+TILE_PERMS_SD=User should have User.hdbrole,Time Data has to be generated, Create Synonyms should have been executed in Data Generator.
+TILE_PERMS_US=User should have User.hdbrole.
+TILE_PERMS_SPATIAL=User should have User.hdbrole.
+TILE_PERMS_SALES_MOB=User should have User.hdbrole,Time Data has to be generated, Create Synonyms should have been executed in Data Generator.
+
+CHECKING_PRE=Checking Prerequisites
+PRE_PROMPT=Please check Section 5 of this guide for the complete list of prerequisites.
+PDF_LINK=http://help.sap.com/hana/SAP_HANA_Interactive_Education_SHINE_en.pdf
+LINK_PROMPT=Getting started guide
+USER_ROLE_PRESENT=User role status
+ADMIN_ROLE_PRESENT=Admin role status
+ANALYTIC_PRIVILEGE=Analytic privileges for models
+TIME_DATA_GENERATED=Time data generated
+GENERATE_TIME_DATA=Generate Time data
+GENERATE_TIME_DATA_SUCCESS=Time data generated successfully.
+GENERATE_TIME_DATA_ERROR=Time data could not be generated.
+SYNONYM_PRESENT=Synonyms present
+CREATE_SYNONYMS=Create Synonyms
+CREATE_SYNONYMS_SUCCESS=Synonyms created successfully.
+CREATE_SYNONYMS_ERROR=Synonyms could not be created.
+CANT_CHECK=Not able to check the prerequisites
+TIME_INFO=<div>Data needs to be loaded into the M_TIME_DIMENSION Time Dimension table in the _SYS_BI Schema for the models and charts to work perfectly. You can easily generate this data by clicking on <b>Generate Time Data</b> button. This can also be done by navigating to the Modeler view in the SAP HANA Studio, select your System and then select Generate Time Data and fill up the relevant information. Data should be present at least for year 2012.</div>
+SYNONYMS_INFO=<div>Synonyms are required for Currency conversion to work. This can easily be done by clicking on <b>Create Synonyms</b> button or navigate to the Data Generator to generate the synonyms.</div>

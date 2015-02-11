@@ -1,0 +1,6 @@
+service namespace "{{PACKAGE_NAME}}"  { 
+   "{{PACKAGE_NAME}}.models::CV_SALESORDER_RANKING" 
+    as "salesRank"  
+	keys generate local "ID"
+    aggregates always;	 
+}

@@ -1,0 +1,58 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<link rel="shortcut icon" type="image/x-icon" href="images/favicon.ico" />
+		<title>User CRUD</title>
+		
+		<style>
+		    /* move button to far right */
+            .helpButton{
+                font-weight: bold;
+                float: right;
+            }
+            /* help dialog */
+            .welcomeDlg {
+                background-color: #FFFFFF !important;
+            }
+            .welcomeDlg .sapUiDlgHdr {
+                border-bottom: 0px solid #FFFFFF !important;
+            }
+            .welcomeDlg .sapUiDlgCont {
+                background-color: #FFFFFF !important;
+                padding: 10px 25px 12px;
+            }
+            .welcomeHeaderTextAlign {
+                font-size: 22px !important;
+                padding-left: 5px;
+            }        
+            .dialogTextColor{
+                color: #007CC0 !important;
+            }
+		</style>
+		
+		<script src="/sap/ui5/1/resources/sap-ui-core.js"
+				id="sap-ui-bootstrap"
+				data-sap-ui-libs="sap.ui.commons, sap.ui.table"
+				data-sap-ui-theme="sap_bluecrystal">
+		</script>
+		<!-- add sap.ui.table,sap.ui.ux3 and/or other libraries to 'data-sap-ui-libs' if required -->
+
+		<script>
+		       	sap.ui.localResources("usercrud");
+				var view = sap.ui.view({id:"iduserCRUD1", viewName:"usercrud.userCRUD", type:sap.ui.core.mvc.ViewType.JS});
+				view.placeAt("content");
+				
+				var oModel = new sap.ui.model.resource.ResourceModel({bundleUrl:"i18n/messagebundle.hdbtextbundle"});
+				sap.ui.getCore().setModel(oModel, "i18n");
+				
+			    /** initialize tile dialog */
+                jQuery.sap.registerModulePath('app', 'js');
+                jQuery.sap.require("app.tileDialog");
+		</script>
+
+	</head>
+	<body class="sapUiBody" role="application">
+		<div id="content"></div>
+	</body>
+</html>

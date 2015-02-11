@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Dimension:dimension xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:AccessControl="http://www.sap.com/ndb/SQLCoreModelAccessControl.ecore" xmlns:Dimension="http://www.sap.com/ndb/BiModelDimension.ecore" schemaVersion="1.2" id="AT_TIME_DIM" applyPrivilegeType="ANALYTIC_PRIVILEGE" checkAnalyticPrivileges="true" defaultClient="$$client$$" defaultLanguage="$$language$$" visibility="internal" dimensionType="Time">
+  <origin/>
+  <descriptions defaultDescription="AT_TIME_DIM"/>
+  <attributes>
+    <attribute id="DATETIMESTAMP" order="1" attributeHierarchyActive="false" displayAttribute="false">
+      <descriptions defaultDescription="DATETIMESTAMP"/>
+      <keyMapping schemaName="_SYS_BI" columnObjectName="M_TIME_DIMENSION" columnName="DATETIMESTAMP"/>
+    </attribute>
+    <attribute id="DATE_SQL" order="2" attributeHierarchyActive="false" displayAttribute="false" key="true">
+      <descriptions defaultDescription="DATE_SQL"/>
+      <keyMapping schemaName="_SYS_BI" columnObjectName="M_TIME_DIMENSION" columnName="DATE_SQL"/>
+    </attribute>
+    <attribute id="DATETIME_SAP" order="3" attributeHierarchyActive="false" displayAttribute="false">
+      <descriptions defaultDescription="DATETIME_SAP"/>
+      <keyMapping schemaName="_SYS_BI" columnObjectName="M_TIME_DIMENSION" columnName="DATETIME_SAP"/>
+    </attribute>
+    <attribute id="DATE_SAP" order="4" attributeHierarchyActive="false" displayAttribute="false">
+      <descriptions defaultDescription="DATE_SAP"/>
+      <keyMapping schemaName="_SYS_BI" columnObjectName="M_TIME_DIMENSION" columnName="DATE_SAP"/>
+    </attribute>
+    <attribute id="YEAR" order="5" attributeHierarchyActive="false" displayAttribute="false">
+      <descriptions defaultDescription="YEAR"/>
+      <keyMapping schemaName="_SYS_BI" columnObjectName="M_TIME_DIMENSION" columnName="YEAR"/>
+    </attribute>
+    <attribute id="QUARTER" order="6" attributeHierarchyActive="false" displayAttribute="false">
+      <descriptions defaultDescription="QUARTER"/>
+      <keyMapping schemaName="_SYS_BI" columnObjectName="M_TIME_DIMENSION" columnName="QUARTER"/>
+    </attribute>
+    <attribute id="MONTH" order="7" attributeHierarchyActive="false" displayAttribute="false">
+      <descriptions defaultDescription="MONTH"/>
+      <keyMapping schemaName="_SYS_BI" columnObjectName="M_TIME_DIMENSION" columnName="MONTH"/>
+    </attribute>
+    <attribute id="WEEK" order="8" attributeHierarchyActive="false" displayAttribute="false">
+      <descriptions defaultDescription="WEEK"/>
+      <keyMapping schemaName="_SYS_BI" columnObjectName="M_TIME_DIMENSION" columnName="WEEK"/>
+    </attribute>
+    <attribute id="WEEK_YEAR" order="9" attributeHierarchyActive="false" displayAttribute="false">
+      <descriptions defaultDescription="WEEK_YEAR"/>
+      <keyMapping schemaName="_SYS_BI" columnObjectName="M_TIME_DIMENSION" columnName="WEEK_YEAR"/>
+    </attribute>
+    <attribute id="DAY_OF_WEEK" order="10" attributeHierarchyActive="false" displayAttribute="false">
+      <descriptions defaultDescription="DAY_OF_WEEK"/>
+      <keyMapping schemaName="_SYS_BI" columnObjectName="M_TIME_DIMENSION" columnName="DAY_OF_WEEK"/>
+    </attribute>
+    <attribute id="DAY" order="11" attributeHierarchyActive="false" displayAttribute="false">
+      <descriptions defaultDescription="DAY"/>
+      <keyMapping schemaName="_SYS_BI" columnObjectName="M_TIME_DIMENSION" columnName="DAY"/>
+    </attribute>
+    <attribute id="CALQUARTER" order="12" attributeHierarchyActive="false" displayAttribute="false">
+      <descriptions defaultDescription="CALQUARTER"/>
+      <keyMapping schemaName="_SYS_BI" columnObjectName="M_TIME_DIMENSION" columnName="CALQUARTER"/>
+    </attribute>
+    <attribute id="CALMONTH" order="13" attributeHierarchyActive="false" displayAttribute="false">
+      <descriptions defaultDescription="CALMONTH"/>
+      <keyMapping schemaName="_SYS_BI" columnObjectName="M_TIME_DIMENSION" columnName="CALMONTH"/>
+    </attribute>
+    <attribute id="CALWEEK" order="14" attributeHierarchyActive="false" displayAttribute="false">
+      <descriptions defaultDescription="CALWEEK"/>
+      <keyMapping schemaName="_SYS_BI" columnObjectName="M_TIME_DIMENSION" columnName="CALWEEK"/>
+    </attribute>
+    <attribute id="YEAR_INT" order="15" attributeHierarchyActive="false" displayAttribute="false">
+      <descriptions defaultDescription="YEAR_INT"/>
+      <keyMapping schemaName="_SYS_BI" columnObjectName="M_TIME_DIMENSION" columnName="YEAR_INT"/>
+    </attribute>
+    <attribute id="QUARTER_INT" order="16" attributeHierarchyActive="false" displayAttribute="false">
+      <descriptions defaultDescription="QUARTER_INT"/>
+      <keyMapping schemaName="_SYS_BI" columnObjectName="M_TIME_DIMENSION" columnName="QUARTER_INT"/>
+    </attribute>
+    <attribute id="MONTH_INT" order="17" attributeHierarchyActive="false" displayAttribute="false">
+      <descriptions defaultDescription="MONTH_INT"/>
+      <keyMapping schemaName="_SYS_BI" columnObjectName="M_TIME_DIMENSION" columnName="MONTH_INT"/>
+    </attribute>
+    <attribute id="WEEK_INT" order="18" attributeHierarchyActive="false" displayAttribute="false">
+      <descriptions defaultDescription="WEEK_INT"/>
+      <keyMapping schemaName="_SYS_BI" columnObjectName="M_TIME_DIMENSION" columnName="WEEK_INT"/>
+    </attribute>
+    <attribute id="WEEK_YEAR_INT" order="19" attributeHierarchyActive="false" displayAttribute="false">
+      <descriptions defaultDescription="WEEK_YEAR_INT"/>
+      <keyMapping schemaName="_SYS_BI" columnObjectName="M_TIME_DIMENSION" columnName="WEEK_YEAR_INT"/>
+    </attribute>
+    <attribute id="DAY_OF_WEEK_INT" order="20" attributeHierarchyActive="false" displayAttribute="false">
+      <descriptions defaultDescription="DAY_OF_WEEK_INT"/>
+      <keyMapping schemaName="_SYS_BI" columnObjectName="M_TIME_DIMENSION" columnName="DAY_OF_WEEK_INT"/>
+    </attribute>
+    <attribute id="DAY_INT" order="21" attributeHierarchyActive="false" displayAttribute="false">
+      <descriptions defaultDescription="DAY_INT"/>
+      <keyMapping schemaName="_SYS_BI" columnObjectName="M_TIME_DIMENSION" columnName="DAY_INT"/>
+    </attribute>
+  </attributes>
+  <calculatedAttributes/>
+  <privateDataFoundation>
+    <tableProxies>
+      <tableProxy>
+        <table schemaName="_SYS_BI" columnObjectName="M_TIME_DIMENSION"/>
+        <columnFilter columnName="HOUR">
+          <valueFilter xsi:type="AccessControl:SingleValueFilter" including="true" value="00"/>
+        </columnFilter>
+        <columnFilter columnName="MINUTE">
+          <valueFilter xsi:type="AccessControl:SingleValueFilter" including="true" value="00"/>
+        </columnFilter>
+        <columnFilter columnName="SECOND">
+          <valueFilter xsi:type="AccessControl:SingleValueFilter" including="true" value="00"/>
+        </columnFilter>
+      </tableProxy>
+    </tableProxies>
+    <joins/>
+    <layout>
+      <shapes>
+        <shape modelObjectName="M_TIME_DIMENSION" modelObjectNameSpace="_SYS_BI" modelObjectType="catalog">
+          <upperLeftCorner x="70" y="30"/>
+        </shape>
+        <shape modelObjectName="DataFoundation" modelObjectNameSpace="DataFoundation" modelObjectType="repository">
+          <upperLeftCorner x="40" y="85"/>
+          <rectangleSize/>
+        </shape>
+      </shapes>
+    </layout>
+  </privateDataFoundation>
+  <hierarchies>
+    <hierarchy xsi:type="Dimension:LeveledHierarchy" id="Gregorian_Hierarchy" multipleParents="false" rootNodeVisibility="ADD_ROOT_NODE" withRootNode="true" nodeStyle="NAME_PATH">
+      <descriptions defaultDescription="Gregorian_Hierarchy"/>
+      <levels>
+        <level levelAttribute="#YEAR" levelType="MDLEVEL_TYPE_REGULAR" order="1"/>
+        <level levelAttribute="#QUARTER" levelType="MDLEVEL_TYPE_TIME_QUARTERS" order="2"/>
+        <level levelAttribute="#MONTH" levelType="MDLEVEL_TYPE_TIME_MONTHS" order="3"/>
+        <level levelAttribute="#WEEK" levelType="MDLEVEL_TYPE_TIME_WEEKS" order="4"/>
+        <level levelAttribute="#DAY" levelType="MDLEVEL_TYPE_TIME_DAYS" order="5"/>
+      </levels>
+    </hierarchy>
+  </hierarchies>
+</Dimension:dimension>

@@ -1,0 +1,391 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dtmodel:decisionTableModel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:alias="http://www.sap.com/ndb/Rules/Alias" xmlns:core="http://www.sap.com/ndb/Rules/Core" xmlns:dtmodel="http://www.sap.com/ndb/DecisionTableModel1.ecore" xmlns:table="http://www.sap.com/ndb/Rules/DecisionTable" schemaVersion="1.0" id="DT_CUSTOMER_DISCOUNT_CALCULATION" applyPrivilegeType="ANALYTIC_PRIVILEGE" checkAnalyticPrivileges="true" defaultClient="$$client$$" defaultLanguage="$$language$$" visibility="reportingEnabled">
+  <origin/>
+  <descriptions defaultDescription="DT_CUSTOMER_DISCOUNT_CALCULATION"/>
+  <defaultSchema/>
+  <dataSources/>
+  <privateDataFoundation>
+    <tableProxies>
+      <tableProxy>
+        <table schemaName="_SYS_BIC" columnObjectName="{{PACKAGE_NAME}}.data::EPM.Procedures.tt_customer_discount_calculation"/>
+      </tableProxy>
+    </tableProxies>
+    <joins/>
+    <layout>
+      <shapes>
+        <shape modelObjectName="{{PACKAGE_NAME}}.data::EPM.Procedures.tt_customer_discount_calculation" modelObjectNameSpace="_SYS_BIC" modelObjectType="catalog">
+          <upperLeftCorner x="70" y="30"/>
+        </shape>
+      </shapes>
+    </layout>
+  </privateDataFoundation>
+  <dtmodel:variables>
+    <core:variable id="VAR141819d895cxf3465" core:assignable="true" core:length="3" core:name="DISCOUNT" core:scale="2" core:type="DECIMAL">
+      <descriptions defaultDescription="DISCOUNT"/>
+      <core:simpleexp core:operator="" core:type="DECIMAL">
+        <core:primitive core:value="0"/>
+      </core:simpleexp>
+      <core:valueDomain core:type="empty"/>
+      <core:selection core:isMultiLine="false" core:type=""/>
+    </core:variable>
+  </dtmodel:variables>
+  <alias:aliasset alias:guid="AS141819c059ax49daf">
+    <alias:basealias xsi:type="alias:TableAlias" id="TBLAL141819c388dx50af" alias:visible="true" alias:columnName="SALES_RANK" alias:columnObjectName="{{PACKAGE_NAME}}.data::EPM.Procedures.tt_customer_discount_calculation" alias:columntype="INTEGER" alias:modelType="tabletype" alias:schemaName="_SYS_BIC">
+      <descriptions defaultDescription="SALES_RANK"/>
+    </alias:basealias>
+    <alias:basealias xsi:type="alias:TableAlias" id="TBLAL141819c388fx8fb2" alias:visible="true" alias:columnName="ORDERS" alias:columnObjectName="{{PACKAGE_NAME}}.data::EPM.Procedures.tt_customer_discount_calculation" alias:columntype="INTEGER" alias:modelType="tabletype" alias:schemaName="_SYS_BIC">
+      <descriptions defaultDescription="ORDERS"/>
+    </alias:basealias>
+    <alias:basealias xsi:type="alias:TableAlias" id="TBLAL141819c3891x67b73" alias:visible="true" alias:columnName="REGION" alias:columnObjectName="{{PACKAGE_NAME}}.data::EPM.Procedures.tt_customer_discount_calculation" alias:columntype="NVARCHAR" alias:modelType="tabletype" alias:schemaName="_SYS_BIC">
+      <descriptions defaultDescription="REGION"/>
+    </alias:basealias>
+    <alias:basealias xsi:type="alias:TableAlias" id="TBLAL141819c3892x32b1d" alias:visible="true" alias:columnName="ORDER_RANK" alias:columnObjectName="{{PACKAGE_NAME}}.data::EPM.Procedures.tt_customer_discount_calculation" alias:columntype="INTEGER" alias:modelType="tabletype" alias:schemaName="_SYS_BIC">
+      <descriptions defaultDescription="ORDER_RANK"/>
+    </alias:basealias>
+    <alias:basealias xsi:type="alias:TableAlias" id="TBLAL141819c3894x6dbc" alias:visible="true" alias:columnName="SALES" alias:columnObjectName="{{PACKAGE_NAME}}.data::EPM.Procedures.tt_customer_discount_calculation" alias:columntype="DECIMAL" alias:modelType="tabletype" alias:schemaName="_SYS_BIC">
+      <descriptions defaultDescription="SALES"/>
+    </alias:basealias>
+    <alias:basealias xsi:type="alias:Alias" id="VARAL141819d895exbd55c" alias:visible="true">
+      <descriptions defaultDescription="DISCOUNT"/>
+      <alias:member alias:returntype="DECIMAL" alias:varname="DISCOUNT"/>
+    </alias:basealias>
+    <alias:basealias xsi:type="alias:TableAlias" id="TBLAL141a87136a8x51436" alias:visible="true" alias:columnName="COMPANY_NAME" alias:columnObjectName="{{PACKAGE_NAME}}.data::EPM.Procedures.tt_customer_discount_calculation" alias:columntype="NVARCHAR" alias:modelType="tabletype" alias:schemaName="_SYS_BIC">
+      <descriptions defaultDescription="COMPANY_NAME"/>
+    </alias:basealias>
+  </alias:aliasset>
+  <table:decisiontable table:comments="DT_CUSTOMER_DISCOUNT_CALCULATION" table:guid="DT141819c059bx44351y1" table:name="DT_CUSTOMER_DISCOUNT_CALCULATION">
+    <table:conditionstub table:id="CS14181a5e732x2935f" table:conditionstubtype="regular" table:type="NVARCHAR">
+      <core:lvalue>
+        <core:simpleexp core:type="NVARCHAR">
+          <core:abstractreference xsi:type="core:TableReference" core:columnName="REGION" core:columnObjectName="{{PACKAGE_NAME}}.data::EPM.Procedures.tt_customer_discount_calculation" core:columnType="NVARCHAR" core:modelType="tabletype" core:schemaName="_SYS_BIC"/>
+        </core:simpleexp>
+      </core:lvalue>
+      <table:cv table:id="CV14181a8b166xdeebby98">
+        <core:rangeexpression xsi:type="core:SimpleRangeExpression" core:comparator="Equals">
+          <core:simpleexp core:closebracket="0" core:openbracket="0" core:operator="" core:type="NVARCHAR">
+            <core:primitive core:value="AMER"/>
+          </core:simpleexp>
+        </core:rangeexpression>
+      </table:cv>
+      <table:cv table:id="CV14181a8e410x8f5d4y9c">
+        <core:rangeexpression xsi:type="core:SimpleRangeExpression" core:comparator="Equals">
+          <core:simpleexp core:closebracket="0" core:openbracket="0" core:operator="" core:type="NVARCHAR">
+            <core:primitive core:value="APJ"/>
+          </core:simpleexp>
+        </core:rangeexpression>
+      </table:cv>
+      <table:cv table:id="CV14181a8ffdfx19191ya0">
+        <core:rangeexpression xsi:type="core:SimpleRangeExpression" core:comparator="Equals">
+          <core:simpleexp core:closebracket="0" core:openbracket="0" core:operator="" core:type="NVARCHAR">
+            <core:primitive core:value="AFR"/>
+          </core:simpleexp>
+        </core:rangeexpression>
+      </table:cv>
+      <table:cv table:id="CV141ee7ef039x120ceya">
+        <core:rangeexpression xsi:type="core:SimpleRangeExpression" core:comparator="Equals">
+          <core:simpleexp core:closebracket="0" core:openbracket="0" core:operator="" core:type="NVARCHAR">
+            <core:primitive core:value="EMEA"/>
+          </core:simpleexp>
+        </core:rangeexpression>
+      </table:cv>
+    </table:conditionstub>
+    <table:conditionstub table:id="CS14181a5f3c3x17171" table:conditionstubtype="regular" table:type="INTEGER">
+      <core:lvalue>
+        <core:simpleexp core:type="INTEGER">
+          <core:abstractreference xsi:type="core:TableReference" core:columnName="ORDER_RANK" core:columnObjectName="{{PACKAGE_NAME}}.data::EPM.Procedures.tt_customer_discount_calculation" core:columnType="INTEGER" core:modelType="tabletype" core:schemaName="_SYS_BIC"/>
+        </core:simpleexp>
+      </core:lvalue>
+      <table:cv table:id="CV14208564a90x56570y1d">
+        <core:rangeexpression xsi:type="core:SimpleRangeExpression" core:comparator="Less Than Equals">
+          <core:simpleexp core:closebracket="0" core:openbracket="0" core:operator="" core:type="INTEGER">
+            <core:primitive core:value="5"/>
+          </core:simpleexp>
+        </core:rangeexpression>
+      </table:cv>
+      <table:cv table:id="CV1420856705ex21181y20">
+        <core:rangeexpression xsi:type="core:SimpleRangeExpression" core:comparator="Greater Than">
+          <core:simpleexp core:closebracket="0" core:openbracket="0" core:operator="" core:type="INTEGER">
+            <core:primitive core:value="5"/>
+          </core:simpleexp>
+        </core:rangeexpression>
+      </table:cv>
+      <table:cv table:id="CV142087a5e7bx75cc6ya2">
+        <core:rangeexpression xsi:type="core:SimpleRangeExpression" core:comparator="Less Than Equals">
+          <core:simpleexp core:closebracket="0" core:openbracket="0" core:operator="" core:type="INTEGER">
+            <core:primitive core:value="9"/>
+          </core:simpleexp>
+        </core:rangeexpression>
+      </table:cv>
+      <table:cv table:id="CV14208ff57d4xb2d95yc0">
+        <core:rangeexpression xsi:type="core:SimpleRangeExpression" core:comparator="Greater Than">
+          <core:simpleexp core:closebracket="0" core:openbracket="0" core:operator="" core:type="INTEGER">
+            <core:primitive core:value="9"/>
+          </core:simpleexp>
+        </core:rangeexpression>
+      </table:cv>
+      <table:cv table:id="CV142090a1992x56027yf3">
+        <core:rangeexpression xsi:type="core:SimpleRangeExpression" core:comparator="Less Than Equals">
+          <core:simpleexp core:closebracket="0" core:openbracket="0" core:operator="" core:type="INTEGER">
+            <core:primitive core:value="3"/>
+          </core:simpleexp>
+        </core:rangeexpression>
+      </table:cv>
+      <table:cv table:id="CV1424c05b46exa81c5yf">
+        <core:rangeexpression xsi:type="core:SimpleRangeExpression" core:comparator="Greater Than">
+          <core:simpleexp core:closebracket="0" core:openbracket="0" core:operator="" core:type="INTEGER">
+            <core:primitive core:value="3"/>
+          </core:simpleexp>
+        </core:rangeexpression>
+      </table:cv>
+    </table:conditionstub>
+    <table:conditionstub table:id="CS14181a60422xaf512" table:conditionstubtype="regular" table:type="INTEGER">
+      <core:lvalue>
+        <core:simpleexp core:type="INTEGER">
+          <core:abstractreference xsi:type="core:TableReference" core:columnName="ORDERS" core:columnObjectName="{{PACKAGE_NAME}}.data::EPM.Procedures.tt_customer_discount_calculation" core:columnType="INTEGER" core:modelType="tabletype" core:schemaName="_SYS_BIC"/>
+        </core:simpleexp>
+      </core:lvalue>
+      <table:cv table:id="CV14208573357xb5b98y3c">
+        <core:rangeexpression xsi:type="core:SimpleRangeExpression" core:comparator="Greater Than Equals">
+          <core:simpleexp core:closebracket="0" core:openbracket="0" core:operator="" core:type="INTEGER">
+            <core:primitive core:value="50"/>
+          </core:simpleexp>
+        </core:rangeexpression>
+      </table:cv>
+      <table:cv table:id="CV142085742afxe18e2y3f">
+        <core:rangeexpression xsi:type="core:SimpleRangeExpression" core:comparator="Less Than">
+          <core:simpleexp core:closebracket="0" core:openbracket="0" core:operator="" core:type="INTEGER">
+            <core:primitive core:value="50"/>
+          </core:simpleexp>
+        </core:rangeexpression>
+      </table:cv>
+      <table:cv table:id="CV14208577c45x3b2bby48">
+        <core:rangeexpression xsi:type="core:SimpleRangeExpression" core:comparator="Greater Than Equals">
+          <core:simpleexp core:closebracket="0" core:openbracket="0" core:operator="" core:type="INTEGER">
+            <core:primitive core:value="8"/>
+          </core:simpleexp>
+        </core:rangeexpression>
+      </table:cv>
+      <table:cv table:id="CV14208578d42x30a1ay4b">
+        <core:rangeexpression xsi:type="core:SimpleRangeExpression" core:comparator="Less Than">
+          <core:simpleexp core:closebracket="0" core:openbracket="0" core:operator="" core:type="INTEGER">
+            <core:primitive core:value="8"/>
+          </core:simpleexp>
+        </core:rangeexpression>
+      </table:cv>
+      <table:cv table:id="CV142086eab80x14716y7a">
+        <core:rangeexpression xsi:type="core:SimpleRangeExpression" core:comparator="Greater Than Equals">
+          <core:simpleexp core:closebracket="0" core:openbracket="0" core:operator="" core:type="INTEGER">
+            <core:primitive core:value="100"/>
+          </core:simpleexp>
+        </core:rangeexpression>
+      </table:cv>
+      <table:cv table:id="CV142086ebbc5x8b386y7d">
+        <core:rangeexpression xsi:type="core:SimpleRangeExpression" core:comparator="Less Than">
+          <core:simpleexp core:closebracket="0" core:openbracket="0" core:operator="" core:type="INTEGER">
+            <core:primitive core:value="100"/>
+          </core:simpleexp>
+        </core:rangeexpression>
+      </table:cv>
+      <table:cv table:id="CV1420876e1b9xb4860y8e">
+        <core:rangeexpression xsi:type="core:SimpleRangeExpression" core:comparator="Greater Than Equals">
+          <core:simpleexp core:closebracket="0" core:openbracket="0" core:operator="" core:type="INTEGER">
+            <core:primitive core:value="20"/>
+          </core:simpleexp>
+        </core:rangeexpression>
+      </table:cv>
+      <table:cv table:id="CV14208ff74fcx78afayc3">
+        <core:rangeexpression xsi:type="core:SimpleRangeExpression" core:comparator="Less Than">
+          <core:simpleexp core:closebracket="0" core:openbracket="0" core:operator="" core:type="INTEGER">
+            <core:primitive core:value="20"/>
+          </core:simpleexp>
+        </core:rangeexpression>
+      </table:cv>
+    </table:conditionstub>
+    <table:conditionstub table:id="CS14181a618bax6c82e" table:conditionstubtype="regular" table:type="DECIMAL">
+      <core:lvalue>
+        <core:simpleexp core:type="DECIMAL">
+          <core:abstractreference xsi:type="core:TableReference" core:columnName="SALES" core:columnObjectName="{{PACKAGE_NAME}}.data::EPM.Procedures.tt_customer_discount_calculation" core:columnType="DECIMAL" core:modelType="tabletype" core:schemaName="_SYS_BIC"/>
+        </core:simpleexp>
+      </core:lvalue>
+      <table:cv table:id="CV14208581194x6ffd8y53">
+        <core:rangeexpression xsi:type="core:SimpleRangeExpression" core:comparator="Greater Than">
+          <core:simpleexp core:closebracket="0" core:openbracket="0" core:operator="" core:type="DECIMAL">
+            <core:primitive core:value="100000"/>
+          </core:simpleexp>
+        </core:rangeexpression>
+      </table:cv>
+      <table:cv table:id="CV14208586aa9xaf0dby56">
+        <core:rangeexpression xsi:type="core:SimpleRangeExpression" core:comparator="Less Than Equals">
+          <core:simpleexp core:closebracket="0" core:openbracket="0" core:operator="" core:type="DECIMAL">
+            <core:primitive core:value="100000"/>
+          </core:simpleexp>
+        </core:rangeexpression>
+      </table:cv>
+      <table:cv table:id="CV1420858e744x1b60ay5f">
+        <core:rangeexpression xsi:type="core:SimpleRangeExpression" core:comparator="Greater Than">
+          <core:simpleexp core:closebracket="0" core:openbracket="0" core:operator="" core:type="DECIMAL">
+            <core:primitive core:value="3000"/>
+          </core:simpleexp>
+        </core:rangeexpression>
+      </table:cv>
+      <table:cv table:id="CV142085905edx77bf9y62">
+        <core:rangeexpression xsi:type="core:SimpleRangeExpression" core:comparator="Less Than Equals">
+          <core:simpleexp core:closebracket="0" core:openbracket="0" core:operator="" core:type="DECIMAL">
+            <core:primitive core:value="3000"/>
+          </core:simpleexp>
+        </core:rangeexpression>
+      </table:cv>
+      <table:cv table:id="CV14208705346xd5715y86">
+        <core:rangeexpression xsi:type="core:SimpleRangeExpression" core:comparator="Greater Than">
+          <core:simpleexp core:closebracket="0" core:openbracket="0" core:operator="" core:type="DECIMAL">
+            <core:primitive core:value="150000"/>
+          </core:simpleexp>
+        </core:rangeexpression>
+      </table:cv>
+      <table:cv table:id="CV14208706b37xa95edy89">
+        <core:rangeexpression xsi:type="core:SimpleRangeExpression" core:comparator="Less Than Equals">
+          <core:simpleexp core:closebracket="0" core:openbracket="0" core:operator="" core:type="DECIMAL">
+            <core:primitive core:value="150000"/>
+          </core:simpleexp>
+        </core:rangeexpression>
+      </table:cv>
+      <table:cv table:id="CV142087bcdb9x1b028yad">
+        <core:rangeexpression xsi:type="core:SimpleRangeExpression" core:comparator="Less Than Equals">
+          <core:simpleexp core:closebracket="0" core:openbracket="0" core:operator="" core:type="DECIMAL">
+            <core:primitive core:value="30000"/>
+          </core:simpleexp>
+        </core:rangeexpression>
+      </table:cv>
+      <table:cv table:id="CV142087bf86bx44c01yb0">
+        <core:rangeexpression xsi:type="core:SimpleRangeExpression" core:comparator="Greater Than">
+          <core:simpleexp core:closebracket="0" core:openbracket="0" core:operator="" core:type="DECIMAL">
+            <core:primitive core:value="30000"/>
+          </core:simpleexp>
+        </core:rangeexpression>
+      </table:cv>
+    </table:conditionstub>
+    <table:conditionstub table:id="CS14181a61f02x59666" table:conditionstubtype="regular" table:type="INTEGER">
+      <core:lvalue>
+        <core:simpleexp core:type="INTEGER">
+          <core:abstractreference xsi:type="core:TableReference" core:columnName="SALES_RANK" core:columnObjectName="{{PACKAGE_NAME}}.data::EPM.Procedures.tt_customer_discount_calculation" core:columnType="INTEGER" core:modelType="tabletype" core:schemaName="_SYS_BIC"/>
+        </core:simpleexp>
+      </core:lvalue>
+      <table:cv table:id="CV14208552881x99bcy3">
+        <core:rangeexpression xsi:type="core:SimpleRangeExpression" core:comparator="Less Than Equals">
+          <core:simpleexp core:closebracket="0" core:openbracket="0" core:operator="" core:type="INTEGER">
+            <core:primitive core:value="5"/>
+          </core:simpleexp>
+        </core:rangeexpression>
+      </table:cv>
+      <table:cv table:id="CV14208553a01xc427ay6">
+        <core:rangeexpression xsi:type="core:SimpleRangeExpression" core:comparator="Greater Than">
+          <core:simpleexp core:closebracket="0" core:openbracket="0" core:operator="" core:type="INTEGER">
+            <core:primitive core:value="5"/>
+          </core:simpleexp>
+        </core:rangeexpression>
+      </table:cv>
+    </table:conditionstub>
+    <table:actionstub table:id="AS14181aaebfdxef9c1" table:actionstubtype="regular">
+      <core:abstractaction xsi:type="core:Action" core:type="assign" core:varname="DISCOUNT">
+        <core:assignmentvalue>
+          <core:simpleexp core:type="DECIMAL">
+            <core:abstractreference xsi:type="core:VariableReference" core:varname="DISCOUNT"/>
+          </core:simpleexp>
+        </core:assignmentvalue>
+      </core:abstractaction>
+      <table:av table:ce-id-refs="CV14181a8b166xdeebby98 CV14208564a90x56570y1d CV14208573357xb5b98y3c CV14208581194x6ffd8y53 CV14208552881x99bcy3" table:id="AV14181ab29d4x5eb3f">
+        <core:simpleexp core:closebracket="0" core:openbracket="0" core:operator="" core:type="DECIMAL">
+          <core:primitive core:value="5"/>
+        </core:simpleexp>
+      </table:av>
+      <table:av table:ce-id-refs="CV14181a8b166xdeebby98 CV1420856705ex21181y20 CV142085742afxe18e2y3f CV14208586aa9xaf0dby56 CV14208553a01xc427ay6" table:id="AV14181ab33c4x5f2e2">
+        <core:simpleexp core:closebracket="0" core:openbracket="0" core:operator="" core:type="DECIMAL">
+          <core:primitive core:value="2.5"/>
+        </core:simpleexp>
+      </table:av>
+      <table:av table:ce-id-refs="CV141ee7ef039x120ceya CV14208564a90x56570y1d CV142086eab80x14716y7a CV14208705346xd5715y86 CV14208552881x99bcy3" table:id="AV14181ab111dx2eb61">
+        <core:simpleexp core:closebracket="0" core:openbracket="0" core:operator="" core:type="DECIMAL">
+          <core:primitive core:value="5"/>
+        </core:simpleexp>
+      </table:av>
+      <table:av table:ce-id-refs="CV141ee7ef039x120ceya CV1420856705ex21181y20 CV142086ebbc5x8b386y7d CV14208706b37xa95edy89 CV14208553a01xc427ay6" table:id="AV14181ab1ac2xe6e97">
+        <core:simpleexp core:closebracket="0" core:openbracket="0" core:operator="" core:type="DECIMAL">
+          <core:primitive core:value="2.5"/>
+        </core:simpleexp>
+      </table:av>
+      <table:av table:ce-id-refs="CV14181a8e410x8f5d4y9c CV142087a5e7bx75cc6ya2 CV1420876e1b9xb4860y8e CV142087bf86bx44c01yb0 CV14208552881x99bcy3" table:id="AV14181ab3e41xf2f30">
+        <core:simpleexp core:closebracket="0" core:openbracket="0" core:operator="" core:type="DECIMAL">
+          <core:primitive core:value="5"/>
+        </core:simpleexp>
+      </table:av>
+      <table:av table:ce-id-refs="CV14181a8e410x8f5d4y9c CV14208ff57d4xb2d95yc0 CV14208ff74fcx78afayc3 CV142087bcdb9x1b028yad CV14208553a01xc427ay6" table:id="AV14181ab4729x72a40">
+        <core:simpleexp core:closebracket="0" core:openbracket="0" core:operator="" core:type="DECIMAL">
+          <core:primitive core:value="2.5"/>
+        </core:simpleexp>
+      </table:av>
+      <table:av table:ce-id-refs="CV14181a8ffdfx19191ya0 CV142090a1992x56027yf3 CV14208577c45x3b2bby48 CV1420858e744x1b60ay5f CV14208552881x99bcy3" table:id="AV14181ab52a3x2267c">
+        <core:simpleexp core:closebracket="0" core:openbracket="0" core:operator="" core:type="DECIMAL">
+          <core:primitive core:value="5"/>
+        </core:simpleexp>
+      </table:av>
+      <table:av table:ce-id-refs="CV14181a8ffdfx19191ya0 CV1424c05b46exa81c5yf CV14208578d42x30a1ay4b CV142085905edx77bf9y62 CV14208553a01xc427ay6" table:id="AV14181ab5d82x1808e">
+        <core:simpleexp core:closebracket="0" core:openbracket="0" core:operator="" core:type="DECIMAL">
+          <core:primitive core:value="2.5"/>
+        </core:simpleexp>
+      </table:av>
+    </table:actionstub>
+    <table:tablelayout>
+      <table:conditionstub-layout table:stub-id="CS14181a5e732x2935f" table:type="vertical">
+        <table:cell table:ref-id="CV141ee7ef039x120ceya" table:span="2"/>
+        <table:cell table:ref-id="CV141ee7ef039x120ceya" table:span="-1"/>
+        <table:cell table:ref-id="CV14181a8b166xdeebby98" table:span="2"/>
+        <table:cell table:span="-1"/>
+        <table:cell table:ref-id="CV14181a8e410x8f5d4y9c" table:span="2"/>
+        <table:cell table:span="-1"/>
+        <table:cell table:ref-id="CV14181a8ffdfx19191ya0" table:span="2"/>
+        <table:cell table:span="-1"/>
+      </table:conditionstub-layout>
+      <table:conditionstub-layout table:stub-id="CS14181a5f3c3x17171" table:type="vertical">
+        <table:cell table:ref-id="CV14208564a90x56570y1d" table:span="1"/>
+        <table:cell table:ref-id="CV1420856705ex21181y20" table:span="1"/>
+        <table:cell table:ref-id="CV14208564a90x56570y1d" table:span="1"/>
+        <table:cell table:ref-id="CV1420856705ex21181y20" table:span="1"/>
+        <table:cell table:ref-id="CV142087a5e7bx75cc6ya2" table:span="1"/>
+        <table:cell table:ref-id="CV14208ff57d4xb2d95yc0" table:span="1"/>
+        <table:cell table:ref-id="CV142090a1992x56027yf3" table:span="1"/>
+        <table:cell table:ref-id="CV1424c05b46exa81c5yf" table:span="1"/>
+      </table:conditionstub-layout>
+      <table:conditionstub-layout table:stub-id="CS14181a60422xaf512" table:type="vertical">
+        <table:cell table:ref-id="CV142086eab80x14716y7a" table:span="1"/>
+        <table:cell table:ref-id="CV142086ebbc5x8b386y7d" table:span="1"/>
+        <table:cell table:ref-id="CV14208573357xb5b98y3c" table:span="1"/>
+        <table:cell table:ref-id="CV142085742afxe18e2y3f" table:span="1"/>
+        <table:cell table:ref-id="CV1420876e1b9xb4860y8e" table:span="1"/>
+        <table:cell table:ref-id="CV14208ff74fcx78afayc3" table:span="1"/>
+        <table:cell table:ref-id="CV14208577c45x3b2bby48" table:span="1"/>
+        <table:cell table:ref-id="CV14208578d42x30a1ay4b" table:span="1"/>
+      </table:conditionstub-layout>
+      <table:conditionstub-layout table:stub-id="CS14181a618bax6c82e" table:type="vertical">
+        <table:cell table:ref-id="CV14208705346xd5715y86" table:span="1"/>
+        <table:cell table:ref-id="CV14208706b37xa95edy89" table:span="1"/>
+        <table:cell table:ref-id="CV14208581194x6ffd8y53" table:span="1"/>
+        <table:cell table:ref-id="CV14208586aa9xaf0dby56" table:span="1"/>
+        <table:cell table:ref-id="CV142087bf86bx44c01yb0" table:span="1"/>
+        <table:cell table:ref-id="CV142087bcdb9x1b028yad" table:span="1"/>
+        <table:cell table:ref-id="CV1420858e744x1b60ay5f" table:span="1"/>
+        <table:cell table:ref-id="CV142085905edx77bf9y62" table:span="1"/>
+      </table:conditionstub-layout>
+      <table:conditionstub-layout table:stub-id="CS14181a61f02x59666" table:type="vertical">
+        <table:cell table:ref-id="CV14208552881x99bcy3" table:span="1"/>
+        <table:cell table:ref-id="CV14208553a01xc427ay6" table:span="1"/>
+        <table:cell table:ref-id="CV14208552881x99bcy3" table:span="1"/>
+        <table:cell table:ref-id="CV14208553a01xc427ay6" table:span="1"/>
+        <table:cell table:ref-id="CV14208552881x99bcy3" table:span="1"/>
+        <table:cell table:ref-id="CV14208553a01xc427ay6" table:span="1"/>
+        <table:cell table:ref-id="CV14208552881x99bcy3" table:span="1"/>
+        <table:cell table:ref-id="CV14208553a01xc427ay6" table:span="1"/>
+      </table:conditionstub-layout>
+      <table:actionstub-layout table:width="100" table:stub-id="AS14181aaebfdxef9c1"/>
+    </table:tablelayout>
+  </table:decisiontable>
+</dtmodel:decisionTableModel>

@@ -1,0 +1,5 @@
+service namespace "{{PACKAGE_NAME}}"  { 
+
+   "{{PACKAGE_NAME}}.models::AT_PROD" as "ProductDetails" 
+   keys ("PRODUCTID");
+}

@@ -1,0 +1,37 @@
+NEW_USER_TITLE=New User Record Details
+FIRST_NAME=First Name
+LAST_NAME=Last Name
+EMAIL=Email
+PERSON_NO=Person Number
+CREATE_RECORD=Create Record
+CREATE_BATCH=Create users with batch request
+USERS=Users
+DELETE=Delete
+SUBMIT=Submit
+ADD_NEW_RECORD=Add a new record
+REMOVE_ROW=Remove this row
+USER_CREATED={0} Users created
+SELECT_ROW=Select a row to delete first.
+USER_DELETED_SUCCESS=User deleted successfully.
+USER_DELETE_FAILURE=Could not delete the user.
+UPDATE_DELETE=Update and Delete records
+OK=OK
+
+HELP_DESC_1=Create a new User record by providing First name, Last name and Email and then press "Create Record". This will send a HTTP POST request to the OData service to create a new record. The request will trigger "usersCreateMethod" procedure which performs a validation.
+HELP_DESC_2=Create multiple User records using $batch request provided in OData. Check this link http://www.odata.org/documentation/odata-version-2-0/batch-processing/ 
+HELP_DESC_3=This table is used to display all the User records. You can update any record by clicking any entry and then type the changes and then selecting any other object to trigger the update. You can also select a row and press Delete button to remove a record from the database.
+
+HELP_HEADER_1=OData service
+HELP_HEADER_2=Procedure
+HELP_HEADER_3=Controller method
+
+HELP_ODATA_1=shine/services/user.xsodata
+HELP_ODATA_2=shine/services/userBeforeExit.xsodata
+HELP_ODATA_3=shine/services/user.xsodata
+
+HELP_PROCEDURE_1=shine/Procedures/usersCreateMethod.hdbprocedure
+HELP_PROCEDURE_2=shine/services/userBefore.xsjslib
+
+HELP_CONTROLLER_1=shine/ui/userCRUD/usercrud/userCRUD.controller.js
+HELP_CONTROLLER_2=shine/ui/userCRUD/usercrud/userCRUD.controller.js
+HELP_CONTROLLER_3=shine/ui/userCRUD/usercrud/userCRUD.controller.js

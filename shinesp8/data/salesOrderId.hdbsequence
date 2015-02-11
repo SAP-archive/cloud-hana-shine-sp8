@@ -1,0 +1,8 @@
+schema= "_SYS_BIC";
+start_with= 0500001029;
+maxvalue= 0599999999;
+nomaxvalue=false;
+minvalue= 1;
+nominvalue=true;
+cycles= false;
+depends_on_table= "{{PACKAGE_NAME}}.data::EPM.SO.Header"; 

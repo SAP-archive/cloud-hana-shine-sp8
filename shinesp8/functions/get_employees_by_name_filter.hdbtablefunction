@@ -1,0 +1,22 @@
+FUNCTION "_SYS_BIC"."{{PACKAGE_NAME}}.functions::get_employees_by_name_filter" (lastNameFilter NVARCHAR(40)) 
+	RETURNS table ( EMPLOYEEID NVARCHAR(10), 
+                   "NAME.FIRST" NVARCHAR(40), 
+                   "NAME.LAST" NVARCHAR(40), 
+                   EMAILADDRESS NVARCHAR(255),
+                   ADDRESSID NVARCHAR(10), CITY NVARCHAR(40),  
+                   POSTALCODE NVARCHAR(10), STREET NVARCHAR(60)) 
+	LANGUAGE SQLSCRIPT
+	SQL SECURITY INVOKER AS
+BEGIN
+RETURN 
+  select a."EMPLOYEEID", a."NAME.FIRST", 
+         a."NAME.LAST", a."EMAILADDRESS",   
+         a."ADDRESSID.ADDRESSID" as "ADDRESSID", b."CITY", b."POSTALCODE", b."STREET"  
+  from "{{PACKAGE_NAME}}.data::EPM.MD.Employees"
+      as a   
+  inner join 
+        "{{PACKAGE_NAME}}.data::EPM.MD.Addresses"
+      as b  
+   on a."ADDRESSID.ADDRESSID" = b.ADDRESSID  
+       where contains("NAME.LAST", :lastNameFilter, FUZZY(0.9));  
+END;

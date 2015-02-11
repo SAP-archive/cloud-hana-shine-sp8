@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Privilege:analyticPrivilege xmlns:Privilege="http://www.sap.com/ndb/BiModelPrivilege.ecore" schemaVersion="1.1" id="AP_SALES_ORDER">
+  <origin/>
+  <descriptions defaultDescription="Sales Order Privileges"/>
+  <metadata changedAt="2014-04-01 12:51:05.584" createdAt="2013-10-24 09:51:16.795"/>
+  <securedModels allInformationModels="false">
+    <modelUri>/{{PACKAGE_NAME}}.models/analyticviews/AN_SALES_ORDER_DYNAMIC_TIME_PERIOD</modelUri>
+    <modelUri>/{{PACKAGE_NAME}}.models/analyticviews/AN_SALES_ORDER_LITE</modelUri>
+    <modelUri>/{{PACKAGE_NAME}}.models/analyticviews/AN_SALES_ORDER_RANKING</modelUri>
+    <modelUri>/{{PACKAGE_NAME}}.models/analyticviews/AN_SALES_OVERVIEW_WO_CURR_CONV</modelUri>
+    <modelUri>/{{PACKAGE_NAME}}.models/calculationviews/CV_CUSTOMER_DISCOUNT_BY_RANKING_AND_REGION</modelUri>
+    <modelUri>/{{PACKAGE_NAME}}.models/calculationviews/CV_SALESORDER_DYNAMIC_JOIN</modelUri>
+    <modelUri>/{{PACKAGE_NAME}}.models/calculationviews/CV_SALESORDER_RANKING</modelUri>
+    <modelUri>/{{PACKAGE_NAME}}.models/calculationviews/CV_SALES_YEAR_COMPARISON</modelUri>
+    <modelUri>/{{PACKAGE_NAME}}.models/attributeviews/AT_BUYER</modelUri>
+    <modelUri>/{{PACKAGE_NAME}}.models/attributeviews/AT_PROD</modelUri>
+    <modelUri>/{{PACKAGE_NAME}}.models/calculationviews/CV_SALES_ORDER_RANKING_AND_DISCOUNT_SQL</modelUri>
+    <modelUri>/{{PACKAGE_NAME}}.models/calculationviews/CV_SALESORDER_RANKING_SQL</modelUri>
+    <modelUri>/{{PACKAGE_NAME}}.models/attributeviews/AT_SALES_ORDER_WORKLIST</modelUri>
+    <modelUri>/{{PACKAGE_NAME}}.spatial.models/attributeviews/BP_ADDRESS_DETAILS</modelUri>
+    <modelUri>/{{PACKAGE_NAME}}.spatial.models/analyticviews/REGION_SALES_BP</modelUri>
+    <modelUri>/{{PACKAGE_NAME}}.models/attributeviews/AT_TIME_DIM</modelUri>
+  </securedModels>
+</Privilege:analyticPrivilege>

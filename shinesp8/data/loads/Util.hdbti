@@ -1,0 +1,27 @@
+import = [
+            {
+                cdstable = "{{PACKAGE_NAME}}.data::EPM.Util.Constants";
+                file = "{{PACKAGE_NAME}}.data.loads:constants.csv";
+                header = false;
+            },
+            {
+                cdstable = "{{PACKAGE_NAME}}.data::EPM.Util.Texts";
+                file = "{{PACKAGE_NAME}}.data.loads:texts.csv";
+                header = false;
+            },
+            {
+                cdstable = "{{PACKAGE_NAME}}.data::EPM.Util.Notes";
+                file = "{{PACKAGE_NAME}}.data.loads:notes.csv";  
+                header = false;
+            },
+            {
+                cdstable = "{{PACKAGE_NAME}}.data::EPM.Util.Attachments";
+                file = "{{PACKAGE_NAME}}.data.loads:attachments.csv";  
+                header = false; 
+            } ,      
+            {
+                cdstable = "{{PACKAGE_NAME}}.data::EPM.Util.TimeDimension";
+                file = "{{PACKAGE_NAME}}.data.loads:TIME_DIMENSION_DATA.csv";  
+                header = false;
+            }
+       ];

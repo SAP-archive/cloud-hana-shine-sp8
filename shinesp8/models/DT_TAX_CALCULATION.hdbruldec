@@ -1,0 +1,336 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dtmodel:decisionTableModel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:alias="http://www.sap.com/ndb/Rules/Alias" xmlns:core="http://www.sap.com/ndb/Rules/Core" xmlns:dtmodel="http://www.sap.com/ndb/DecisionTableModel1.ecore" xmlns:table="http://www.sap.com/ndb/Rules/DecisionTable" schemaVersion="1.0" id="DT_TAX_CALCULATION" applyPrivilegeType="ANALYTIC_PRIVILEGE" checkAnalyticPrivileges="true" defaultClient="$$client$$" defaultLanguage="$$language$$" visibility="reportingEnabled">
+  <origin/>
+  <descriptions/>
+  <metadata changedAt="2014-03-03 09:46:57.479"/>
+  <defaultSchema/>
+  <dataSources/>
+  <privateDataFoundation>
+    <tableProxies>
+      <tableProxy>
+        <table schemaName="_SYS_BIC" columnObjectName="{{PACKAGE_NAME}}.data::EPM.Procedures.tt_tax_calculation"/>
+      </tableProxy>
+    </tableProxies>
+    <joins/>
+    <layout>
+      <shapes>
+        <shape modelObjectName="{{PACKAGE_NAME}}.data::EPM.Procedures.tt_tax_calculation" modelObjectNameSpace="_SYS_BIC" modelObjectType="catalog">
+          <upperLeftCorner x="70" y="30"/>
+        </shape>
+      </shapes>
+    </layout>
+  </privateDataFoundation>
+  <dtmodel:variables>
+    <core:variable id="VAR14486230257x5545a" core:assignable="true" core:length="3" core:name="TAX" core:scale="2" core:type="DECIMAL">
+      <descriptions defaultDescription="TAX"/>
+      <core:simpleexp core:operator="" core:type="DECIMAL">
+        <core:primitive core:value="0"/>
+      </core:simpleexp>
+      <core:valueDomain core:type="empty"/>
+      <core:selection core:isMultiLine="false" core:type=""/>
+    </core:variable>
+  </dtmodel:variables>
+  <alias:aliasset alias:guid="AS14486221975x92faf">
+    <alias:basealias xsi:type="alias:TableAlias" id="TBLAL1448622b263x1f6ed" alias:visible="true" alias:columnName="COMPANYNAME" alias:columnObjectName="{{PACKAGE_NAME}}.data::EPM.Procedures.tt_tax_calculation" alias:columntype="NVARCHAR" alias:modelType="tabletype" alias:schemaName="_SYS_BIC">
+      <descriptions defaultDescription="COMPANYNAME"/>
+    </alias:basealias>
+    <alias:basealias xsi:type="alias:TableAlias" id="TBLAL1448622b9cbx6c966" alias:visible="true" alias:columnName="PARTNERID" alias:columnObjectName="{{PACKAGE_NAME}}.data::EPM.Procedures.tt_tax_calculation" alias:columntype="NVARCHAR" alias:modelType="tabletype" alias:schemaName="_SYS_BIC">
+      <descriptions defaultDescription="PARTNERID"/>
+    </alias:basealias>
+    <alias:basealias xsi:type="alias:TableAlias" id="TBLAL1448622bebex619c7" alias:visible="true" alias:columnName="PRODUCTID" alias:columnObjectName="{{PACKAGE_NAME}}.data::EPM.Procedures.tt_tax_calculation" alias:columntype="NVARCHAR" alias:modelType="tabletype" alias:schemaName="_SYS_BIC">
+      <descriptions defaultDescription="PRODUCTID"/>
+    </alias:basealias>
+    <alias:basealias xsi:type="alias:Alias" id="VARAL14486230258xedfb2" alias:visible="true">
+      <descriptions defaultDescription="TAX"/>
+      <alias:member alias:returntype="DECIMAL" alias:varname="TAX"/>
+    </alias:basealias>
+  </alias:aliasset>
+  <table:decisiontable table:guid="DT14486221976x518c8" table:name="DT_TAX_CALCULATION">
+    <table:conditionstub table:id="CS1448623126bx3cfd8" table:conditionstubtype="regular" table:type="NVARCHAR">
+      <core:lvalue>
+        <core:simpleexp core:type="NVARCHAR">
+          <core:abstractreference xsi:type="core:TableReference" core:columnName="COMPANYNAME" core:columnObjectName="{{PACKAGE_NAME}}.data::EPM.Procedures.tt_tax_calculation" core:columnType="NVARCHAR" core:modelType="tabletype" core:schemaName="_SYS_BIC"/>
+        </core:simpleexp>
+      </core:lvalue>
+      <table:cv table:id="CV14486235a59x2c4e4ya">
+        <core:rangeexpression xsi:type="core:SimpleRangeExpression" core:comparator="Equals">
+          <core:simpleexp core:closebracket="0" core:openbracket="0" core:operator="" core:type="NVARCHAR">
+            <core:primitive core:value="SAP"/>
+          </core:simpleexp>
+        </core:rangeexpression>
+      </table:cv>
+      <table:cv table:id="CV1448624805fxa0326y1c">
+        <core:rangeexpression xsi:type="core:SimpleRangeExpression" core:comparator="Equals">
+          <core:simpleexp core:closebracket="0" core:openbracket="0" core:operator="" core:type="NVARCHAR">
+            <core:primitive core:value="AVANTEL"/>
+          </core:simpleexp>
+        </core:rangeexpression>
+      </table:cv>
+      <table:cv table:id="CV1448624fe6cx8bed5y25">
+        <core:rangeexpression xsi:type="core:SimpleRangeExpression" core:comparator="Equals">
+          <core:simpleexp core:closebracket="0" core:openbracket="0" core:operator="" core:type="NVARCHAR">
+            <core:primitive core:value="Asia High tech"/>
+          </core:simpleexp>
+        </core:rangeexpression>
+      </table:cv>
+      <table:cv table:id="CV14486255e7dxc1d70y2e">
+        <core:rangeexpression xsi:type="core:SimpleRangeExpression" core:comparator="Equals">
+          <core:simpleexp core:closebracket="0" core:openbracket="0" core:operator="" core:type="NVARCHAR">
+            <core:primitive core:value="DelBont Industries"/>
+          </core:simpleexp>
+        </core:rangeexpression>
+      </table:cv>
+      <table:cv table:id="CV1448625d3cdxbb3e6y39">
+        <core:rangeexpression xsi:type="core:SimpleRangeExpression" core:comparator="Equals">
+          <core:simpleexp core:closebracket="0" core:openbracket="0" core:operator="" core:type="NVARCHAR">
+            <core:primitive core:value="Panaroma Studios"/>
+          </core:simpleexp>
+        </core:rangeexpression>
+      </table:cv>
+      <table:cv table:id="CV144862648bcx4b0fey47">
+        <core:rangeexpression xsi:type="core:SimpleRangeExpression" core:comparator="Equals">
+          <core:simpleexp core:type="NVARCHAR">
+            <core:primitive core:value="*"/>
+          </core:simpleexp>
+        </core:rangeexpression>
+      </table:cv>
+    </table:conditionstub>
+    <table:conditionstub table:id="CS14486231289x2c105y3" table:conditionstubtype="regular" table:type="NVARCHAR">
+      <core:lvalue>
+        <core:simpleexp core:type="NVARCHAR">
+          <core:abstractreference xsi:type="core:TableReference" core:columnName="PARTNERID" core:columnObjectName="{{PACKAGE_NAME}}.data::EPM.Procedures.tt_tax_calculation" core:columnType="NVARCHAR" core:modelType="tabletype" core:schemaName="_SYS_BIC"/>
+        </core:simpleexp>
+      </core:lvalue>
+      <table:cv table:id="CV1448623a62bx2f85fyd">
+        <core:rangeexpression xsi:type="core:SimpleRangeExpression" core:comparator="Equals">
+          <core:simpleexp core:closebracket="0" core:openbracket="0" core:operator="" core:type="NVARCHAR">
+            <core:primitive core:value="0100000000"/>
+          </core:simpleexp>
+        </core:rangeexpression>
+      </table:cv>
+      <table:cv table:id="CV1448624a88cx4e74y21">
+        <core:rangeexpression xsi:type="core:SimpleRangeExpression" core:comparator="Equals">
+          <core:simpleexp core:closebracket="0" core:openbracket="0" core:operator="" core:type="NVARCHAR">
+            <core:primitive core:value="0100000008"/>
+          </core:simpleexp>
+        </core:rangeexpression>
+      </table:cv>
+      <table:cv table:id="CV14486251953x7c15y2a">
+        <core:rangeexpression xsi:type="core:SimpleRangeExpression" core:comparator="Equals">
+          <core:simpleexp core:closebracket="0" core:openbracket="0" core:operator="" core:type="NVARCHAR">
+            <core:primitive core:value="0100000006"/>
+          </core:simpleexp>
+        </core:rangeexpression>
+      </table:cv>
+      <table:cv table:id="CV1448625a007xb69f7y36">
+        <core:rangeexpression xsi:type="core:SimpleRangeExpression" core:comparator="Equals">
+          <core:simpleexp core:closebracket="0" core:openbracket="0" core:operator="" core:type="NVARCHAR">
+            <core:primitive core:value="0100000002"/>
+          </core:simpleexp>
+        </core:rangeexpression>
+      </table:cv>
+      <table:cv table:id="CV1448625ebf8x3d6efy3f">
+        <core:rangeexpression xsi:type="core:SimpleRangeExpression" core:comparator="Equals">
+          <core:simpleexp core:closebracket="0" core:openbracket="0" core:operator="" core:type="NVARCHAR">
+            <core:primitive core:value="0100000004"/>
+          </core:simpleexp>
+        </core:rangeexpression>
+      </table:cv>
+      <table:cv table:id="CV14486265477xe981ay4d">
+        <core:rangeexpression xsi:type="core:SimpleRangeExpression" core:comparator="Equals">
+          <core:simpleexp core:type="NVARCHAR">
+            <core:primitive core:value="*"/>
+          </core:simpleexp>
+        </core:rangeexpression>
+      </table:cv>
+    </table:conditionstub>
+    <table:conditionstub table:id="CS1448623128ax43a7cy5" table:conditionstubtype="regular" table:type="NVARCHAR">
+      <core:lvalue>
+        <core:simpleexp core:type="NVARCHAR">
+          <core:abstractreference xsi:type="core:TableReference" core:columnName="PRODUCTID" core:columnObjectName="{{PACKAGE_NAME}}.data::EPM.Procedures.tt_tax_calculation" core:columnType="NVARCHAR" core:modelType="tabletype" core:schemaName="_SYS_BIC"/>
+        </core:simpleexp>
+      </core:lvalue>
+      <table:cv table:id="CV1448623c90exa7614y10">
+        <core:rangeexpression xsi:type="core:SimpleRangeExpression" core:comparator="Equals">
+          <core:simpleexp core:closebracket="0" core:openbracket="0" core:operator="" core:type="NVARCHAR">
+            <core:primitive core:value="HT-1000"/>
+          </core:simpleexp>
+        </core:rangeexpression>
+      </table:cv>
+      <table:cv table:id="CV1448623e049xedb92y14">
+        <core:rangeexpression xsi:type="core:SimpleRangeExpression" core:comparator="Equals">
+          <core:simpleexp core:closebracket="0" core:openbracket="0" core:operator="" core:type="NVARCHAR">
+            <core:primitive core:value="HT-1007"/>
+          </core:simpleexp>
+        </core:rangeexpression>
+      </table:cv>
+      <table:cv table:id="CV144862431a8x4b403y18">
+        <core:rangeexpression xsi:type="core:SimpleRangeExpression" core:comparator="Equals">
+          <core:simpleexp core:type="NVARCHAR">
+            <core:primitive core:value="*"/>
+          </core:simpleexp>
+        </core:rangeexpression>
+      </table:cv>
+      <table:cv table:id="CV14486258e15x937e7y33">
+        <core:rangeexpression xsi:type="core:SimpleRangeExpression" core:comparator="Equals">
+          <core:simpleexp core:closebracket="0" core:openbracket="0" core:operator="" core:type="NVARCHAR">
+            <core:primitive core:value="HT-1030"/>
+          </core:simpleexp>
+        </core:rangeexpression>
+      </table:cv>
+      <table:cv table:id="CV1448625faedx68591y43">
+        <core:rangeexpression xsi:type="core:SimpleRangeExpression" core:comparator="Equals">
+          <core:simpleexp core:closebracket="0" core:openbracket="0" core:operator="" core:type="NVARCHAR">
+            <core:primitive core:value="HT-6123"/>
+          </core:simpleexp>
+        </core:rangeexpression>
+      </table:cv>
+    </table:conditionstub>
+    <table:actionstub table:id="AS14486231ac3x9bb01" table:actionstubtype="regular">
+      <core:abstractaction xsi:type="core:Action" core:type="assign" core:varname="TAX">
+        <core:assignmentvalue>
+          <core:simpleexp core:type="DECIMAL">
+            <core:abstractreference xsi:type="core:VariableReference" core:varname="TAX"/>
+          </core:simpleexp>
+        </core:assignmentvalue>
+      </core:abstractaction>
+      <table:av table:ce-id-refs="CV14486235a59x2c4e4ya CV1448623a62bx2f85fyd CV1448623c90exa7614y10" table:id="AV1448623ffd8xdeecd">
+        <core:simpleexp core:closebracket="0" core:openbracket="0" core:operator="" core:type="DECIMAL">
+          <core:primitive core:value="1.5"/>
+        </core:simpleexp>
+      </table:av>
+      <table:av table:ce-id-refs="CV14486235a59x2c4e4ya CV1448623a62bx2f85fyd CV1448623e049xedb92y14" table:id="AV14486240b9axcfdbe">
+        <core:simpleexp core:closebracket="0" core:openbracket="0" core:operator="" core:type="DECIMAL">
+          <core:primitive core:value="1.3"/>
+        </core:simpleexp>
+      </table:av>
+      <table:av table:ce-id-refs="CV14486235a59x2c4e4ya CV1448623a62bx2f85fyd CV144862431a8x4b403y18" table:id="AV144862431a8x4b8d4y19">
+        <core:simpleexp core:closebracket="0" core:openbracket="0" core:operator="" core:type="DECIMAL">
+          <core:primitive core:value="1.9"/>
+        </core:simpleexp>
+      </table:av>
+      <table:av table:ce-id-refs="CV1448624805fxa0326y1c CV1448624a88cx4e74y21 CV1448623e049xedb92y14" table:id="AV14486248060xad4d2y1d">
+        <core:simpleexp core:closebracket="0" core:openbracket="0" core:operator="" core:type="DECIMAL">
+          <core:primitive core:value="1.4"/>
+        </core:simpleexp>
+      </table:av>
+      <table:av table:ce-id-refs="CV1448624805fxa0326y1c CV1448624a88cx4e74y21 CV144862431a8x4b403y18" table:id="AV14486248060x515e9y1e">
+        <core:simpleexp core:closebracket="0" core:openbracket="0" core:operator="" core:type="DECIMAL">
+          <core:primitive core:value="1.9"/>
+        </core:simpleexp>
+      </table:av>
+      <table:av table:ce-id-refs="CV1448624805fxa0326y1c CV1448624a88cx4e74y21 CV1448623c90exa7614y10" table:id="AV14486248060x76117">
+        <core:simpleexp core:closebracket="0" core:openbracket="0" core:operator="" core:type="DECIMAL">
+          <core:primitive core:value="1.6"/>
+        </core:simpleexp>
+      </table:av>
+      <table:av table:ce-id-refs="CV1448624fe6cx8bed5y25 CV14486251953x7c15y2a CV1448623c90exa7614y10" table:id="AV1448624fe6dx61291y27">
+        <core:simpleexp core:closebracket="0" core:openbracket="0" core:operator="" core:type="DECIMAL">
+          <core:primitive core:value="1.6"/>
+        </core:simpleexp>
+      </table:av>
+      <table:av table:ce-id-refs="CV1448624fe6cx8bed5y25 CV14486251953x7c15y2a CV144862431a8x4b403y18" table:id="AV1448624fe6dxd4b04y26">
+        <core:simpleexp core:closebracket="0" core:openbracket="0" core:operator="" core:type="DECIMAL">
+          <core:primitive core:value="1.9"/>
+        </core:simpleexp>
+      </table:av>
+      <table:av table:ce-id-refs="CV1448624fe6cx8bed5y25 CV14486251953x7c15y2a CV1448623e049xedb92y14" table:id="AV1448624fe6dx8bf7e">
+        <core:simpleexp core:closebracket="0" core:openbracket="0" core:operator="" core:type="DECIMAL">
+          <core:primitive core:value="1.3"/>
+        </core:simpleexp>
+      </table:av>
+      <table:av table:ce-id-refs="CV14486255e7dxc1d70y2e CV1448625a007xb69f7y36 CV1448623c90exa7614y10" table:id="AV14486255e7dxb4eaay2f">
+        <core:simpleexp core:closebracket="0" core:openbracket="0" core:operator="" core:type="DECIMAL">
+          <core:primitive core:value="1.6"/>
+        </core:simpleexp>
+      </table:av>
+      <table:av table:ce-id-refs="CV14486255e7dxc1d70y2e CV1448625a007xb69f7y36 CV14486258e15x937e7y33" table:id="AV14486255e7exd354dy30">
+        <core:simpleexp core:closebracket="0" core:openbracket="0" core:operator="" core:type="DECIMAL">
+          <core:primitive core:value="1.8"/>
+        </core:simpleexp>
+      </table:av>
+      <table:av table:ce-id-refs="CV14486255e7dxc1d70y2e CV1448625a007xb69f7y36 CV144862431a8x4b403y18" table:id="AV14486255e7exdc3ee">
+        <core:simpleexp core:closebracket="0" core:openbracket="0" core:operator="" core:type="DECIMAL">
+          <core:primitive core:value="1.9"/>
+        </core:simpleexp>
+      </table:av>
+      <table:av table:ce-id-refs="CV1448625d3cdxbb3e6y39 CV1448625ebf8x3d6efy3f CV1448623c90exa7614y10" table:id="AV1448625d3cdxf2c75y3a">
+        <core:simpleexp core:closebracket="0" core:openbracket="0" core:operator="" core:type="DECIMAL">
+          <core:primitive core:value="1.6"/>
+        </core:simpleexp>
+      </table:av>
+      <table:av table:ce-id-refs="CV1448625d3cdxbb3e6y39 CV1448625ebf8x3d6efy3f CV144862431a8x4b403y18" table:id="AV1448625d3cex459fey3b">
+        <core:simpleexp core:closebracket="0" core:openbracket="0" core:operator="" core:type="DECIMAL">
+          <core:primitive core:value="1.9"/>
+        </core:simpleexp>
+      </table:av>
+      <table:av table:ce-id-refs="CV1448625d3cdxbb3e6y39 CV1448625ebf8x3d6efy3f CV1448625faedx68591y43" table:id="AV1448625d3cexb3bc8">
+        <core:simpleexp core:closebracket="0" core:openbracket="0" core:operator="" core:type="DECIMAL">
+          <core:primitive core:value="1.2"/>
+        </core:simpleexp>
+      </table:av>
+      <table:av table:ce-id-refs="CV144862648bcx4b0fey47 CV14486265477xe981ay4d CV144862431a8x4b403y18" table:id="AV144862648bcx87a8y49">
+        <core:simpleexp core:closebracket="0" core:openbracket="0" core:operator="" core:type="DECIMAL">
+          <core:primitive core:value="1.9"/>
+        </core:simpleexp>
+      </table:av>
+    </table:actionstub>
+    <table:tablelayout>
+      <table:conditionstub-layout table:stub-id="CS1448623126bx3cfd8" table:type="vertical">
+        <table:cell table:ref-id="CV14486235a59x2c4e4ya" table:span="3"/>
+        <table:cell table:span="-1"/>
+        <table:cell table:span="-2"/>
+        <table:cell table:ref-id="CV1448624805fxa0326y1c" table:span="3"/>
+        <table:cell table:span="-1"/>
+        <table:cell table:span="-2"/>
+        <table:cell table:ref-id="CV1448624fe6cx8bed5y25" table:span="3"/>
+        <table:cell table:span="-1"/>
+        <table:cell table:span="-2"/>
+        <table:cell table:ref-id="CV14486255e7dxc1d70y2e" table:span="3"/>
+        <table:cell table:span="-1"/>
+        <table:cell table:span="-2"/>
+        <table:cell table:ref-id="CV1448625d3cdxbb3e6y39" table:span="3"/>
+        <table:cell table:span="-1"/>
+        <table:cell table:span="-2"/>
+        <table:cell table:ref-id="CV144862648bcx4b0fey47" table:span="1"/>
+      </table:conditionstub-layout>
+      <table:conditionstub-layout table:stub-id="CS14486231289x2c105y3" table:type="vertical">
+        <table:cell table:ref-id="CV1448623a62bx2f85fyd" table:span="3"/>
+        <table:cell table:span="-1"/>
+        <table:cell table:span="-2"/>
+        <table:cell table:ref-id="CV1448624a88cx4e74y21" table:span="3"/>
+        <table:cell table:ref-id="CV1448624a88cx4e74y21" table:span="-1"/>
+        <table:cell table:ref-id="CV1448624a88cx4e74y21" table:span="-2"/>
+        <table:cell table:ref-id="CV14486251953x7c15y2a" table:span="3"/>
+        <table:cell table:ref-id="CV14486251953x7c15y2a" table:span="-1"/>
+        <table:cell table:ref-id="CV14486251953x7c15y2a" table:span="-2"/>
+        <table:cell table:ref-id="CV1448625a007xb69f7y36" table:span="3"/>
+        <table:cell table:ref-id="CV1448625a007xb69f7y36" table:span="-1"/>
+        <table:cell table:ref-id="CV1448625a007xb69f7y36" table:span="-2"/>
+        <table:cell table:ref-id="CV1448625ebf8x3d6efy3f" table:span="3"/>
+        <table:cell table:ref-id="CV1448625ebf8x3d6efy3f" table:span="-1"/>
+        <table:cell table:ref-id="CV1448625ebf8x3d6efy3f" table:span="-2"/>
+        <table:cell table:ref-id="CV14486265477xe981ay4d" table:span="1"/>
+      </table:conditionstub-layout>
+      <table:conditionstub-layout table:stub-id="CS1448623128ax43a7cy5" table:type="vertical">
+        <table:cell table:ref-id="CV1448623c90exa7614y10" table:span="1"/>
+        <table:cell table:ref-id="CV1448623e049xedb92y14" table:span="1"/>
+        <table:cell table:ref-id="CV144862431a8x4b403y18" table:span="1"/>
+        <table:cell table:ref-id="CV1448623c90exa7614y10" table:span="1"/>
+        <table:cell table:ref-id="CV1448623e049xedb92y14" table:span="1"/>
+        <table:cell table:ref-id="CV144862431a8x4b403y18" table:span="1"/>
+        <table:cell table:ref-id="CV1448623c90exa7614y10" table:span="1"/>
+        <table:cell table:ref-id="CV1448623e049xedb92y14" table:span="1"/>
+        <table:cell table:ref-id="CV144862431a8x4b403y18" table:span="1"/>
+        <table:cell table:ref-id="CV1448623c90exa7614y10" table:span="1"/>
+        <table:cell table:ref-id="CV14486258e15x937e7y33" table:span="1"/>
+        <table:cell table:ref-id="CV144862431a8x4b403y18" table:span="1"/>
+        <table:cell table:ref-id="CV1448623c90exa7614y10" table:span="1"/>
+        <table:cell table:ref-id="CV1448625faedx68591y43" table:span="1"/>
+        <table:cell table:ref-id="CV144862431a8x4b403y18" table:span="1"/>
+        <table:cell table:ref-id="CV144862431a8x4b403y18" table:span="1"/>
+      </table:conditionstub-layout>
+      <table:actionstub-layout table:width="100" table:stub-id="AS14486231ac3x9bb01"/>
+    </table:tablelayout>
+  </table:decisiontable>
+</dtmodel:decisionTableModel>

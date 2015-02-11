@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Cube:cube xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:AccessControl="http://www.sap.com/ndb/SQLCoreModelAccessControl.ecore" xmlns:Cube="http://www.sap.com/ndb/BiModelCube.ecore" xmlns:Privilege="http://www.sap.com/ndb/BiModelPrivilege.ecore" schemaVersion="1.5" id="AN_SALES_OVERVIEW_WO_CURR_CONV" allowRelationalOptimization="true" applyPrivilegeType="ANALYTIC_PRIVILEGE" checkAnalyticPrivileges="true" defaultClient="$$client$$" defaultLanguage="$$language$$" visibility="reportingEnabled">
+  <descriptions defaultDescription="Sales Orders Overview Without Currency Conversions"/>
+  <metadata changedAt="2014-03-03 11:43:12.709"/>
+  <defaultSchema schemaName="_SYS_BIC"/>
+  <localVariables/>
+  <privateMeasureGroup id="MeasureGroup">
+    <attributes>
+      <attribute id="CURRENCY" order="1" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="CURRENCY"/>
+        <keyMapping schemaName="_SYS_BIC" columnObjectName="{{PACKAGE_NAME}}.data::EPM.SO.Header" columnName="CURRENCY"/>
+      </attribute>
+      <attribute id="LIFECYCLESTATUS" order="2" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="LIFECYCLESTATUS"/>
+        <keyMapping schemaName="_SYS_BIC" columnObjectName="{{PACKAGE_NAME}}.data::EPM.SO.Header" columnName="LIFECYCLESTATUS"/>
+      </attribute>
+      <attribute id="DELIVERYSTATUS" order="3" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="DELIVERYSTATUS"/>
+        <keyMapping schemaName="_SYS_BIC" columnObjectName="{{PACKAGE_NAME}}.data::EPM.SO.Header" columnName="DELIVERYSTATUS"/>
+      </attribute>
+      <attribute id="POSTING_DATE" order="4" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="HISTORY_CREATEDAT"/>
+        <keyMapping schemaName="_SYS_BIC" columnObjectName="{{PACKAGE_NAME}}.data::EPM.SO.Header" columnName="HISTORY.CREATEDAT"/>
+      </attribute>
+      <attribute id="SALESORDERID" order="5" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="SALESORDERID"/>
+        <keyMapping schemaName="_SYS_BIC" columnObjectName="{{PACKAGE_NAME}}.data::EPM.SO.Item" columnName="SALESORDERID.SALESORDERID"/>
+      </attribute>
+      <attribute id="SALESORDERITEM" order="6" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="SALESORDERITEM"/>
+        <keyMapping schemaName="_SYS_BIC" columnObjectName="{{PACKAGE_NAME}}.data::EPM.SO.Item" columnName="SALESORDERITEM"/>
+      </attribute>
+      <attribute id="QUANTITYUNIT" order="7" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="QUANTITYUNIT"/>
+        <keyMapping schemaName="_SYS_BIC" columnObjectName="{{PACKAGE_NAME}}.data::EPM.SO.Item" columnName="QUANTITYUNIT"/>
+      </attribute>
+      <attribute id="BILLINGSTATUS" order="8" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="BILLINGSTATUS"/>
+        <keyMapping schemaName="_SYS_BIC" columnObjectName="{{PACKAGE_NAME}}.data::EPM.SO.Header" columnName="BILLINGSTATUS"/>
+      </attribute>
+      <attribute id="HISTORY_CREATEDBY" order="18" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="HISTORY_CREATEDBY"/>
+        <keyMapping schemaName="_SYS_BIC" columnObjectName="{{PACKAGE_NAME}}.data::EPM.SO.Header" columnName="HISTORY.CREATEDBY.EMPLOYEEID"/>
+      </attribute>
+      <attribute id="PARTNERID" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="PARTNERID"/>
+        <keyMapping schemaName="_SYS_BIC" columnObjectName="{{PACKAGE_NAME}}.data::EPM.SO.Header" columnName="PARTNERID.PARTNERID"/>
+      </attribute>
+      <attribute id="PRODUCTID" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="PRODUCTID"/>
+        <keyMapping schemaName="_SYS_BIC" columnObjectName="{{PACKAGE_NAME}}.data::EPM.SO.Item" columnName="PRODUCTID.PRODUCTID"/>
+      </attribute>
+    </attributes>
+    <calculatedAttributes/>
+    <privateDataFoundation>
+      <tableProxies>
+        <tableProxy>
+          <table schemaName="_SYS_BIC" columnObjectName="{{PACKAGE_NAME}}.data::EPM.SO.Header"/>
+        </tableProxy>
+        <tableProxy centralTable="true">
+          <table schemaName="_SYS_BIC" columnObjectName="{{PACKAGE_NAME}}.data::EPM.SO.Item"/>
+        </tableProxy>
+      </tableProxies>
+      <joins>
+        <join>
+          <leftTable schemaName="_SYS_BIC" columnObjectName="{{PACKAGE_NAME}}.data::EPM.SO.Item"/>
+          <rightTable schemaName="_SYS_BIC" columnObjectName="{{PACKAGE_NAME}}.data::EPM.SO.Header"/>
+          <leftColumns>
+            <columnName>SALESORDERID.SALESORDERID</columnName>
+          </leftColumns>
+          <rightColumns>
+            <columnName>SALESORDERID</columnName>
+          </rightColumns>
+          <properties cardinality="CN_1" joinOperator="Equal" joinType="leftOuter"/>
+        </join>
+      </joins>
+      <layout>
+        <shapes>
+          <shape modelObjectName="{{PACKAGE_NAME}}.data::EPM.SO.Header" modelObjectNameSpace="_SYS_BIC" modelObjectType="catalog">
+            <upperLeftCorner x="70" y="30"/>
+          </shape>
+          <shape modelObjectName="{{PACKAGE_NAME}}.data::EPM.SO.Item" modelObjectNameSpace="_SYS_BIC" modelObjectType="catalog">
+            <upperLeftCorner x="555" y="30"/>
+          </shape>
+        </shapes>
+      </layout>
+    </privateDataFoundation>
+    <baseMeasures>
+      <measure id="QUANTITY" order="9" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="QUANTITY"/>
+        <measureMapping schemaName="_SYS_BIC" columnObjectName="{{PACKAGE_NAME}}.data::EPM.SO.Item" columnName="QUANTITY"/>
+      </measure>
+      <measure id="NETAMOUNT" order="10" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="NETAMOUNT"/>
+        <measureMapping schemaName="_SYS_BIC" columnObjectName="{{PACKAGE_NAME}}.data::EPM.SO.Item" columnName="NETAMOUNT"/>
+      </measure>
+      <measure id="TAXAMOUNT" order="19" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="TAXAMOUNT"/>
+        <measureMapping schemaName="_SYS_BIC" columnObjectName="{{PACKAGE_NAME}}.data::EPM.SO.Item" columnName="TAXAMOUNT"/>
+      </measure>
+    </baseMeasures>
+    <calculatedMeasures/>
+    <restrictedMeasures>
+      <measure id="RM_AMOUNT_NEW" hidden="false" order="11" baseMeasure="#NETAMOUNT">
+        <descriptions defaultDescription="RM_AMOUNT_NEW"/>
+        <restriction logicalOperator="AND">
+          <filter xsi:type="Privilege:AttributeFilter" attributeName="LIFECYCLESTATUS">
+            <valueFilter xsi:type="AccessControl:SingleValueFilter" including="true" value="N"/>
+          </filter>
+          <attributeName>LIFECYCLESTATUS</attributeName>
+        </restriction>
+      </measure>
+      <measure id="RM_AMOUNT_COMPLETED" hidden="false" order="12" baseMeasure="#NETAMOUNT">
+        <descriptions defaultDescription="RM_AMOUNT_COMPLETED"/>
+        <restriction logicalOperator="AND">
+          <filter xsi:type="Privilege:AttributeFilter" attributeName="LIFECYCLESTATUS">
+            <valueFilter xsi:type="AccessControl:SingleValueFilter" including="true" value="C"/>
+          </filter>
+          <attributeName>LIFECYCLESTATUS</attributeName>
+        </restriction>
+      </measure>
+      <measure id="RM_AMOUNT_INPROCESS" hidden="false" order="13" baseMeasure="#NETAMOUNT">
+        <descriptions defaultDescription="RM_AMOUNT_INPROCESS"/>
+        <restriction logicalOperator="AND">
+          <filter xsi:type="Privilege:AttributeFilter" attributeName="LIFECYCLESTATUS">
+            <valueFilter xsi:type="AccessControl:SingleValueFilter" including="true" value="P"/>
+          </filter>
+          <attributeName>LIFECYCLESTATUS</attributeName>
+        </restriction>
+      </measure>
+      <measure id="RM_AMOUNT_PAID" hidden="false" order="14" baseMeasure="#NETAMOUNT">
+        <descriptions defaultDescription="RM_AMOUNT_PAID"/>
+        <restriction logicalOperator="AND">
+          <filter xsi:type="Privilege:AttributeFilter" attributeName="BILLINGSTATUS">
+            <valueFilter xsi:type="AccessControl:SingleValueFilter" including="true" value="P"/>
+          </filter>
+          <attributeName>BILLINGSTATUS</attributeName>
+        </restriction>
+      </measure>
+      <measure id="RM_AMOUNT_UNPAID" hidden="false" order="15" baseMeasure="#NETAMOUNT">
+        <descriptions defaultDescription="RM_AMOUNT_UNPAID"/>
+        <restriction logicalOperator="AND">
+          <filter xsi:type="Privilege:AttributeFilter" attributeName="BILLINGSTATUS">
+            <valueFilter xsi:type="AccessControl:SingleValueFilter" including="true" value="I"/>
+            <valueFilter xsi:type="AccessControl:SingleValueFilter" operator="NL" including="true" value=""/>
+          </filter>
+          <attributeName>BILLINGSTATUS</attributeName>
+        </restriction>
+      </measure>
+      <measure id="RM_AMOUNT_DELIVERED" hidden="false" order="16" baseMeasure="#NETAMOUNT">
+        <descriptions defaultDescription="RM_AMOUNT_DELIVERED"/>
+        <restriction logicalOperator="AND">
+          <filter xsi:type="Privilege:AttributeFilter" attributeName="DELIVERYSTATUS">
+            <valueFilter xsi:type="AccessControl:SingleValueFilter" including="true" value="D"/>
+          </filter>
+          <attributeName>DELIVERYSTATUS</attributeName>
+        </restriction>
+      </measure>
+      <measure id="RM_AMOUNT_UNDELIVERED" hidden="false" order="17" baseMeasure="#NETAMOUNT">
+        <descriptions defaultDescription="RM_AMOUNT_UNDELIVERED"/>
+        <restriction logicalOperator="AND">
+          <filter xsi:type="Privilege:AttributeFilter" attributeName="DELIVERYSTATUS">
+            <valueFilter xsi:type="AccessControl:SingleValueFilter" operator="NL" including="true" value=""/>
+            <valueFilter xsi:type="AccessControl:SingleValueFilter" including="true" value="I"/>
+          </filter>
+          <attributeName>DELIVERYSTATUS</attributeName>
+        </restriction>
+      </measure>
+    </restrictedMeasures>
+    <sharedDimensions>
+      <logicalJoin associatedObjectUri="/{{PACKAGE_NAME}}.models/attributeviews/AT_BUYER">
+        <attributes>
+          <attributeRef>#PARTNERID</attributeRef>
+        </attributes>
+        <associatedAttributeNames>
+          <attributeName>PARTNERID</attributeName>
+        </associatedAttributeNames>
+        <properties cardinality="CN_1" joinOperator="Equal" joinType="leftOuter"/>
+        <associatedAttributeFeatures/>
+      </logicalJoin>
+      <logicalJoin associatedObjectUri="/{{PACKAGE_NAME}}.models/attributeviews/AT_PROD">
+        <attributes>
+          <attributeRef>#PRODUCTID</attributeRef>
+        </attributes>
+        <associatedAttributeNames>
+          <attributeName>PRODUCTID</attributeName>
+        </associatedAttributeNames>
+        <properties cardinality="CN_1" joinOperator="Equal" joinType="leftOuter"/>
+        <associatedAttributeFeatures>
+          <attributeReference alias="AT_PROD_POSTALCODE" attributeName="POSTALCODE"/>
+          <attributeReference alias="AT_PROD_COMPANYNAME" attributeName="COMPANYNAME"/>
+        </associatedAttributeFeatures>
+      </logicalJoin>
+    </sharedDimensions>
+    <layout>
+      <shapes>
+        <shape modelObjectName="MEASURE_GROUP" modelObjectType="repository">
+          <upperLeftCorner x="147" y="100"/>
+        </shape>
+        <shape modelObjectName="/{{PACKAGE_NAME}}.models/attributeviews/AT_BUYER.attributeview" modelObjectType="repository">
+          <upperLeftCorner x="724" y="35"/>
+        </shape>
+        <shape modelObjectName="/{{PACKAGE_NAME}}.models/attributeviews/AT_PROD.attributeview" modelObjectType="repository">
+          <upperLeftCorner x="723" y="316"/>
+        </shape>
+        <shape modelObjectName="LogicalView" modelObjectNameSpace="MeasureGroup" modelObjectType="repository">
+          <upperLeftCorner x="40" y="85"/>
+          <rectangleSize height="0" width="0"/>
+        </shape>
+      </shapes>
+    </layout>
+  </privateMeasureGroup>
+</Cube:cube>

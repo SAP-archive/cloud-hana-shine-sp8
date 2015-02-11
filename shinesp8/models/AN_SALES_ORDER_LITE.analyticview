@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Cube:cube xmlns:Cube="http://www.sap.com/ndb/BiModelCube.ecore" schemaVersion="1.5" id="AN_SALES_ORDER_LITE" applyPrivilegeType="ANALYTIC_PRIVILEGE" checkAnalyticPrivileges="true" defaultClient="$$client$$" defaultLanguage="$$language$$" visibility="reportingEnabled">
+  <descriptions defaultDescription="AN_SALES_ORDER_LITE"/>
+  <defaultSchema schemaName="_SYS_BIC"/>
+  <localVariables/>
+  <privateMeasureGroup id="MeasureGroup">
+    <attributes>
+      <attribute id="SALESORDERID" order="1" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="SALESORDERID"/>
+        <keyMapping schemaName="_SYS_BIC" columnObjectName="{{PACKAGE_NAME}}.data::EPM.SO.Item" columnName="SALESORDERID.SALESORDERID"/>
+      </attribute>
+      <attribute id="SALESORDERITEM" order="2" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="SALESORDERITEM"/>
+        <keyMapping schemaName="_SYS_BIC" columnObjectName="{{PACKAGE_NAME}}.data::EPM.SO.Item" columnName="SALESORDERITEM"/>
+      </attribute>
+      <attribute id="PRODUCTID" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="PRODUCTID"/>
+        <keyMapping schemaName="_SYS_BIC" columnObjectName="{{PACKAGE_NAME}}.data::EPM.SO.Item" columnName="PRODUCTID.PRODUCTID"/>
+      </attribute>
+      <attribute id="PARTNERID" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="PARTNERID"/>
+        <keyMapping schemaName="_SYS_BIC" columnObjectName="{{PACKAGE_NAME}}.data::EPM.SO.Header" columnName="PARTNERID.PARTNERID"/>
+      </attribute>
+      <attribute id="HISTORY_CREATEDAT" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="HISTORY_CREATEDAT"/>
+        <keyMapping schemaName="_SYS_BIC" columnObjectName="{{PACKAGE_NAME}}.data::EPM.SO.Header" columnName="HISTORY.CREATEDAT"/>
+      </attribute>
+    </attributes>
+    <calculatedAttributes/>
+    <privateDataFoundation>
+      <tableProxies>
+        <tableProxy>
+          <table schemaName="_SYS_BIC" columnObjectName="{{PACKAGE_NAME}}.data::EPM.SO.Header"/>
+        </tableProxy>
+        <tableProxy centralTable="true">
+          <table schemaName="_SYS_BIC" columnObjectName="{{PACKAGE_NAME}}.data::EPM.SO.Item"/>
+        </tableProxy>
+      </tableProxies>
+      <joins>
+        <join>
+          <leftTable schemaName="_SYS_BIC" columnObjectName="{{PACKAGE_NAME}}.data::EPM.SO.Header"/>
+          <rightTable schemaName="_SYS_BIC" columnObjectName="{{PACKAGE_NAME}}.data::EPM.SO.Item"/>
+          <leftColumns>
+            <columnName>SALESORDERID</columnName>
+          </leftColumns>
+          <rightColumns>
+            <columnName>SALESORDERID.SALESORDERID</columnName>
+          </rightColumns>
+          <properties cardinality="C1_N" joinOperator="Equal" joinType="leftOuter"/>
+        </join>
+      </joins>
+      <layout>
+        <shapes>
+          <shape modelObjectName="{{PACKAGE_NAME}}.data::EPM.SO.Header" modelObjectNameSpace="_SYS_BIC" modelObjectType="catalog">
+            <upperLeftCorner x="70" y="30"/>
+          </shape>
+          <shape modelObjectName="{{PACKAGE_NAME}}.data::EPM.SO.Item" modelObjectNameSpace="_SYS_BIC" modelObjectType="catalog">
+            <upperLeftCorner x="555" y="30"/>
+          </shape>
+        </shapes>
+      </layout>
+    </privateDataFoundation>
+    <baseMeasures>
+      <measure id="NETAMOUNT" order="3" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="NETAMOUNT"/>
+        <measureMapping schemaName="_SYS_BIC" columnObjectName="{{PACKAGE_NAME}}.data::EPM.SO.Item" columnName="NETAMOUNT"/>
+      </measure>
+    </baseMeasures>
+    <calculatedMeasures/>
+    <restrictedMeasures/>
+    <sharedDimensions>
+      <logicalJoin associatedObjectUri="/{{PACKAGE_NAME}}.models/attributeviews/AT_PROD">
+        <attributes>
+          <attributeRef>#PRODUCTID</attributeRef>
+        </attributes>
+        <associatedAttributeNames>
+          <attributeName>PRODUCTID</attributeName>
+        </associatedAttributeNames>
+        <properties cardinality="C1_1" joinOperator="Equal" joinType="referential"/>
+        <associatedAttributeFeatures/>
+      </logicalJoin>
+      <logicalJoin associatedObjectUri="/{{PACKAGE_NAME}}.models/attributeviews/AT_BUYER">
+        <attributes>
+          <attributeRef>#PARTNERID</attributeRef>
+        </attributes>
+        <associatedAttributeNames>
+          <attributeName>PARTNERID</attributeName>
+        </associatedAttributeNames>
+        <properties cardinality="C1_1" joinOperator="Equal" joinType="referential"/>
+        <associatedAttributeFeatures>
+          <attributeReference alias="AT_BUYER_POSTALCODE" attributeName="POSTALCODE"/>
+          <attributeReference alias="AT_BUYER_COMPANYNAME" attributeName="COMPANYNAME"/>
+        </associatedAttributeFeatures>
+      </logicalJoin>
+      <logicalJoin associatedObjectUri="/{{PACKAGE_NAME}}.models/attributeviews/AT_TIME_DIM">
+        <attributes>
+          <attributeRef>#HISTORY_CREATEDAT</attributeRef>
+        </attributes>
+        <associatedAttributeNames>
+          <attributeName>DATE_SQL</attributeName>
+        </associatedAttributeNames>
+        <properties cardinality="C1_1" joinOperator="Equal" joinType="referential"/>
+        <associatedAttributeFeatures/>
+      </logicalJoin>
+    </sharedDimensions>
+    <layout>
+      <shapes>
+        <shape modelObjectName="MEASURE_GROUP" modelObjectType="repository">
+          <upperLeftCorner x="207" y="201"/>
+        </shape>
+        <shape modelObjectName="/{{PACKAGE_NAME}}.models/attributeviews/AT_PROD" modelObjectType="repository">
+          <upperLeftCorner x="628" y="30"/>
+        </shape>
+        <shape modelObjectName="/{{PACKAGE_NAME}}.models/attributeviews/AT_BUYER" modelObjectType="repository">
+          <upperLeftCorner x="1079" y="29"/>
+        </shape>
+        <shape modelObjectName="/{{PACKAGE_NAME}}.models/attributeviews/AT_TIME_DIM" modelObjectType="repository">
+          <upperLeftCorner x="968" y="377"/>
+        </shape>
+        <shape modelObjectName="LogicalView" modelObjectNameSpace="MeasureGroup" modelObjectType="repository">
+          <upperLeftCorner x="40" y="85"/>
+          <rectangleSize height="0" width="0"/>
+        </shape>
+      </shapes>
+    </layout>
+  </privateMeasureGroup>
+</Cube:cube>

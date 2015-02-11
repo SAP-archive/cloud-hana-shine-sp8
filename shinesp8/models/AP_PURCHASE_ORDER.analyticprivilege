@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Privilege:analyticPrivilege xmlns:Privilege="http://www.sap.com/ndb/BiModelPrivilege.ecore" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" schemaVersion="1.1" id="AP_PURCHASE_ORDER">
+  <origin/>
+  <descriptions defaultDescription="Purchase Order"/>
+  <metadata activatedAt="2013-10-22 11:06:24.0" changedAt="2013-10-24 09:51:15.391" createdAt="2013-10-24 09:51:15.391"/>
+  <securedModels allInformationModels="false">
+    <modelUri>/{{PACKAGE_NAME}}.models/attributeviews/AT_PURCHASE_ORDER_WORKLIST</modelUri>
+    <modelUri>/{{PACKAGE_NAME}}.models/analyticviews/AN_PURCHASE_COMMON_CURRENCY</modelUri>
+    <modelUri>/{{PACKAGE_NAME}}.models/analyticviews/AN_PURCHASE_OVERVIEW</modelUri>
+  </securedModels>
+</Privilege:analyticPrivilege>

@@ -1,0 +1,6 @@
+service namespace "{{PACKAGE_NAME}}"  { 
+   "{{PACKAGE_NAME}}.data::EPM.User.Details" as "Users"
+    create using "{{PACKAGE_NAME}}.services:useridUpdate.xsjslib::my_create_after_exit";
+}
+   
+ 

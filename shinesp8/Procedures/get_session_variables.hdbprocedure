@@ -1,0 +1,15 @@
+PROCEDURE "_SYS_BIC"."{{PACKAGE_NAME}}.Procedures::get_session_variables" (IN SESSIONID NVARCHAR(32), IN APPLICATION NVARCHAR(128), OUT svariables _SYS_BIC."{{PACKAGE_NAME}}.data::EPM.Procedures.tt_variable") 
+	LANGUAGE SQLSCRIPT
+	SQL SECURITY INVOKER 
+	--DEFAULT SCHEMA <default_schema_name>
+	READS SQL DATA AS
+BEGIN
+/***************************** 
+	Write your procedure logic 
+ *****************************/
+ svariables = 
+      SELECT SESSIONID, NAME, APPLICATION, EXPIRY, DATA 
+ 	    FROM "{{PACKAGE_NAME}}.data::EPM.Util.SSCOOKIE"
+	   WHERE SESSIONID   = :SESSIONID
+	     AND APPLICATION = :APPLICATION; 
+END;

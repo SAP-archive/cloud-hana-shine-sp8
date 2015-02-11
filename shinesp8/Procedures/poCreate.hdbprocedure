@@ -1,0 +1,37 @@
+PROCEDURE "_SYS_BIC"."{{PACKAGE_NAME}}.Procedures::poCreate" (IN row _SYS_BIC."{{PACKAGE_NAME}}.data::EPM.PO.Header", OUT error _SYS_BIC."{{PACKAGE_NAME}}.data::EPM.Procedures.tt_errors") 
+	LANGUAGE SQLSCRIPT
+	SQL SECURITY INVOKER 
+	DEFAULT SCHEMA _SYS_BIC AS
+BEGIN
+/***************************** 
+	Write your procedure logic 
+ *****************************/
+  
+declare lv_partner_id string;
+
+
+select "PARTNERID.PARTNERID" 
+     into lv_partner_id
+                      from :row;
+
+if :lv_partner_id = ' ' then
+  error = select 500 as http_status_code, 
+               'invalid partner id ' || lv_partner_id as error_message, 
+                     'No Way! Partner Id field can not be empty' as detail from dummy;
+else
+                     
+  INSERT INTO "{{PACKAGE_NAME}}.data::EPM.PO.Header" 
+    VALUES("{{PACKAGE_NAME}}.data::purchaseOrderSeqId".NEXTVAL,
+    '0000000033',
+    now(),
+    '0000000033',
+    now(),
+    null,
+    :lv_partner_id,
+    'EUR',
+	        (SELECT ROUND(TO_DECIMAL(1 + (999999-1)*RAND()),2) FROM DUMMY),
+	        (SELECT ROUND(TO_DECIMAL(1 + (999999-1)*RAND()),2) FROM DUMMY),
+	        (SELECT ROUND(TO_DECIMAL(1 + (9999-1)*RAND()),2) FROM DUMMY),
+	        'N','I','I','I','I');                     
+end if;
+END;

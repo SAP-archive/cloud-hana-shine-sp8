@@ -1,0 +1,24 @@
+service namespace "{{PACKAGE_NAME}}"  { 
+   "{{PACKAGE_NAME}}.data::EPM.SO.Header" 
+   as "SalesOrderHeader" 
+   navigates ("SO_Partner" as "Buyer", "SO_Item" as "SalesOrderItem");
+   
+   "{{PACKAGE_NAME}}.models::AT_BUYER" 
+   as "Buyer" 
+   keys ("PARTNERID");
+ 
+   
+   "{{PACKAGE_NAME}}.models::AN_SALES_OVERVIEW_WO_CURR_CONV" 
+   as "SalesOrderItem" 
+   keys generate local "ID"
+   aggregates always;	
+   
+      association "SO_Partner" principal "SalesOrderHeader"("PARTNERID.PARTNERID")
+     multiplicity "1" dependent "Buyer"("PARTNERID") multiplicity "1";
+  
+   association "SO_Item" principal "SalesOrderHeader"("SALESORDERID") 
+     multiplicity "1" dependent "SalesOrderItem"("SALESORDERID") multiplicity "*"; 
+     
+  }
+
+   

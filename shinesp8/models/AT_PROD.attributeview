@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Dimension:dimension xmlns:Dimension="http://www.sap.com/ndb/BiModelDimension.ecore" schemaVersion="1.2" id="AT_PROD" applyPrivilegeType="ANALYTIC_PRIVILEGE" checkAnalyticPrivileges="true" defaultClient="000" defaultLanguage="$$language$$" visibility="internal" dimensionType="Standard">
+  <origin/>
+  <descriptions defaultDescription="Product With Details"/>
+  <defaultSchema/>
+  <attributes>
+    <attribute id="PRODUCTID" order="1" attributeHierarchyActive="false" displayAttribute="false" key="true">
+      <descriptions defaultDescription="PRODUCTID"/>
+      <keyMapping schemaName="_SYS_BIC" columnObjectName="{{PACKAGE_NAME}}.data::EPM.MD.Products" columnName="PRODUCTID"/>
+    </attribute>
+    <attribute id="PRODUCT_TYPECODE" order="2" attributeHierarchyActive="false" displayAttribute="false">
+      <descriptions defaultDescription="PRODUCT_TYPECODE"/>
+      <keyMapping schemaName="_SYS_BIC" columnObjectName="{{PACKAGE_NAME}}.data::EPM.MD.Products" columnName="TYPECODE"/>
+    </attribute>
+    <attribute id="PRODUCT_CATEGORY" order="3" attributeHierarchyActive="false" displayAttribute="false">
+      <descriptions defaultDescription="PRODUCT_CATEGORY"/>
+      <keyMapping schemaName="_SYS_BIC" columnObjectName="{{PACKAGE_NAME}}.data::EPM.MD.Products" columnName="CATEGORY"/>
+    </attribute>
+    <attribute id="PRODUCT_CURRENCY" order="4" attributeHierarchyActive="false" displayAttribute="false">
+      <descriptions defaultDescription="PRODUCT_CURRENCY"/>
+      <keyMapping schemaName="_SYS_BIC" columnObjectName="{{PACKAGE_NAME}}.data::EPM.MD.Products" columnName="CURRENCY"/>
+    </attribute>
+    <attribute id="PRODUCT_PRICE" order="5" attributeHierarchyActive="false" displayAttribute="false">
+      <descriptions defaultDescription="PRODUCT_PRICE"/>
+      <keyMapping schemaName="_SYS_BIC" columnObjectName="{{PACKAGE_NAME}}.data::EPM.MD.Products" columnName="PRICE"/>
+    </attribute>
+    <attribute id="SUPPLIER_CITY" order="6" attributeHierarchyActive="false" displayAttribute="false">
+      <descriptions defaultDescription="SUPPLIER_CITY"/>
+      <keyMapping schemaName="_SYS_BIC" columnObjectName="{{PACKAGE_NAME}}.data::EPM.MD.Addresses" columnName="CITY"/>
+    </attribute>
+    <attribute id="POSTALCODE" order="7" attributeHierarchyActive="false" displayAttribute="false">
+      <descriptions defaultDescription="POSTALCODE"/>
+      <keyMapping schemaName="_SYS_BIC" columnObjectName="{{PACKAGE_NAME}}.data::EPM.MD.Addresses" columnName="POSTALCODE"/>
+    </attribute>
+    <attribute id="SUPPLIER_STREET" order="8" attributeHierarchyActive="false" displayAttribute="false">
+      <descriptions defaultDescription="SUPPLIER_STREET"/>
+      <keyMapping schemaName="_SYS_BIC" columnObjectName="{{PACKAGE_NAME}}.data::EPM.MD.Addresses" columnName="STREET"/>
+    </attribute>
+    <attribute id="SUPPLIER_BUILDING" order="9" attributeHierarchyActive="false" displayAttribute="false">
+      <descriptions defaultDescription="SUPPLIER_BUILDING"/>
+      <keyMapping schemaName="_SYS_BIC" columnObjectName="{{PACKAGE_NAME}}.data::EPM.MD.Addresses" columnName="BUILDING"/>
+    </attribute>
+    <attribute id="SUPPLIER_COUNTRY" order="10" attributeHierarchyActive="false" displayAttribute="false">
+      <descriptions defaultDescription="SUPPLIER_COUNTRY"/>
+      <keyMapping schemaName="_SYS_BIC" columnObjectName="{{PACKAGE_NAME}}.data::EPM.MD.Addresses" columnName="COUNTRY"/>
+    </attribute>
+    <attribute id="SUPPLIER_REGION" order="11" attributeHierarchyActive="false" displayAttribute="false">
+      <descriptions defaultDescription="SUPPLIER_REGION"/>
+      <keyMapping schemaName="_SYS_BIC" columnObjectName="{{PACKAGE_NAME}}.data::EPM.MD.Addresses" columnName="REGION"/>
+    </attribute>
+    <attribute id="PRODUCT_NAME" order="12" attributeHierarchyActive="false" displayAttribute="false">
+      <descriptions defaultDescription="PRODUCT_NAME"/>
+      <keyMapping schemaName="_SYS_BIC" columnObjectName="{{PACKAGE_NAME}}.data::EPM.Util.Texts" columnName="TEXT"/>
+    </attribute>
+    <attribute id="SUPPLIER_ID" order="13" attributeHierarchyActive="false" displayAttribute="false">
+      <descriptions defaultDescription="SUPPLIER_ID"/>
+      <keyMapping schemaName="_SYS_BIC" columnObjectName="{{PACKAGE_NAME}}.data::EPM.MD.BusinessPartner" columnName="PARTNERID"/>
+    </attribute>
+    <attribute id="COMPANYNAME" order="14" attributeHierarchyActive="false" displayAttribute="false">
+      <descriptions defaultDescription="COMPANYNAME"/>
+      <keyMapping schemaName="_SYS_BIC" columnObjectName="{{PACKAGE_NAME}}.data::EPM.MD.BusinessPartner" columnName="COMPANYNAME"/>
+    </attribute>
+    <attribute id="PRODUCT_WEIGHTMEASURE" order="15" attributeHierarchyActive="false" displayAttribute="false">
+      <descriptions defaultDescription="PRODUCT_WEIGHTMEASURE"/>
+      <keyMapping schemaName="_SYS_BIC" columnObjectName="{{PACKAGE_NAME}}.data::EPM.MD.Products" columnName="WEIGHTMEASURE"/>
+    </attribute>
+    <attribute id="PRODUCT_WEIGHTUNIT" order="16" attributeHierarchyActive="false" displayAttribute="false">
+      <descriptions defaultDescription="PRODUCT_WEIGHTUNIT"/>
+      <keyMapping schemaName="_SYS_BIC" columnObjectName="{{PACKAGE_NAME}}.data::EPM.MD.Products" columnName="WEIGHTUNIT"/>
+    </attribute>
+    <attribute id="PRODUCT_DESCRIPTION" order="17" attributeHierarchyActive="false" displayAttribute="false">
+      <descriptions defaultDescription="PRODUCT_DESCRIPTION"/>
+      <keyMapping schemaName="_SYS_BIC" columnObjectName="{{PACKAGE_NAME}}.data::EPM.Util.Texts" alias="description" columnName="TEXT"/>
+    </attribute>
+  </attributes>
+  <calculatedAttributes/>
+  <privateDataFoundation>
+    <tableProxies>
+      <tableProxy>
+        <table schemaName="_SYS_BIC" columnObjectName="{{PACKAGE_NAME}}.data::EPM.MD.Addresses"/>
+      </tableProxy>
+      <tableProxy>
+        <table schemaName="_SYS_BIC" columnObjectName="{{PACKAGE_NAME}}.data::EPM.MD.Products"/>
+      </tableProxy>
+      <tableProxy>
+        <table schemaName="_SYS_BIC" columnObjectName="{{PACKAGE_NAME}}.data::EPM.Util.Texts"/>
+      </tableProxy>
+      <tableProxy>
+        <table schemaName="_SYS_BIC" columnObjectName="{{PACKAGE_NAME}}.data::EPM.Util.Texts" alias="description"/>
+      </tableProxy>
+      <tableProxy>
+        <table schemaName="_SYS_BIC" columnObjectName="{{PACKAGE_NAME}}.data::EPM.MD.BusinessPartner"/>
+      </tableProxy>
+    </tableProxies>
+    <joins>
+      <join languageColumn="LANGUAGE">
+        <leftTable schemaName="_SYS_BIC" columnObjectName="{{PACKAGE_NAME}}.data::EPM.MD.Products"/>
+        <rightTable schemaName="_SYS_BIC" columnObjectName="{{PACKAGE_NAME}}.data::EPM.Util.Texts"/>
+        <leftColumns>
+          <columnName>NAMEID</columnName>
+        </leftColumns>
+        <rightColumns>
+          <columnName>TEXTID</columnName>
+        </rightColumns>
+        <properties cardinality="C1_1" joinOperator="Equal" joinType="textTable"/>
+      </join>
+      <join languageColumn="LANGUAGE">
+        <leftTable schemaName="_SYS_BIC" columnObjectName="{{PACKAGE_NAME}}.data::EPM.MD.Products"/>
+        <rightTable schemaName="_SYS_BIC" columnObjectName="{{PACKAGE_NAME}}.data::EPM.Util.Texts" alias="description"/>
+        <leftColumns>
+          <columnName>DESCID</columnName>
+        </leftColumns>
+        <rightColumns>
+          <columnName>TEXTID</columnName>
+        </rightColumns>
+        <properties cardinality="C1_1" joinOperator="Equal" joinType="textTable"/>
+      </join>
+      <join>
+        <leftTable schemaName="_SYS_BIC" columnObjectName="{{PACKAGE_NAME}}.data::EPM.MD.Products"/>
+        <rightTable schemaName="_SYS_BIC" columnObjectName="{{PACKAGE_NAME}}.data::EPM.MD.BusinessPartner"/>
+        <leftColumns>
+          <columnName>SUPPLIERID.PARTNERID</columnName>
+        </leftColumns>
+        <rightColumns>
+          <columnName>PARTNERID</columnName>
+        </rightColumns>
+        <properties cardinality="C1_N" joinOperator="Equal" joinType="referential"/>
+      </join>
+      <join>
+        <leftTable schemaName="_SYS_BIC" columnObjectName="{{PACKAGE_NAME}}.data::EPM.MD.BusinessPartner"/>
+        <rightTable schemaName="_SYS_BIC" columnObjectName="{{PACKAGE_NAME}}.data::EPM.MD.Addresses"/>
+        <leftColumns>
+          <columnName>ADDRESSID.ADDRESSID</columnName>
+        </leftColumns>
+        <rightColumns>
+          <columnName>ADDRESSID</columnName>
+        </rightColumns>
+        <properties cardinality="C1_1" joinOperator="Equal" joinType="referential"/>
+      </join>
+    </joins>
+    <layout>
+      <shapes>
+        <shape modelObjectName="{{PACKAGE_NAME}}.data::EPM.MD.Addresses" modelObjectNameSpace="_SYS_BIC" modelObjectType="catalog">
+          <upperLeftCorner x="70" y="30"/>
+        </shape>
+        <shape modelObjectName="{{PACKAGE_NAME}}.data::EPM.MD.Products" modelObjectNameSpace="_SYS_BIC" modelObjectType="catalog">
+          <upperLeftCorner x="78" y="294"/>
+        </shape>
+        <shape modelObjectName="{{PACKAGE_NAME}}.data::EPM.Util.Texts" modelObjectNameSpace="_SYS_BIC" modelObjectType="catalog">
+          <upperLeftCorner x="675" y="22"/>
+        </shape>
+        <shape modelObjectName="description" modelObjectNameSpace="_SYS_BIC" modelObjectType="catalog">
+          <upperLeftCorner x="675" y="248"/>
+        </shape>
+        <shape modelObjectName="{{PACKAGE_NAME}}.data::EPM.MD.BusinessPartner" modelObjectNameSpace="_SYS_BIC" modelObjectType="catalog">
+          <upperLeftCorner x="727" y="444"/>
+        </shape>
+        <shape modelObjectName="DataFoundation" modelObjectNameSpace="DataFoundation" modelObjectType="repository">
+          <upperLeftCorner x="40" y="85"/>
+          <rectangleSize height="161" width="419"/>
+        </shape>
+      </shapes>
+    </layout>
+  </privateDataFoundation>
+  <hierarchies/>
+</Dimension:dimension>

@@ -1,0 +1,10 @@
+namespace {{PACKAGE_NAME}}.data;
+
+@Schema: '_SYS_BIC' 
+context JobsDemo {
+ 	 @Catalog.tableType: #COLUMN
+     Entity Details {
+     	key TIME: UTCTimestamp;
+     	SOURCE: String(30);
+     };	
+};

@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Cube:cube xmlns:Cube="http://www.sap.com/ndb/BiModelCube.ecore" id="AN_SALES_ORDER_DYNAMIC_TIME_PERIOD" applyPrivilegeType="ANALYTIC_PRIVILEGE" checkAnalyticPrivileges="true" defaultClient="$$client$$" defaultLanguage="$$language$$" visibility="reportingEnabled">
+  <descriptions defaultDescription="AN_SALES_ORDER_DYNAMIC_TIME_PERIOD"/>
+  <defaultSchema schemaName="_SYS_BIC"/>
+  <localVariables>
+    <variable id="IP_StartDate" parameter="true">
+      <descriptions defaultDescription="IP_StartDate"/>
+      <variableProperties datatype="DATE" mandatory="false">
+        <valueDomain type="Date"/>
+        <selection multiLine="false" type="SingleValue"/>
+      </variableProperties>
+    </variable>
+    <variable id="IP_EndDate" parameter="true">
+      <descriptions defaultDescription="IP_EndDate"/>
+      <variableProperties datatype="DATE" mandatory="false">
+        <valueDomain type="Date"/>
+        <selection multiLine="false" type="SingleValue"/>
+      </variableProperties>
+    </variable>
+    <variable id="IP_PeriodType" parameter="true">
+      <descriptions defaultDescription="IP_PeriodType"/>
+      <variableProperties datatype="VARCHAR" length="20" mandatory="false">
+        <valueDomain type="StaticList">
+          <listEntry id="Start Date-End Date">
+            <descriptions defaultDescription="Enter Beginning and End Date"/>
+          </listEntry>
+          <listEntry id="Current Year">
+            <descriptions defaultDescription="Current Year"/>
+          </listEntry>
+          <listEntry id="Previous Year">
+            <descriptions defaultDescription="Previous Year"/>
+          </listEntry>
+        </valueDomain>
+        <selection multiLine="false" type="SingleValue"/>
+      </variableProperties>
+    </variable>
+  </localVariables>
+  <privateMeasureGroup id="MeasureGroup">
+    <attributes>
+      <attribute id="History_CREATEDAT" order="3" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="History_CREATEDAT"/>
+        <keyMapping schemaName="_SYS_BIC" columnObjectName="{{PACKAGE_NAME}}.data::EPM.SO.Header" columnName="HISTORY.CREATEDAT"/>
+      </attribute>
+      <attribute id="SALESORDERID" order="4" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="SALESORDERID"/>
+        <keyMapping schemaName="_SYS_BIC" columnObjectName="{{PACKAGE_NAME}}.data::EPM.SO.Item" columnName="SALESORDERID.SALESORDERID"/>
+      </attribute>
+      <attribute id="SALESORDERITEM" order="5" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="SALESORDERITEM"/>
+        <keyMapping schemaName="_SYS_BIC" columnObjectName="{{PACKAGE_NAME}}.data::EPM.SO.Item" columnName="SALESORDERITEM"/>
+      </attribute>
+      <attribute id="PARTNERID_1" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="PARTNERID_1"/>
+        <keyMapping schemaName="_SYS_BIC" columnObjectName="{{PACKAGE_NAME}}.data::EPM.SO.Header" columnName="PARTNERID.PARTNERID"/>
+      </attribute>
+      <attribute id="PRODUCTID_1" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="PRODUCTID_1"/>
+        <keyMapping schemaName="_SYS_BIC" columnObjectName="{{PACKAGE_NAME}}.data::EPM.SO.Item" columnName="PRODUCTID.PRODUCTID"/>
+      </attribute>
+    </attributes>
+    <calculatedAttributes>
+      <calculatedAttribute id="CA_StartDate" hidden="false" order="1" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="CA_StartDate"/>
+        <keyCalculation datatype="DATE" length="0" scale="0">
+          <formula>case( '$$IP_PeriodType$$', 'Start Date-End Date',date('$$IP_StartDate$$'), 'Current Year',date(midstr(string(now()),1,4)), 'Previous Year',date(double(midstr(string(now()),1,4))-1), date(now()) )</formula>
+        </keyCalculation>
+      </calculatedAttribute>
+      <calculatedAttribute id="CA_EndDate" hidden="false" order="2" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="CA_EndDate"/>
+        <keyCalculation datatype="DATE" length="0" scale="0">
+          <formula>case( '$$IP_PeriodType$$', 'Start Date-End Date',date('$$IP_EndDate$$'), 'Current Year',date(now()), 'Previous Year',adddays(date(midstr(string(now()),1,4)),-1), date(now()) )</formula>
+        </keyCalculation>
+      </calculatedAttribute>
+    </calculatedAttributes>
+    <privateDataFoundation>
+      <tableProxies>
+        <tableProxy>
+          <table schemaName="_SYS_BIC" columnObjectName="{{PACKAGE_NAME}}.data::EPM.SO.Header"/>
+        </tableProxy>
+        <tableProxy centralTable="true">
+          <table schemaName="_SYS_BIC" columnObjectName="{{PACKAGE_NAME}}.data::EPM.SO.Item"/>
+        </tableProxy>
+      </tableProxies>
+      <joins>
+        <join>
+          <leftTable schemaName="_SYS_BIC" columnObjectName="{{PACKAGE_NAME}}.data::EPM.SO.Header"/>
+          <rightTable schemaName="_SYS_BIC" columnObjectName="{{PACKAGE_NAME}}.data::EPM.SO.Item"/>
+          <leftColumns>
+            <columnName>SALESORDERID</columnName>
+          </leftColumns>
+          <rightColumns>
+            <columnName>SALESORDERID.SALESORDERID</columnName>
+          </rightColumns>
+          <properties cardinality="C1_N" joinOperator="Equal" joinType="leftOuter"/>
+        </join>
+      </joins>
+      <layout>
+        <shapes>
+          <shape modelObjectName="{{PACKAGE_NAME}}.data::EPM.SO.Header" modelObjectNameSpace="_SYS_BIC" modelObjectType="catalog">
+            <upperLeftCorner x="70" y="30"/>
+          </shape>
+          <shape modelObjectName="{{PACKAGE_NAME}}.data::EPM.SO.Item" modelObjectNameSpace="_SYS_BIC" modelObjectType="catalog">
+            <upperLeftCorner x="555" y="30"/>
+          </shape>
+        </shapes>
+      </layout>
+    </privateDataFoundation>
+    <baseMeasures>
+      <measure id="NETAMOUNT" order="6" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="NETAMOUNT"/>
+        <measureMapping schemaName="_SYS_BIC" columnObjectName="{{PACKAGE_NAME}}.data::EPM.SO.Item" columnName="NETAMOUNT"/>
+      </measure>
+    </baseMeasures>
+    <calculatedMeasures>
+      <measure id="CM_NetAmount" hidden="false" order="7" aggregationType="sum" measureType="simple" calculateBeforeAggregation="false" datatype="DECIMAL" length="13" scale="2">
+        <descriptions defaultDescription="CM_NetAmount"/>
+        <formula>if(&quot;History_CREATEDAT&quot; >= &quot;CA_StartDate&quot; AND &quot;History_CREATEDAT&quot;&lt;= &quot;CA_EndDate&quot; , &quot;NETAMOUNT&quot;, 0 )</formula>
+      </measure>
+    </calculatedMeasures>
+    <restrictedMeasures/>
+    <sharedDimensions>
+      <logicalJoin associatedObjectUri="/{{PACKAGE_NAME}}.models/attributeviews/AT_BUYER">
+        <attributes>
+          <attributeRef>#PARTNERID_1</attributeRef>
+        </attributes>
+        <associatedAttributeNames>
+          <attributeName>PARTNERID</attributeName>
+        </associatedAttributeNames>
+        <properties cardinality="C1_1" joinOperator="Equal" joinType="referential"/>
+        <associatedAttributeFeatures/>
+      </logicalJoin>
+      <logicalJoin associatedObjectUri="/{{PACKAGE_NAME}}.models/attributeviews/AT_PROD">
+        <attributes>
+          <attributeRef>#PRODUCTID_1</attributeRef>
+        </attributes>
+        <associatedAttributeNames>
+          <attributeName>PRODUCTID</attributeName>
+        </associatedAttributeNames>
+        <properties cardinality="C1_1" joinOperator="Equal" joinType="referential"/>
+        <associatedAttributeFeatures>
+          <attributeReference alias="AT_PROD_POSTALCODE" attributeName="POSTALCODE"/>
+          <attributeReference alias="AT_PROD_COMPANYNAME" attributeName="COMPANYNAME"/>
+        </associatedAttributeFeatures>
+      </logicalJoin>
+    </sharedDimensions>
+    <layout>
+      <shapes>
+        <shape modelObjectName="MEASURE_GROUP" modelObjectType="repository">
+          <upperLeftCorner x="66" y="296"/>
+        </shape>
+        <shape modelObjectName="/{{PACKAGE_NAME}}.models/attributeviews/AT_BUYER.attributeview" modelObjectType="repository">
+          <upperLeftCorner x="231" y="30"/>
+        </shape>
+        <shape modelObjectName="/{{PACKAGE_NAME}}.models/attributeviews/AT_PROD.attributeview" modelObjectType="repository">
+          <upperLeftCorner x="584" y="30"/>
+        </shape>
+        <shape modelObjectName="LogicalView" modelObjectNameSpace="MeasureGroup" modelObjectType="repository">
+          <upperLeftCorner x="40" y="85"/>
+          <rectangleSize height="0" width="0"/>
+        </shape>
+      </shapes>
+    </layout>
+  </privateMeasureGroup>
+</Cube:cube>

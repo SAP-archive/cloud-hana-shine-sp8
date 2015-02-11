@@ -1,0 +1,9 @@
+import = [
+            
+            {
+                cdstable = "{{PACKAGE_NAME}}.data::EPM.Util.Messages";
+                file = "{{PACKAGE_NAME}}.data.loads:messages.csv";
+                header = false;
+            }
+            
+       ];

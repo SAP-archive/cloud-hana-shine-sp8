@@ -1,0 +1,13 @@
+PROCEDURE "_SYS_BIC"."{{PACKAGE_NAME}}.Procedures::jobsCreateEntry" ( ) 
+	LANGUAGE SQLSCRIPT
+	SQL SECURITY INVOKER 
+	DEFAULT SCHEMA _SYS_BIC
+	AS
+BEGIN 
+
+/*This Procedure inserts a record with the current timestamp into the "JobsDemo" table*/
+
+   insert into "{{PACKAGE_NAME}}.data::JobsDemo.Details" 
+             values (now(), 'Inserted via SQLScript');
+
+END;

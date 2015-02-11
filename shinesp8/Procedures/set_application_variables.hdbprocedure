@@ -1,0 +1,17 @@
+PROCEDURE "_SYS_BIC"."{{PACKAGE_NAME}}.Procedures::set_application_variables" (IN NAME NVARCHAR(30), IN APPLICATION NVARCHAR(128), IN EXPIRY TIMESTAMP, IN DATA NCLOB) 
+	LANGUAGE SQLSCRIPT
+	SQL SECURITY INVOKER AS
+
+BEGIN
+/***************************** 
+	Write your procedure logic 
+ *****************************/
+ UPSERT "{{PACKAGE_NAME}}.data::EPM.Util.SSCOOKIE"
+	  VALUES('', :NAME, :APPLICATION, :EXPIRY, :DATA)
+	   WHERE SESSIONID   = ''
+	     AND NAME        = :NAME
+	     AND APPLICATION = :APPLICATION; 
+	     
+	DELETE FROM "{{PACKAGE_NAME}}.data::EPM.Util.SSCOOKIE"
+	 WHERE EXPIRY <= now();  
+END;

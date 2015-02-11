@@ -1,0 +1,5 @@
+service namespace "{{PACKAGE_NAME}}"  { 
+   "{{PACKAGE_NAME}}.data::EPM.User.Details" as "Users"
+    create events(before "{{PACKAGE_NAME}}.services:userBefore.xsjslib::create_before_exit");
+}
+   

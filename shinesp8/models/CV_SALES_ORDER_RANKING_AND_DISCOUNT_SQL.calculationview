@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Calculation:scenario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" schemaVersion="2.3" id="CV_SALES_ORDER_RANKING_AND_DISCOUNT_SQL" applyPrivilegeType="ANALYTIC_PRIVILEGE" checkAnalyticPrivileges="true" defaultClient="crossClient" defaultLanguage="$$language$$" visibility="reportingEnabled" calculationScenarioType="SCRIPT_BASED" dataCategory="CUBE" enforceSqlExecution="false" executionSemantic="UNDEFINED" scriptParametersCaseSensitive="true">
+  <origin/>
+  <descriptions defaultDescription="CV_SALES_ORDER_RANKING_AND_DISCOUNT_SQL"/>
+  <defaultSchema schemaName="_SYS_BIC"/>
+  <localVariables>
+    <variable id="IP_FR_DTE" parameter="true">
+      <descriptions defaultDescription="IP_FR_DTE"/>
+      <variableProperties datatype="DATE" mandatory="true">
+        <valueDomain type="empty"/>
+        <selection multiLine="false" type="SingleValue"/>
+      </variableProperties>
+    </variable>
+    <variable id="IP_TO_DTE" parameter="true">
+      <descriptions defaultDescription="IP_TO_DTE"/>
+      <variableProperties datatype="DATE" mandatory="true">
+        <valueDomain type="empty"/>
+        <selection multiLine="false" type="SingleValue"/>
+      </variableProperties>
+    </variable>
+    <variable id="IP_REGION" parameter="true">
+      <descriptions defaultDescription="IP_REGION"/>
+      <variableProperties datatype="NVARCHAR" length="4" mandatory="true">
+        <valueDomain type="empty"/>
+        <selection multiLine="false" type="SingleValue"/>
+      </variableProperties>
+    </variable>
+  </localVariables>
+  <variableMappings/>
+  <dataSources/>
+  <calculationViews>
+    <calculationView xsi:type="Calculation:SqlScriptView" id="Script_View">
+      <viewAttributes>
+        <viewAttribute datatype="INTEGER" id="SALES_RANK"/>
+        <viewAttribute datatype="INTEGER" id="ORDERS"/>
+        <viewAttribute datatype="VARCHAR" id="REGION" length="50"/>
+        <viewAttribute datatype="INTEGER" id="ORDER_RANK"/>
+        <viewAttribute datatype="DECIMAL" id="SALES" length="15" scale="2"/>
+        <viewAttribute datatype="NVARCHAR" id="COMPANY_NAME" length="80"/>
+        <viewAttribute datatype="DECIMAL" id="DISCOUNT" length="3" scale="2"/>
+      </viewAttributes>
+      <calculatedViewAttributes/>
+      <localVariable>#IP_FR_DTE</localVariable>
+      <localVariable>#IP_TO_DTE</localVariable>
+      <localVariable>#IP_REGION</localVariable>
+      <definition> 
+ /********* Begin Procedure Script ************/ 
+ BEGIN 
+ 	 var_rank = 
+		select company_name, region, sales, orders, sales_rank, order_rank from(                
+		           select  &quot;COMPANYNAME&quot; as company_name, &quot;REGION&quot; as region, sum(&quot;NETAMOUNT&quot;) as sales, 
+		           count(&quot;SALESORDERID&quot;) as orders,
+		        	  dense_rank() over ( order by sum(&quot;NETAMOUNT&quot;) desc ) as sales_rank,
+		        	  dense_rank() over ( order by count(&quot;SALESORDERID&quot;) desc ) as order_rank
+		              from &quot;_SYS_BIC&quot;.&quot;{{PACKAGE_NAME}}.models/AN_SALES_ORDER_RANKING&quot;
+		              where DATE_SQL between :IP_FR_DTE and :IP_TO_DTE
+		                and &quot;REGION&quot; = :IP_REGION
+		              group by &quot;COMPANYNAME&quot;, &quot;REGION&quot; 
+		              order by sales_rank, &quot;COMPANYNAME&quot;
+		)                            
+		where sales_rank &lt; 11;   
+
+CALL &quot;_SYS_BIC&quot;.&quot;{{PACKAGE_NAME}}.models/DT_CUSTOMER_DISCOUNT_CALCULATION&quot; (:var_rank, var_out);
+
+END /********* End Procedure Script ************/</definition>
+    </calculationView>
+  </calculationViews>
+  <logicalModel id="Script_View">
+    <attributes>
+      <attribute id="REGION" order="3">
+        <descriptions defaultDescription="REGION"/>
+        <keyMapping columnObjectName="Script_View" columnName="REGION"/>
+      </attribute>
+      <attribute id="COMPANY_NAME" order="6">
+        <descriptions defaultDescription="COMPANY_NAME"/>
+        <keyMapping columnObjectName="Script_View" columnName="COMPANY_NAME"/>
+      </attribute>
+    </attributes>
+    <calculatedAttributes/>
+    <privateDataFoundation>
+      <tableProxies/>
+      <joins/>
+      <layout>
+        <shapes/>
+      </layout>
+    </privateDataFoundation>
+    <baseMeasures>
+      <measure id="SALES_RANK" order="1" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="SALES_RANK"/>
+        <measureMapping columnObjectName="Script_View" columnName="SALES_RANK"/>
+      </measure>
+      <measure id="ORDERS" order="2" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="ORDER"/>
+        <measureMapping columnObjectName="Script_View" columnName="ORDERS"/>
+      </measure>
+      <measure id="ORDER_RANK" order="4" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="ORDER_RANK"/>
+        <measureMapping columnObjectName="Script_View" columnName="ORDER_RANK"/>
+      </measure>
+      <measure id="SALES" order="5" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="SALES"/>
+        <measureMapping columnObjectName="Script_View" columnName="SALES"/>
+      </measure>
+      <measure id="DISCOUNT" order="7" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="DISCOUNT"/>
+        <measureMapping columnObjectName="Script_View" columnName="DISCOUNT"/>
+      </measure>
+    </baseMeasures>
+    <calculatedMeasures/>
+    <restrictedMeasures/>
+    <localDimensions/>
+  </logicalModel>
+  <layout>
+    <shapes>
+      <shape modelObjectName="Output" modelObjectNameSpace="MeasureGroup">
+        <upperLeftCorner x="40" y="85"/>
+      </shape>
+    </shapes>
+  </layout>
+</Calculation:scenario>

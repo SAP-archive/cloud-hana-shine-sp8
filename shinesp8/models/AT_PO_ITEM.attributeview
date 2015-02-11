@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Dimension:dimension xmlns:Dimension="http://www.sap.com/ndb/BiModelDimension.ecore" schemaVersion="1.2" id="AT_PO_ITEM" defaultClient="$$client$$" defaultLanguage="$$language$$" visibility="internal" dimensionType="Standard">
+  <origin/>
+  <descriptions defaultDescription="AT_PO_ITEM"/>
+  <metadata changedAt="2013-10-08 14:49:51.971"/>
+  <attributes>
+    <attribute id="ProductName">
+      <descriptions defaultDescription="TEXT"/>
+      <keyMapping schemaName="_SYS_BIC" columnObjectName="{{PACKAGE_NAME}}.data::EPM.Util.Texts" columnName="TEXT"/>
+    </attribute>
+    <attribute id="PURCHASEORDERID">
+      <descriptions defaultDescription="PURCHASEORDERID"/>
+      <keyMapping schemaName="_SYS_BIC" columnObjectName="{{PACKAGE_NAME}}.data::EPM.PO.Item" columnName="PURCHASEORDERID.PURCHASEORDERID"/>
+    </attribute>
+    <attribute id="DELIVERYDATE">
+      <descriptions defaultDescription="DELIVERYDATE"/>
+      <keyMapping schemaName="_SYS_BIC" columnObjectName="{{PACKAGE_NAME}}.data::EPM.PO.Item" columnName="DELIVERYDATE"/>
+    </attribute>
+    <attribute id="PURCHASEORDERITEM">
+      <descriptions defaultDescription="PURCHASEORDERITEM"/>
+      <keyMapping schemaName="_SYS_BIC" columnObjectName="{{PACKAGE_NAME}}.data::EPM.PO.Item" columnName="PURCHASEORDERITEM"/>
+    </attribute>
+    <attribute id="PRODUCTID" key="true">
+      <descriptions defaultDescription="PRODUCTID"/>
+      <keyMapping schemaName="_SYS_BIC" columnObjectName="{{PACKAGE_NAME}}.data::EPM.PO.Item" columnName="PRODUCTID.PRODUCTID"/>
+    </attribute>
+    <attribute id="CURRENCY">
+      <descriptions defaultDescription="CURRENCY"/>
+      <keyMapping schemaName="_SYS_BIC" columnObjectName="{{PACKAGE_NAME}}.data::EPM.PO.Item" columnName="CURRENCY"/>
+    </attribute>
+    <attribute id="GROSSAMOUNT">
+      <descriptions defaultDescription="GROSSAMOUNT"/>
+      <keyMapping schemaName="_SYS_BIC" columnObjectName="{{PACKAGE_NAME}}.data::EPM.PO.Item" columnName="GROSSAMOUNT"/>
+    </attribute>
+    <attribute id="NETAMOUNT">
+      <descriptions defaultDescription="NETAMOUNT"/>
+      <keyMapping schemaName="_SYS_BIC" columnObjectName="{{PACKAGE_NAME}}.data::EPM.PO.Item" columnName="NETAMOUNT"/>
+    </attribute>
+    <attribute id="TAXAMOUNT">
+      <descriptions defaultDescription="TAXAMOUNT"/>
+      <keyMapping schemaName="_SYS_BIC" columnObjectName="{{PACKAGE_NAME}}.data::EPM.PO.Item" columnName="TAXAMOUNT"/>
+    </attribute>
+    <attribute id="QUANTITY">
+      <descriptions defaultDescription="QUANTITY"/>
+      <keyMapping schemaName="_SYS_BIC" columnObjectName="{{PACKAGE_NAME}}.data::EPM.PO.Item" columnName="QUANTITY"/>
+    </attribute>
+    <attribute id="QUANTITYUNIT">
+      <descriptions defaultDescription="QUANTITYUNIT"/>
+      <keyMapping schemaName="_SYS_BIC" columnObjectName="{{PACKAGE_NAME}}.data::EPM.PO.Item" columnName="QUANTITYUNIT"/>
+    </attribute>
+  </attributes>
+  <calculatedAttributes/>
+  <privateDataFoundation>
+    <tableProxies>
+      <tableProxy>
+        <table schemaName="_SYS_BIC" columnObjectName="{{PACKAGE_NAME}}.data::EPM.MD.Products"/>
+      </tableProxy>
+      <tableProxy>
+        <table schemaName="_SYS_BIC" columnObjectName="{{PACKAGE_NAME}}.data::EPM.Util.Texts"/>
+      </tableProxy>
+      <tableProxy>
+        <table schemaName="_SYS_BIC" columnObjectName="{{PACKAGE_NAME}}.data::EPM.PO.Item"/>
+      </tableProxy>
+    </tableProxies>
+    <joins>
+      <join languageColumn="LANGUAGE">
+        <leftTable schemaName="_SYS_BIC" columnObjectName="{{PACKAGE_NAME}}.data::EPM.MD.Products"/>
+        <rightTable schemaName="_SYS_BIC" columnObjectName="{{PACKAGE_NAME}}.data::EPM.Util.Texts"/>
+        <leftColumns>
+          <columnName>NAMEID</columnName>
+        </leftColumns>
+        <rightColumns>
+          <columnName>TEXTID</columnName>
+        </rightColumns>
+        <properties cardinality="C1_1" joinOperator="Equal" joinType="textTable"/>
+      </join>
+      <join>
+        <leftTable schemaName="_SYS_BIC" columnObjectName="{{PACKAGE_NAME}}.data::EPM.PO.Item"/>
+        <rightTable schemaName="_SYS_BIC" columnObjectName="{{PACKAGE_NAME}}.data::EPM.MD.Products"/>
+        <leftColumns>
+          <columnName>PRODUCTID.PRODUCTID</columnName>
+        </leftColumns>
+        <rightColumns>
+          <columnName>PRODUCTID</columnName>
+        </rightColumns>
+        <properties cardinality="C1_1" joinOperator="Equal" joinType="referential"/>
+      </join>
+    </joins>
+    <layout>
+      <shapes>
+        <shape modelObjectName="{{PACKAGE_NAME}}.data::EPM.MD.Products" modelObjectNameSpace="_SYS_BIC" modelObjectType="catalog">
+          <upperLeftCorner x="70" y="30"/>
+        </shape>
+        <shape modelObjectName="{{PACKAGE_NAME}}.data::EPM.Util.Texts" modelObjectNameSpace="_SYS_BIC" modelObjectType="catalog">
+          <upperLeftCorner x="600" y="30"/>
+        </shape>
+        <shape modelObjectName="{{PACKAGE_NAME}}.data::EPM.PO.Item" modelObjectNameSpace="_SYS_BIC" modelObjectType="catalog">
+          <upperLeftCorner x="598" y="173"/>
+        </shape>
+      </shapes>
+    </layout>
+  </privateDataFoundation>
+  <hierarchies/>
+</Dimension:dimension>

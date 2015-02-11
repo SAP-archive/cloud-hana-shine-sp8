@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Privilege:analyticPrivilege xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:AccessControl="http://www.sap.com/ndb/SQLCoreModelAccessControl.ecore" xmlns:Privilege="http://www.sap.com/ndb/BiModelPrivilege.ecore" schemaVersion="1.1" id="AP_PURCHASE_ORDER_PROD_CAT">
+  <origin/>
+  <descriptions defaultDescription="Purchase Orders by Product Category"/>
+  <metadata changedAt="2013-10-30 17:01:24.483" createdAt="2013-10-30 14:35:07.202"/>
+  <securedModels allInformationModels="false">
+    <modelUri>/{{PACKAGE_NAME}}.models/attributeviews/AT_PURCHASE_ORDER_WORKLIST</modelUri>
+    <modelUri>/{{PACKAGE_NAME}}.models/analyticviews/AN_PURCHASE_COMMON_CURRENCY</modelUri>
+    <modelUri>/{{PACKAGE_NAME}}.models/analyticviews/AN_PURCHASE_OVERVIEW</modelUri>
+  </securedModels>
+  <restriction logicalOperator="AND">
+    <filter xsi:type="Privilege:AttributeFilter" attributeName="PRODUCTCATEGORY">
+      <valueFilter xsi:type="AccessControl:SingleValueFilter" including="true" value="Flat-screen television"/>
+    </filter>
+    <attributeName>PRODUCTCATEGORY</attributeName>
+    <originInformationModelUri>/{{PACKAGE_NAME}}.models/analyticviews/AN_PURCHASE_COMMON_CURRENCY</originInformationModelUri>
+  </restriction>
+  <restriction logicalOperator="AND">
+    <filter xsi:type="Privilege:AttributeFilter" attributeName="PRODUCT_CATEGORY">
+      <valueFilter xsi:type="AccessControl:SingleValueFilter" including="true" value="Flat-screen television"/>
+    </filter>
+    <dimensionUri>/{{PACKAGE_NAME}}.models/attributeviews/AT_PROD</dimensionUri>
+  </restriction>
+  <restriction logicalOperator="AND">
+    <filter xsi:type="Privilege:AttributeFilter" attributeName="CATEGORY">
+      <valueFilter xsi:type="AccessControl:SingleValueFilter" including="true" value="Flat-screen television"/>
+    </filter>
+    <dimensionUri>/{{PACKAGE_NAME}}.models/attributeviews/AT_PURCHASE_ORDER_WORKLIST</dimensionUri>
+  </restriction>
+</Privilege:analyticPrivilege>

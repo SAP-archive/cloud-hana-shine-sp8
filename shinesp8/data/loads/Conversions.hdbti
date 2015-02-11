@@ -1,0 +1,52 @@
+import = [
+            {
+                cdstable = "{{PACKAGE_NAME}}.data::EPM.Conversions.T006";
+                file = "{{PACKAGE_NAME}}.data.loads:T006.csv";
+                header = false;
+            },
+            {
+                cdstable = "{{PACKAGE_NAME}}.data::EPM.Conversions.T006A";
+                file = "{{PACKAGE_NAME}}.data.loads:T006A.csv";
+                header = false;
+            }, 
+            {
+                cdstable = "{{PACKAGE_NAME}}.data::EPM.Conversions.TCURC";
+                file = "{{PACKAGE_NAME}}.data.loads:TCURC.csv";
+                header = false;
+            },
+            {
+                cdstable = "{{PACKAGE_NAME}}.data::EPM.Conversions.TCURF";
+                file = "{{PACKAGE_NAME}}.data.loads:TCURF.csv";
+                header = false;
+            },
+            {
+                cdstable = "{{PACKAGE_NAME}}.data::EPM.Conversions.TCURN";
+                file = "{{PACKAGE_NAME}}.data.loads:TCURN.csv"; 
+                header = false;
+            },
+            {
+                cdstable = "{{PACKAGE_NAME}}.data::EPM.Conversions.TCURR";
+                file = "{{PACKAGE_NAME}}.data.loads:TCURR.csv";
+                header = false;
+            }, 
+            {
+                cdstable = "{{PACKAGE_NAME}}.data::EPM.Conversions.TCURT";
+                file = "{{PACKAGE_NAME}}.data.loads:TCURT.csv";
+                header = false;
+            },
+            {
+                cdstable = "{{PACKAGE_NAME}}.data::EPM.Conversions.TCURV";
+                file = "{{PACKAGE_NAME}}.data.loads:TCURV.csv";
+                header = false;
+            },
+            {
+                cdstable = "{{PACKAGE_NAME}}.data::EPM.Conversions.TCURW";
+                file = "{{PACKAGE_NAME}}.data.loads:TCURW.csv";
+                header = false;
+            },
+            {
+                cdstable = "{{PACKAGE_NAME}}.data::EPM.Conversions.TCURX";
+                file = "{{PACKAGE_NAME}}.data.loads:TCURX.csv";
+                header = false;
+            }                                                                          
+         ];

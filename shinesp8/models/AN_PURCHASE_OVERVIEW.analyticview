@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Cube:cube xmlns:Cube="http://www.sap.com/ndb/BiModelCube.ecore" id="AN_PURCHASE_OVERVIEW" applyPrivilegeType="ANALYTIC_PRIVILEGE" checkAnalyticPrivileges="true" defaultClient="$$client$$" defaultLanguage="$$language$$" visibility="reportingEnabled">
+  <descriptions defaultDescription="Purchase Order Overview"/>
+  <defaultSchema schemaName="_SYS_BIC"/>
+  <localVariables/>
+  <privateMeasureGroup id="MeasureGroup">
+    <attributes>
+      <attribute id="PURCHASEORDERID" order="1" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="PURCHASEORDERID"/>
+        <keyMapping schemaName="_SYS_BIC" columnObjectName="{{PACKAGE_NAME}}.data::EPM.PO.Header" columnName="PURCHASEORDERID"/>
+      </attribute>
+      <attribute id="LIFECYCLESTATUS" order="2" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="LIFECYCLESTATUS"/>
+        <keyMapping schemaName="_SYS_BIC" columnObjectName="{{PACKAGE_NAME}}.data::EPM.PO.Header" columnName="LIFECYCLESTATUS"/>
+      </attribute>
+      <attribute id="PURCHASEORDERITEM" order="3" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="PURCHASEORDERITEM"/>
+        <keyMapping schemaName="_SYS_BIC" columnObjectName="{{PACKAGE_NAME}}.data::EPM.PO.Item" columnName="PURCHASEORDERITEM"/>
+      </attribute>
+      <attribute id="CURRENCY" order="4" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="CURRENCY"/>
+        <keyMapping schemaName="_SYS_BIC" columnObjectName="{{PACKAGE_NAME}}.data::EPM.PO.Item" columnName="CURRENCY"/>
+      </attribute>
+      <attribute id="QUANTITYUNIT" order="5" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="QUANTITYUNIT"/>
+        <keyMapping schemaName="_SYS_BIC" columnObjectName="{{PACKAGE_NAME}}.data::EPM.PO.Item" columnName="QUANTITYUNIT"/>
+      </attribute>
+      <attribute id="CREATEDAT" order="9" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="History_CREATEDAT"/>
+        <keyMapping schemaName="_SYS_BIC" columnObjectName="{{PACKAGE_NAME}}.data::EPM.PO.Header" columnName="HISTORY.CREATEDAT"/>
+      </attribute>
+      <attribute id="PRODUCTID" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="PRODUCTID"/>
+        <keyMapping schemaName="_SYS_BIC" columnObjectName="{{PACKAGE_NAME}}.data::EPM.PO.Item" columnName="PRODUCTID.PRODUCTID"/>
+      </attribute>
+    </attributes>
+    <calculatedAttributes/>
+    <privateDataFoundation>
+      <tableProxies>
+        <tableProxy>
+          <table schemaName="_SYS_BIC" columnObjectName="{{PACKAGE_NAME}}.data::EPM.PO.Header"/>
+        </tableProxy>
+        <tableProxy centralTable="true">
+          <table schemaName="_SYS_BIC" columnObjectName="{{PACKAGE_NAME}}.data::EPM.PO.Item"/>
+        </tableProxy>
+      </tableProxies>
+      <joins>
+        <join>
+          <leftTable schemaName="_SYS_BIC" columnObjectName="{{PACKAGE_NAME}}.data::EPM.PO.Item"/>
+          <rightTable schemaName="_SYS_BIC" columnObjectName="{{PACKAGE_NAME}}.data::EPM.PO.Header"/>
+          <leftColumns>
+            <columnName>PURCHASEORDERID.PURCHASEORDERID</columnName>
+          </leftColumns>
+          <rightColumns>
+            <columnName>PURCHASEORDERID</columnName>
+          </rightColumns>
+          <properties cardinality="CN_1" joinOperator="Equal" joinType="leftOuter"/>
+        </join>
+      </joins>
+      <layout>
+        <shapes>
+          <shape modelObjectName="{{PACKAGE_NAME}}.data::EPM.PO.Header" modelObjectNameSpace="_SYS_BIC" modelObjectType="catalog">
+            <upperLeftCorner x="70" y="30"/>
+          </shape>
+          <shape modelObjectName="{{PACKAGE_NAME}}.data::EPM.PO.Item" modelObjectNameSpace="_SYS_BIC" modelObjectType="catalog">
+            <upperLeftCorner x="577" y="30"/>
+          </shape>
+        </shapes>
+      </layout>
+    </privateDataFoundation>
+    <baseMeasures>
+      <measure id="QUANTITY" order="6" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="QUANTITY"/>
+        <measureMapping schemaName="_SYS_BIC" columnObjectName="{{PACKAGE_NAME}}.data::EPM.PO.Item" columnName="QUANTITY"/>
+      </measure>
+      <measure id="NETAMOUNT" order="7" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="NETAMOUNT"/>
+        <measureMapping schemaName="_SYS_BIC" columnObjectName="{{PACKAGE_NAME}}.data::EPM.PO.Item" columnName="NETAMOUNT"/>
+      </measure>
+      <measure id="TAXAMOUNT" order="8" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="TAXAMOUNT"/>
+        <measureMapping schemaName="_SYS_BIC" columnObjectName="{{PACKAGE_NAME}}.data::EPM.PO.Item" columnName="TAXAMOUNT"/>
+      </measure>
+    </baseMeasures>
+    <calculatedMeasures/>
+    <restrictedMeasures/>
+    <sharedDimensions>
+      <logicalJoin associatedObjectUri="/{{PACKAGE_NAME}}.models/attributeviews/AT_PROD">
+        <attributes>
+          <attributeRef>#PRODUCTID</attributeRef>
+        </attributes>
+        <associatedAttributeNames>
+          <attributeName>PRODUCTID</attributeName>
+        </associatedAttributeNames>
+        <properties cardinality="CN_1" joinOperator="Equal" joinType="leftOuter"/>
+        <associatedAttributeFeatures/>
+      </logicalJoin>
+    </sharedDimensions>
+    <layout>
+      <shapes>
+        <shape modelObjectName="MEASURE_GROUP" modelObjectType="repository">
+          <upperLeftCorner x="618" y="397"/>
+        </shape>
+        <shape modelObjectName="/{{PACKAGE_NAME}}.models/attributeviews/AT_PROD.attributeview" modelObjectType="repository">
+          <upperLeftCorner x="427" y="24"/>
+        </shape>
+        <shape modelObjectName="LogicalView" modelObjectNameSpace="MeasureGroup" modelObjectType="repository">
+          <upperLeftCorner x="40" y="85"/>
+          <rectangleSize height="0" width="0"/>
+        </shape>
+      </shapes>
+    </layout>
+  </privateMeasureGroup>
+</Cube:cube>

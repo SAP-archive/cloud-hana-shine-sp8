@@ -1,0 +1,4 @@
+service namespace "{{PACKAGE_NAME}}.services" {
+   "{{PACKAGE_NAME}}.data::EPM.SO.Item" as "salesDetails"
+    create using "{{PACKAGE_NAME}}.Procedures::soCreate";
+}

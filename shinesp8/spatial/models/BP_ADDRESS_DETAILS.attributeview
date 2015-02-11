@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Dimension:dimension xmlns:Dimension="http://www.sap.com/ndb/BiModelDimension.ecore" schemaVersion="1.2" id="BP_ADDRESS_DETAILS" defaultClient="$$client$$" defaultLanguage="$$language$$" visibility="internal" dimensionType="Standard">
+  <descriptions defaultDescription="BP_ADDRESS_DETAILS"/>
+  <attributes>
+    <attribute id="ADDRESSID">
+      <descriptions defaultDescription="ADDRESSID"/>
+      <keyMapping schemaName="_SYS_BIC" columnObjectName="{{PACKAGE_NAME}}.data::EPM.MD.Addresses" columnName="ADDRESSID"/>
+    </attribute>
+    <attribute id="CITY">
+      <descriptions defaultDescription="CITY"/>
+      <keyMapping schemaName="_SYS_BIC" columnObjectName="{{PACKAGE_NAME}}.data::EPM.MD.Addresses" columnName="CITY"/>
+    </attribute>
+    <attribute id="POSTALCODE">
+      <descriptions defaultDescription="POSTALCODE"/>
+      <keyMapping schemaName="_SYS_BIC" columnObjectName="{{PACKAGE_NAME}}.data::EPM.MD.Addresses" columnName="POSTALCODE"/>
+    </attribute>
+    <attribute id="STREET">
+      <descriptions defaultDescription="STREET"/>
+      <keyMapping schemaName="_SYS_BIC" columnObjectName="{{PACKAGE_NAME}}.data::EPM.MD.Addresses" columnName="STREET"/>
+    </attribute>
+    <attribute id="BUILDING">
+      <descriptions defaultDescription="BUILDING"/>
+      <keyMapping schemaName="_SYS_BIC" columnObjectName="{{PACKAGE_NAME}}.data::EPM.MD.Addresses" columnName="BUILDING"/>
+    </attribute>
+    <attribute id="COUNTRY">
+      <descriptions defaultDescription="COUNTRY"/>
+      <keyMapping schemaName="_SYS_BIC" columnObjectName="{{PACKAGE_NAME}}.data::EPM.MD.Addresses" columnName="COUNTRY"/>
+    </attribute>
+    <attribute id="REGION">
+      <descriptions defaultDescription="REGION"/>
+      <keyMapping schemaName="_SYS_BIC" columnObjectName="{{PACKAGE_NAME}}.data::EPM.MD.Addresses" columnName="REGION"/>
+    </attribute>
+    <attribute id="LATITUDE">
+      <descriptions defaultDescription="LATITUDE"/>
+      <keyMapping schemaName="_SYS_BIC" columnObjectName="{{PACKAGE_NAME}}.data::EPM.MD.Addresses" columnName="LATITUDE"/>
+    </attribute>
+    <attribute id="LONGITUDE">
+      <descriptions defaultDescription="LONGITUDE"/>
+      <keyMapping schemaName="_SYS_BIC" columnObjectName="{{PACKAGE_NAME}}.data::EPM.MD.Addresses" columnName="LONGITUDE"/>
+    </attribute>
+    <attribute id="PARTNERID" key="true">
+      <descriptions defaultDescription="PARTNERID"/>
+      <keyMapping schemaName="_SYS_BIC" columnObjectName="{{PACKAGE_NAME}}.data::EPM.MD.BusinessPartner" columnName="PARTNERID"/>
+    </attribute>
+    <attribute id="EMAILADDRESS">
+      <descriptions defaultDescription="EMAILADDRESS"/>
+      <keyMapping schemaName="_SYS_BIC" columnObjectName="{{PACKAGE_NAME}}.data::EPM.MD.BusinessPartner" columnName="EMAILADDRESS"/>
+    </attribute>
+    <attribute id="PHONENUMBER">
+      <descriptions defaultDescription="PHONENUMBER"/>
+      <keyMapping schemaName="_SYS_BIC" columnObjectName="{{PACKAGE_NAME}}.data::EPM.MD.BusinessPartner" columnName="PHONENUMBER"/>
+    </attribute>
+    <attribute id="FAXNUMBER">
+      <descriptions defaultDescription="FAXNUMBER"/>
+      <keyMapping schemaName="_SYS_BIC" columnObjectName="{{PACKAGE_NAME}}.data::EPM.MD.BusinessPartner" columnName="FAXNUMBER"/>
+    </attribute>
+    <attribute id="WEBADDRESS">
+      <descriptions defaultDescription="WEBADDRESS"/>
+      <keyMapping schemaName="_SYS_BIC" columnObjectName="{{PACKAGE_NAME}}.data::EPM.MD.BusinessPartner" columnName="WEBADDRESS"/>
+    </attribute>
+    <attribute id="COMPANYNAME">
+      <descriptions defaultDescription="COMPANYNAME"/>
+      <keyMapping schemaName="_SYS_BIC" columnObjectName="{{PACKAGE_NAME}}.data::EPM.MD.BusinessPartner" columnName="COMPANYNAME"/>
+    </attribute>
+    <attribute id="LEGALFORM">
+      <descriptions defaultDescription="LEGALFORM"/>
+      <keyMapping schemaName="_SYS_BIC" columnObjectName="{{PACKAGE_NAME}}.data::EPM.MD.BusinessPartner" columnName="LEGALFORM"/>
+    </attribute>
+  </attributes>
+  <calculatedAttributes/>
+  <privateDataFoundation>
+    <tableProxies>
+      <tableProxy>
+        <table schemaName="_SYS_BIC" columnObjectName="{{PACKAGE_NAME}}.data::EPM.MD.Addresses"/>
+      </tableProxy>
+      <tableProxy>
+        <table schemaName="_SYS_BIC" columnObjectName="{{PACKAGE_NAME}}.data::EPM.MD.BusinessPartner"/>
+      </tableProxy>
+    </tableProxies>
+    <joins>
+      <join>
+        <leftTable schemaName="_SYS_BIC" columnObjectName="{{PACKAGE_NAME}}.data::EPM.MD.BusinessPartner"/>
+        <rightTable schemaName="_SYS_BIC" columnObjectName="{{PACKAGE_NAME}}.data::EPM.MD.Addresses"/>
+        <leftColumns>
+          <columnName>ADDRESSID.ADDRESSID</columnName>
+        </leftColumns>
+        <rightColumns>
+          <columnName>ADDRESSID</columnName>
+        </rightColumns>
+        <properties joinOperator="Equal" joinType="referential"/>
+      </join>
+    </joins>
+    <layout>
+      <shapes>
+        <shape modelObjectName="{{PACKAGE_NAME}}.data::EPM.MD.Addresses" modelObjectNameSpace="_SYS_BIC" modelObjectType="catalog">
+          <upperLeftCorner x="70" y="30"/>
+        </shape>
+        <shape modelObjectName="{{PACKAGE_NAME}}.data::EPM.MD.BusinessPartner" modelObjectNameSpace="_SYS_BIC" modelObjectType="catalog">
+          <upperLeftCorner x="260" y="305"/>
+        </shape>
+      </shapes>
+    </layout>
+  </privateDataFoundation>
+  <hierarchies/>
+</Dimension:dimension>

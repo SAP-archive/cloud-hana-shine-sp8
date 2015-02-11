@@ -1,0 +1,45 @@
+PROCEDURE _SYS_BIC."{{PACKAGE_NAME}}.Procedures::soDelete"(IN so_details "_SYS_BIC"."{{PACKAGE_NAME}}.data::EPM.SO.Header", 
+          OUT error  "_SYS_BIC"."{{PACKAGE_NAME}}.data::EPM.Procedures.tt_errors" ) 
+
+	LANGUAGE SQLSCRIPT
+	SQL SECURITY INVOKER AS
+	--DEFAULT SCHEMA <default_schema_name>
+	--READS SQL DATA AS
+BEGIN
+
+/*This Procedure takes the Sales Order ID as the input and deletes the corresponding records from the Sales Order Header and Item tables*/
+
+
+declare lv_soid string;
+declare lv_salesorderid string;
+
+
+select SALESORDERID
+     into lv_soid from :so_details;
+
+select SALESORDERID
+     into lv_salesorderid  
+                      from "_SYS_BIC"."{{PACKAGE_NAME}}.data::EPM.SO.Header" where SALESORDERID = :lv_soid;
+                      
+                      
+if :lv_salesorderid = '' then
+
+  error = select 500 as http_status_code, 
+               'Invalid SalesOrderId ' || lv_soid as error_message, 
+                     'Sales Order does not exists' as detail from dummy;
+else
+            
+delete from "{{PACKAGE_NAME}}.data::EPM.SO.Item"  where "SALESORDERID.SALESORDERID" = :lv_soid;     
+
+delete from  "{{PACKAGE_NAME}}.data::EPM.SO.Header" where SALESORDERID = :lv_soid;
+            
+                                                                                                
+                                                
+ end if;
+ 
+ 
+ 
+ 
+ 
+ 
+END;

@@ -1,0 +1,8 @@
+schema= "_SYS_BIC";
+start_with= 1000000000;
+maxvalue= 1999999999;
+nomaxvalue=false;
+minvalue= 1; 
+nominvalue=true;
+cycles= true;
+depends_on_table= "{{PACKAGE_NAME}}.data::EPM.Util.SSCOOKIE";

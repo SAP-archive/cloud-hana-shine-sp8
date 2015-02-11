@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Calculation:scenario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:AccessControl="http://www.sap.com/ndb/SQLCoreModelAccessControl.ecore" xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" schemaVersion="2.3" id="CV_SALES_YEAR_COMPARISON" applyPrivilegeType="ANALYTIC_PRIVILEGE" checkAnalyticPrivileges="true" defaultClient="crossClient" defaultLanguage="$$language$$" visibility="reportingEnabled" calculationScenarioType="TREE_BASED" dataCategory="CUBE" enforceSqlExecution="false" executionSemantic="UNDEFINED" outputViewType="Aggregation">
+  <origin/>
+  <descriptions defaultDescription="CV_SALES_YEAR_COMPARISON"/>
+  <defaultSchema schemaName="_SYS_BIC"/>
+  <localVariables>
+    <variable id="IP_YEAR_1" parameter="true">
+      <descriptions defaultDescription="IP_YEAR_1"/>
+      <variableProperties datatype="NVARCHAR" length="4" mandatory="false">
+        <valueDomain type="empty"/>
+        <selection multiLine="false" type="SingleValue"/>
+      </variableProperties>
+    </variable>
+    <variable id="IP_YEAR_2" parameter="true">
+      <descriptions defaultDescription="IP_YEAR_2"/>
+      <variableProperties datatype="NVARCHAR" length="4" mandatory="false">
+        <valueDomain type="empty"/>
+        <selection multiLine="false" type="SingleValue"/>
+      </variableProperties>
+    </variable>
+  </localVariables>
+  <variableMappings/>
+  <dataSources>
+    <DataSource id="AN_SALES_ORDER_LITE" type="ANALYTIC_VIEW">
+      <viewAttributes allViewAttributes="true"/>
+      <resourceUri>/{{PACKAGE_NAME}}.models/analyticviews/AN_SALES_ORDER_LITE</resourceUri>
+    </DataSource>
+    <DataSource id="YEAR_2$$$$AN_SALES_ORDER_LITE$$" type="ANALYTIC_VIEW">
+      <viewAttributes allViewAttributes="true"/>
+      <resourceUri>/{{PACKAGE_NAME}}.models/analyticviews/AN_SALES_ORDER_LITE</resourceUri>
+    </DataSource>
+  </dataSources>
+  <calculationViews>
+    <calculationView xsi:type="Calculation:ProjectionView" id="YEAR_1">
+      <viewAttributes>
+        <viewAttribute id="NETAMOUNT"/>
+        <viewAttribute id="PRODUCT_CATEGORY"/>
+        <viewAttribute id="YEAR">
+          <filter xsi:type="AccessControl:SingleValueFilter" including="true" value="$$IP_YEAR_1$$"/>
+        </viewAttribute>
+      </viewAttributes>
+      <calculatedViewAttributes/>
+      <input node="#AN_SALES_ORDER_LITE">
+        <mapping xsi:type="Calculation:AttributeMapping" target="NETAMOUNT" source="NETAMOUNT"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="PRODUCT_CATEGORY" source="PRODUCT_CATEGORY"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="YEAR" source="YEAR"/>
+      </input>
+    </calculationView>
+    <calculationView xsi:type="Calculation:ProjectionView" id="YEAR_2">
+      <viewAttributes>
+        <viewAttribute id="NETAMOUNT"/>
+        <viewAttribute id="YEAR">
+          <filter xsi:type="AccessControl:SingleValueFilter" including="true" value="$$IP_YEAR_2$$"/>
+        </viewAttribute>
+        <viewAttribute id="PRODUCT_CATEGORY"/>
+      </viewAttributes>
+      <calculatedViewAttributes/>
+      <input node="#YEAR_2$$$$AN_SALES_ORDER_LITE$$">
+        <mapping xsi:type="Calculation:AttributeMapping" target="NETAMOUNT" source="NETAMOUNT"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="YEAR" source="YEAR"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="PRODUCT_CATEGORY" source="PRODUCT_CATEGORY"/>
+      </input>
+    </calculationView>
+    <calculationView xsi:type="Calculation:UnionView" id="Union_1">
+      <viewAttributes>
+        <viewAttribute id="NETAMOUNT"/>
+        <viewAttribute id="PRODUCT_CATEGORY"/>
+        <viewAttribute id="NETAMOUNT_1"/>
+        <viewAttribute id="YEAR"/>
+      </viewAttributes>
+      <calculatedViewAttributes/>
+      <input node="#YEAR_2">
+        <mapping xsi:type="Calculation:AttributeMapping" target="NETAMOUNT" source="NETAMOUNT"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="PRODUCT_CATEGORY" source="PRODUCT_CATEGORY"/>
+        <mapping xsi:type="Calculation:ConstantAttributeMapping" target="NETAMOUNT_1" null="true" value=""/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="YEAR" source="YEAR"/>
+      </input>
+      <input node="#YEAR_1">
+        <mapping xsi:type="Calculation:ConstantAttributeMapping" target="NETAMOUNT" null="true" value=""/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="PRODUCT_CATEGORY" source="PRODUCT_CATEGORY"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="NETAMOUNT_1" source="NETAMOUNT"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="YEAR" source="YEAR"/>
+      </input>
+    </calculationView>
+  </calculationViews>
+  <logicalModel id="Union_1">
+    <attributes>
+      <attribute id="PRODUCT_CATEGORY" order="1" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="PRODUCT_CATEGORY"/>
+        <keyMapping columnObjectName="Union_1" columnName="PRODUCT_CATEGORY"/>
+      </attribute>
+      <attribute id="YEAR" hidden="true" order="2" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="YEAR"/>
+        <keyMapping columnObjectName="Union_1" columnName="YEAR"/>
+      </attribute>
+    </attributes>
+    <calculatedAttributes/>
+    <privateDataFoundation>
+      <tableProxies/>
+      <joins/>
+      <layout>
+        <shapes/>
+      </layout>
+    </privateDataFoundation>
+    <baseMeasures>
+      <measure id="YEAR1_NET_AMOUNT" hidden="false" order="3" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="NETAMOUNT_1"/>
+        <measureMapping columnObjectName="Union_1" columnName="NETAMOUNT_1"/>
+      </measure>
+      <measure id="YEAR2_NET_AMOUNT" hidden="false" order="4" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="NETAMOUNT"/>
+        <measureMapping columnObjectName="Union_1" columnName="NETAMOUNT"/>
+      </measure>
+    </baseMeasures>
+    <calculatedMeasures/>
+    <restrictedMeasures/>
+    <localDimensions/>
+  </logicalModel>
+  <layout>
+    <shapes>
+      <shape expanded="true" modelObjectName="Output" modelObjectNameSpace="MeasureGroup">
+        <upperLeftCorner x="40" y="85"/>
+        <rectangleSize/>
+      </shape>
+      <shape expanded="true" modelObjectName="YEAR_1" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="190" y="294"/>
+        <rectangleSize/>
+      </shape>
+      <shape expanded="true" modelObjectName="YEAR_2" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="20" y="294"/>
+        <rectangleSize/>
+      </shape>
+      <shape expanded="true" modelObjectName="Union_1" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="80" y="170"/>
+        <rectangleSize/>
+      </shape>
+    </shapes>
+  </layout>
+</Calculation:scenario>

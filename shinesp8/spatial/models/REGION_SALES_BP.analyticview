@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Cube:cube xmlns:Cube="http://www.sap.com/ndb/BiModelCube.ecore" schemaVersion="1.5" id="REGION_SALES_BP" defaultClient="$$client$$" defaultLanguage="$$language$$" hidden="false" visibility="reportingEnabled">
+  <descriptions defaultDescription="Region wise sales data for BP"/>
+  <defaultSchema schemaName=""/>
+  <localVariables/>
+  <privateMeasureGroup id="MeasureGroup">
+    <attributes>
+      <attribute id="SALESORDERID">
+        <descriptions defaultDescription="SALESORDERID"/>
+        <keyMapping schemaName="_SYS_BIC" columnObjectName="{{PACKAGE_NAME}}.data::EPM.SO.Header" columnName="SALESORDERID"/>
+      </attribute>
+      <attribute id="CURRENCY">
+        <descriptions defaultDescription="CURRENCY"/>
+        <keyMapping schemaName="_SYS_BIC" columnObjectName="{{PACKAGE_NAME}}.data::EPM.SO.Header" columnName="CURRENCY"/>
+      </attribute>
+      <attribute id="HISTORY_CREATEDAT">
+        <descriptions defaultDescription="HISTORY_CREATEDAT"/>
+        <keyMapping schemaName="_SYS_BIC" columnObjectName="{{PACKAGE_NAME}}.data::EPM.SO.Header" columnName="HISTORY.CREATEDAT"/>
+      </attribute>
+      <attribute id="PARTNERID_1">
+        <descriptions defaultDescription="PARTNERID_1"/>
+        <keyMapping schemaName="_SYS_BIC" columnObjectName="{{PACKAGE_NAME}}.data::EPM.SO.Header" columnName="PARTNERID.PARTNERID"/>
+      </attribute>
+    </attributes>
+    <calculatedAttributes>
+      <calculatedAttribute id="YEAR_OF_SALE" hidden="false">
+        <descriptions defaultDescription="YEAR_OF_SALE"/>
+        <keyCalculation datatype="VARCHAR" length="10" scale="0">
+          <formula>midstr(string(&quot;HISTORY_CREATEDAT&quot;),0,4)</formula>
+        </keyCalculation>
+      </calculatedAttribute>
+    </calculatedAttributes>
+    <privateDataFoundation>
+      <tableProxies>
+        <tableProxy centralTable="true">
+          <table schemaName="_SYS_BIC" columnObjectName="{{PACKAGE_NAME}}.data::EPM.SO.Header"/>
+        </tableProxy>
+      </tableProxies>
+      <joins/>
+      <layout>
+        <shapes>
+          <shape modelObjectName="{{PACKAGE_NAME}}.data::EPM.SO.Header" modelObjectNameSpace="_SYS_BIC" modelObjectType="catalog">
+            <upperLeftCorner x="69" y="34"/>
+          </shape>
+        </shapes>
+      </layout>
+    </privateDataFoundation>
+    <baseMeasures>
+      <measure id="GROSSAMOUNT" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="GROSSAMOUNT"/>
+        <measureMapping schemaName="_SYS_BIC" columnObjectName="{{PACKAGE_NAME}}.data::EPM.SO.Header" columnName="GROSSAMOUNT"/>
+      </measure>
+      <measure id="NETAMOUNT" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="NETAMOUNT"/>
+        <measureMapping schemaName="_SYS_BIC" columnObjectName="{{PACKAGE_NAME}}.data::EPM.SO.Header" columnName="NETAMOUNT"/>
+      </measure>
+      <measure id="TAXAMOUNT" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="TAXAMOUNT"/>
+        <measureMapping schemaName="_SYS_BIC" columnObjectName="{{PACKAGE_NAME}}.data::EPM.SO.Header" columnName="TAXAMOUNT"/>
+      </measure>
+    </baseMeasures>
+    <calculatedMeasures/>
+    <restrictedMeasures/>
+    <sharedDimensions>
+      <logicalJoin associatedObjectUri="/{{PACKAGE_NAME}}.spatial.models/attributeviews/BP_ADDRESS_DETAILS">
+        <attributes>
+          <attributeRef>#PARTNERID_1</attributeRef>
+        </attributes>
+        <associatedAttributeNames>
+          <attributeName>PARTNERID</attributeName>
+        </associatedAttributeNames>
+        <properties joinOperator="Equal" joinType="referential"/>
+        <associatedAttributeFeatures/>
+      </logicalJoin>
+    </sharedDimensions>
+    <layout>
+      <shapes>
+        <shape modelObjectName="MEASURE_GROUP" modelObjectType="repository">
+          <upperLeftCorner x="19" y="124"/>
+        </shape>
+        <shape modelObjectName="/{{PACKAGE_NAME}}.spatial.models/attributeviews/BP_ADDRESS_DETAILS.attributeview" modelObjectType="repository">
+          <upperLeftCorner x="449" y="30"/>
+        </shape>
+      </shapes>
+    </layout>
+  </privateMeasureGroup>
+</Cube:cube>

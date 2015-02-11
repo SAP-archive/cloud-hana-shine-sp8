@@ -1,0 +1,17 @@
+import = [ 
+            {
+                cdstable = "{{PACKAGE_NAME}}.data::EPM.SO.Header";
+                file = "{{PACKAGE_NAME}}.data.loads:salesOrder.csv";
+                header = false;
+            },
+            {
+                cdstable = "{{PACKAGE_NAME}}.data::EPM.SO.Item";
+                file = "{{PACKAGE_NAME}}.data.loads:salesOrderItem.csv";
+                header = false;
+            },
+            {
+                cdstable = "{{PACKAGE_NAME}}.data::EPM.SO.Filter";
+                file = "{{PACKAGE_NAME}}.data.loads:salesOrderFilter.csv";
+                header = false;
+            }                          
+         ]; 

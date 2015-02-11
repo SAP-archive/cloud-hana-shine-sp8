@@ -1,0 +1,19 @@
+schema="_SYS_BIC";
+query="
+select T0.\"PURCHASEORDERID\" as \"PurchaseOrderId\",
+T0.\"HISTORY.CREATEDBY.EMPLOYEEID\" \"History.CREATEDBY\",
+ T1.\"NAME.FIRST\" \"CreatedByFirstName\",
+ T1.\"NAME.LAST\" \"CreatedByLastName\",
+ T1.\"LOGINNAME\" \"CreatedByLoginName\",
+ T0.\"HISTORY.CREATEDAT\" \"History.CREATEDAT\",
+ T0.\"HISTORY.CHANGEDAT\" \"History.CHANGEDAT\",
+ T0.\"PARTNERID.PARTNERID\" as \"PartnerId\",
+ T2.\"COMPANYNAME\" as \"CompanyName\",
+ T0.\"CURRENCY\" as \"Currency\",
+ T0.\"GROSSAMOUNT\" as \"GrossAmount\",
+ T0.\"NETAMOUNT\" as \"NetAmount\",
+ T0.\"TAXAMOUNT\" as \"TaxAmount\" from 
+ \"_SYS_BIC\".\"{{PACKAGE_NAME}}.data::EPM.PO.Header\" T0 left outer join \"_SYS_BIC\".\"{{PACKAGE_NAME}}.data::EPM.MD.Employees\" T1 on T0.\"HISTORY.CREATEDBY.EMPLOYEEID\" = T1.\"EMPLOYEEID\" left outer join \"_SYS_BIC\".\"{{PACKAGE_NAME}}.data::EPM.MD.BusinessPartner\" T2 on  T0.\"PARTNERID.PARTNERID\" = T2.\"PARTNERID\" order by 
+T0.\"PURCHASEORDERID\" ASC"; 
+depends_on_table=["{{PACKAGE_NAME}}.data::EPM.PO.Header","{{PACKAGE_NAME}}.data::EPM.MD.Employees","{{PACKAGE_NAME}}.data::EPM.MD.BusinessPartner"];
+
