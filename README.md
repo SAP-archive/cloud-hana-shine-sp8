@@ -1,0 +1,2 @@
+# cloud-hana-shine-sp8
+SAP HANA Interactive Education, or SHINE, is a demo application that makes it easy to learn how to build native SAP HANA applications. The demo application, comes complete with sample data and design-time developer objects for the application's database tables, data views, stored procedures, OData, and user interface. This repository contains SHINE SP8 that can be used with HANA SP8 or later. #cloud-hana-sample=SHINESP8
