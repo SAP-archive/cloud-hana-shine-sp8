@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Cube:cube xmlns:Cube="http://www.sap.com/ndb/BiModelCube.ecore" id="AN_SALES_ORDER_RANKING" applyPrivilegeType="ANALYTIC_PRIVILEGE" checkAnalyticPrivileges="true" defaultClient="$$client$$" defaultLanguage="$$language$$" visibility="reportingEnabled">
-  <descriptions defaultDescription="AN_SALES_ORDER_LITE"/>
+  <descriptions defaultDescription="AN_SALES_ORDER_RANKING"/>
   <defaultSchema schemaName="_SYS_BIC"/>
   <localVariables/>
   <privateMeasureGroup id="MeasureGroup">
