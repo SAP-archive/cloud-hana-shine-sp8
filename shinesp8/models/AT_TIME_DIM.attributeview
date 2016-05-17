@@ -121,7 +121,7 @@
     <hierarchy xsi:type="Dimension:LeveledHierarchy" id="Gregorian_Hierarchy" multipleParents="false" rootNodeVisibility="ADD_ROOT_NODE" withRootNode="true" nodeStyle="NAME_PATH">
       <descriptions defaultDescription="Gregorian_Hierarchy"/>
       <levels>
-        <level levelAttribute="#YEAR" levelType="MDLEVEL_TYPE_REGULAR" order="1"/>
+        <level levelAttribute="#YEAR" levelType="MDLEVEL_TYPE_TIME_YEARS" order="1"/>
         <level levelAttribute="#QUARTER" levelType="MDLEVEL_TYPE_TIME_QUARTERS" order="2"/>
         <level levelAttribute="#MONTH" levelType="MDLEVEL_TYPE_TIME_MONTHS" order="3"/>
         <level levelAttribute="#WEEK" levelType="MDLEVEL_TYPE_TIME_WEEKS" order="4"/>
